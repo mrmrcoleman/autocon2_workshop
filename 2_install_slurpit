@@ -1,0 +1,27 @@
+# NOTE: This script has only been tested on Ubuntu 22.04 LTS
+#!/bin/bash
+set -euo pipefail
+
+#echo "--- Setting noninteractive and updating repos ---"
+#export DEBIAN_FRONTEND=noninteractive
+#echo "\$nrconf{restart} = 'l';" > /etc/needrestart/conf.d/90-autorestart.conf
+#apt-get update
+
+# Install unzip
+echo
+echo -e "--- Installing unzip ---"
+echo
+apt install -y unzip
+
+# Pin version
+COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25"
+
+# Install Slurpit
+echo
+echo -e "--- Installing Slurpit at version: $COMMIT_HASH ---"
+echo
+
+wget "https://gitlab.com/slurpit.io/images/-/archive/$COMMIT_HASH/images-$COMMIT_HASH.zip" -O slurpit.zip
+unzip slurpit.zip -d slurpit && rm slurpit.zip
+
+
