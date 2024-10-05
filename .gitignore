@@ -1,3 +1,4 @@
 slurpit/
 netbox-docker/
 *.bak
+clab-*/

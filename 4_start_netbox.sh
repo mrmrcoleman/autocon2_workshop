@@ -28,7 +28,6 @@ RUN /opt/netbox/venv/bin/pip install  --no-warn-script-location -r /opt/netbox/p
 EOF
 
 cat <<EOF > docker-compose.override.yml
-version: '3.4' # This is NOT the version of NetBox! No need to adjust :)
 services:
   netbox:
     image: netbox:latest-plugins
@@ -52,15 +51,10 @@ PLUGINS = ["slurpit_netbox"]
 EOF
 
 # Build NetBox
-
-```
 docker compose build --no-cache
-```
 
 # Start NetBox
-```
 docker compose up -d
-```
 
 popd
 
