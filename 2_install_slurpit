@@ -1,27 +1,38 @@
-# NOTE: This script has only been tested on Ubuntu 22.04 LTS
 #!/bin/bash
 set -euo pipefail
 
-#echo "--- Setting noninteractive and updating repos ---"
-#export DEBIAN_FRONTEND=noninteractive
-#echo "\$nrconf{restart} = 'l';" > /etc/needrestart/conf.d/90-autorestart.conf
-#apt-get update
-
 # Install unzip
 echo
-echo -e "--- Installing unzip ---"
+echo "--- Installing unzip ---"
 echo
 apt install -y unzip
 
 # Pin version
 COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25"
 
-# Install Slurpit
+# Pulling Slurpit
 echo
-echo -e "--- Installing Slurpit at version: $COMMIT_HASH ---"
+echo "--- Pulling Slurpit at version: $COMMIT_HASH ---"
 echo
 
+# Create a directory for Slurpit if it doesn't exist
+mkdir -p slurpit
+
+# Create a temporary directory for the extraction
+TEMP_DIR=$(mktemp -d)
+
+# Download and unzip into the temporary directory
 wget "https://gitlab.com/slurpit.io/images/-/archive/$COMMIT_HASH/images-$COMMIT_HASH.zip" -O slurpit.zip
-unzip slurpit.zip -d slurpit && rm slurpit.zip
+unzip slurpit.zip -d "$TEMP_DIR"
 
+# Move the contents of the extracted folder to the 'slurpit' directory
+mv "$TEMP_DIR"/images-"$COMMIT_HASH"/* slurpit/
 
+# Clean up: remove the zip file and the temporary directory
+rm slurpit.zip
+rm -rf "$TEMP_DIR"
+
+# Updating docker-compose.override.yml
+echo
+echo "--- Updating docker-compose.override.yml ---"
+echo
