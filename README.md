@@ -6,7 +6,18 @@
 ./1_install_docker_and_clab.sh
 ```
 
-## Slurpit
+## Install and start Slurpit
 
-- Follow the instructions here: https://gitlab.com/slurpit.io/images
+```
+./2_install_slurpit.sh
+```
+
+Now you can log in to Slurpit at http://autocon-workshop.netboxlabs.tech/
+
+```
+Username: admin@admin.com
+Password: 12345678
+```
+
+## Start the ContainerLab network
 
