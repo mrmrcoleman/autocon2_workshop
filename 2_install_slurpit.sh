@@ -1,14 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check if COMMIT_HASH is set by the user, otherwise use default
+COMMIT_HASH="${COMMIT_HASH:-3e2d20458e46cc026d39fde599f01f2a615a2e25}"
+
+# Check if PORTAL_BASE_URL is set by the user, otherwise use default
+PORTAL_BASE_URL="${PORTAL_BASE_URL:-http://147.28.133.73:8000/}"
+
+# Echo the values being used
+echo "--- Using COMMIT_HASH: $COMMIT_HASH ---"
+echo "--- Using PORTAL_BASE_URL: $PORTAL_BASE_URL ---"
+
 # Install unzip
 echo
 echo "--- Installing unzip ---"
 echo
 apt install -y unzip
-
-# Pin version
-COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25"
 
 # Pulling Slurpit
 echo
@@ -43,8 +50,8 @@ echo
 # Rename the example file to docker-compose.override.yml
 mv docker-compose.override-EXAMPLE.yml docker-compose.override.yml
 
-# Update the PORTAL_BASE_URL line using sed
-sed -i 's|PORTAL_BASE_URL: http://localhost|PORTAL_BASE_URL: http://autocon-workshop.netboxlabs.tech/|' docker-compose.override.yml
+# Update the PORTAL_BASE_URL line using sed, replacing with the variable
+sed -i "s|PORTAL_BASE_URL: http://localhost|PORTAL_BASE_URL: $PORTAL_BASE_URL|" docker-compose.override.yml
 
 # Update the outside port
 sed -i 's/80:80/8000:80/' docker-compose.override.yml

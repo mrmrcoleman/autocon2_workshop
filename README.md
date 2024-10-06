@@ -8,11 +8,14 @@
 
 ## Install and start Slurpit
 
+> [!NOTE]
+> You need to set the Slurpit version (COMMIT_HASH) and Slurpit portal URL (PORTAL_BASE_URL)
+
 ```
-./2_install_slurpit.sh
+COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25" PORTAL_BASE_URL="http://147.28.133.73:8000/" ./2_install_slurpit.sh
 ```
 
-Now you can log in to Slurpit at http://autocon-workshop.netboxlabs.tech/
+Now you should be able to log in to Slurpit at `PORTAL_BASE_URL`
 
 ```
 Username: admin@admin.com

@@ -1,14 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
-# Starting network
 echo
-echo "--- Starting NetBox ---"
+echo "--- Cloning NetBox Docker ---"
 echo
 
 # Clone netbox-docker
 git clone -b release https://github.com/netbox-community/netbox-docker.git
 pushd netbox-docker
+
+echo
+echo "--- Generating configuration files ---"
+echo
 
 # Create plugin files
 cat <<EOF > plugin_requirements.txt
@@ -37,6 +40,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-Plugins
+    environment:
+      SKIP_SUPERUSER: "false"
+      SUPERUSER_API_TOKEN: "1234567890"
+      SUPERUSER_EMAIL: ""
+      SUPERUSER_NAME: "admin"
+      SUPERUSER_PASSWORD: "admin"
   netbox-worker:
     image: netbox:latest-plugins
     pull_policy: never
@@ -50,13 +59,18 @@ cat <<EOF > configuration/plugins.py
 PLUGINS = ["slurpit_netbox"]
 EOF
 
-# Build NetBox
+echo
+echo "--- Building NetBox ---"
+echo
+
 docker compose build --no-cache
 
-# Start NetBox
+echo
+echo "--- Starting NetBox Docker ---"
+echo
+
 docker compose up -d
 
 popd
-
 
 # Check the static files section in Dockerfile-Plugins to see if they are necessary
