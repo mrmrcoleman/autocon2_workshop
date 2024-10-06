@@ -5,7 +5,7 @@ set -euo pipefail
 COMMIT_HASH="${COMMIT_HASH:-3e2d20458e46cc026d39fde599f01f2a615a2e25}"
 
 # Check if PORTAL_BASE_URL is set by the user, otherwise use default
-PORTAL_BASE_URL="${PORTAL_BASE_URL:-http://147.28.133.73:8000/}"
+PORTAL_BASE_URL="${PORTAL_BASE_URL:-http://147.28.133.39:8000/}"
 
 # Echo the values being used
 echo "--- Using COMMIT_HASH: $COMMIT_HASH ---"
@@ -55,6 +55,9 @@ sed -i "s|PORTAL_BASE_URL: http://localhost|PORTAL_BASE_URL: $PORTAL_BASE_URL|" 
 
 # Update the outside port
 sed -i 's/80:80/8000:80/' docker-compose.override.yml
+
+# Remove SSL/TLS
+sed -i '/443:443/d' docker-compose.override.yml
 
 echo "--- docker-compose.override.yml has been updated ---"
 

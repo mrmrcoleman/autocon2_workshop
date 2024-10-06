@@ -12,7 +12,7 @@
 > You need to set the Slurpit version (COMMIT_HASH) and Slurpit portal URL (PORTAL_BASE_URL)
 
 ```
-COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25" PORTAL_BASE_URL="http://147.28.133.73:8000/" ./2_install_slurpit.sh
+COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25" PORTAL_BASE_URL="http://147.28.133.73:8000/" ./2_start_slurpit.sh
 ```
 
 Now you should be able to log in to Slurpit at `PORTAL_BASE_URL`
@@ -35,4 +35,10 @@ Password: 12345678
 
 ```
 ./4_start_netbox.sh
+```
+
+## Start Icinga
+
+```
+./5_start_icinga.sh
 ```
