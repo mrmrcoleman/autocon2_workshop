@@ -36,12 +36,3 @@ Password: 12345678
 ```
 ./4_start_netbox.sh
 ```
-
-## Start nginx
-
-> [!NOTE]
-> Makes Slurpit available on /slurpit and NetBox available on /netbox
-
-```
-./5_start_nginx.sh
-```
