@@ -2,3 +2,4 @@ slurpit/
 netbox-docker/
 *.bak
 clab-*/
+icinga2/
