@@ -2,33 +2,44 @@
 
 ## Set environment variables
 
-To function correctly we need to tell the services which ports to run on and which fqdn is being used to access them. This script sets all the necessary variables, to change the behaviour you can edit it.
+To function correctly we need to tell the services which ports to run on and which IP is being used to access them. This script sets all the necessary ports and sets ths IP to the public IPv4 of the host.
 
 ```
-./0_set_envvars.sh
+source ./0_set_envvars.sh
 ```
 
-## Docker and ContainerLab
+## Install Docker and ContainerLab
 
 ```
 ./1_install_docker_and_clab.sh
 ```
 
-## Install and start Slurpit
+Check it was successful:
+
+```
+docker version
+clab version
+```
+
+## Start Slurpit
+
+```
+./2_start_slurpit.sh
+```
+
+Now you can access Slurpit.
+
+```
+echo "http://${MY_EXTERNAL_IP}:${SLURPIT_PORT}"
+
+http://139.178.74.171:8000
+
+```
 
 > [!NOTE]
-> You need to set the Slurpit version (COMMIT_HASH) and Slurpit portal URL (PORTAL_BASE_URL)
-
-```
-COMMIT_HASH="3e2d20458e46cc026d39fde599f01f2a615a2e25" PORTAL_BASE_URL="http://147.28.133.73:8000/" ./2_start_slurpit.sh
-```
-
-Now you should be able to log in to Slurpit at `PORTAL_BASE_URL`
-
-```
-Username: admin@admin.com
-Password: 12345678
-```
+> Default credentials
+> username: admin@admin.com
+> password: 12345678
 
 ## Start the ContainerLab network
 
@@ -36,14 +47,45 @@ Password: 12345678
 ./3_start_network.sh
 ```
 
-## Start NetBox
+Check it's working:
+
+```
+pushd network
+
+clab inspect
+INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
++---+--------------------+--------------+-----------------------+---------------+---------+-----------------+--------------+
+| # |        Name        | Container ID |         Image         |     Kind      |  State  |  IPv4 Address   | IPv6 Address |
++---+--------------------+--------------+-----------------------+---------------+---------+-----------------+--------------+
+| 1 | clab-autocon2-srl1 | a0c213487b20 | ghcr.io/nokia/srlinux | nokia_srlinux | running | 192.168.80.6/20 | N/A          |
+| 2 | clab-autocon2-srl2 | 498c2822e8f7 | ghcr.io/nokia/srlinux | nokia_srlinux | running | 192.168.80.7/20 | N/A          |
++---+--------------------+--------------+-----------------------+---------------+---------+-----------------+--------------+
+
+popd
+```
+
+## Start NetBox with the Slurpit plugin
 
 > [!NOTE]
-> This can take a few minutes. Use `docker compose logs -f`to follow along
+> This can take 2-3 minutes. Use `docker compose logs -f` in a separate tab to follow along.
+> If you see `Error` next to the `netbox-docker-netbox-1` container this is often because the healthcheck timeout is shorter than the start up time and it will recover itself automatically.
 
 ```
 ./4_start_netbox.sh
 ```
+
+Now you can access NetBox.
+
+```
+echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
+
+http://139.178.74.171:8001
+```
+
+> [!NOTE]
+> Default credentials
+> username: admin
+> password: admin
 
 ## Start Icinga
 
@@ -51,17 +93,34 @@ Password: 12345678
 ./5_start_icinga.sh
 ```
 
-You should now be able to log into Icinga:
+Now you can access Icinga.
 
-Username: icingaadmin
-Password: icinga
+```
+echo "http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
+
+http://139.178.74.171:8002
+```
+
+> [!NOTE]
+> Default credentials
+> username: icingaadmin
+> password: icinga
 
 ## Start Netpicker
 
 ```
-pushd netpicker
 ./6_start_netpicker.sh
-popd
 ```
 
-Now you should be able to log in to Netpicker at URL:8003
+Now you can access Icinga.
+
+```
+echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
+
+http://139.178.74.171:8003
+```
+
+> [!NOTE]
+> Default credentials
+> username: admin@admin.com
+> password: 12345678

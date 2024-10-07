@@ -7,12 +7,6 @@ export DEBIAN_FRONTEND=noninteractive
 echo "\$nrconf{restart} = 'l';" > /etc/needrestart/conf.d/90-autorestart.conf
 apt-get update
 
-# Install unzip
-echo
-echo "--- Installing unzip ---"
-echo
-apt install -y unzip
-
 # Install Docker and Compose
 echo "--- Installing Docker and ContainerLab ---"
 curl -sL https://containerlab.dev/setup | sudo bash -s "all"
