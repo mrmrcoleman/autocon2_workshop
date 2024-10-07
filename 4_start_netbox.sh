@@ -1,6 +1,16 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check if all required environment variables are set
+REQUIRED_VARS=("MY_EXTERNAL_IP" "NETBOX_PORT")
+
+for var in "${REQUIRED_VARS[@]}"; do
+  if [ -z "${!var:-}" ]; then
+    echo "Error: Required environment variable '$var' is not set."
+    exit 0
+  fi
+done
+
 echo
 echo "--- Cloning NetBox Docker ---"
 echo
@@ -36,7 +46,7 @@ services:
     image: netbox:latest-plugins
     pull_policy: never
     ports:
-      - 8001:8080
+      - "${NETBOX_PORT}:8080"
     build:
       context: .
       dockerfile: Dockerfile-Plugins
@@ -58,6 +68,9 @@ EOF
 cat <<EOF > configuration/plugins.py
 PLUGINS = ["slurpit_netbox"]
 EOF
+
+# Update the healthcheck in docker-compose.yml
+sed -i 's|http://localhost:8080/login/|http://${MY_EXTERNAL_IP}:${NETBOX_PORT}/login/|' docker-compose.yml
 
 echo
 echo "--- Building NetBox ---"
