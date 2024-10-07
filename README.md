@@ -2,7 +2,7 @@
 
 ## Set environment variables
 
-To function correctly we need to tell the services which ports to run on and which IP is being used to access them. This script sets all the necessary ports and sets ths IP to the public IPv4 of the host.
+This script sets all the necessary envirionment variables so that the correct ports are used for the services and defaults to using the public IPv4 of the host for service URLs.
 
 ```
 source ./0_set_envvars.sh
