@@ -36,10 +36,10 @@ http://139.178.74.171:8000
 
 ```
 
-> [!NOTE]
-> Default credentials
-> username: admin@admin.com
-> password: 12345678
+> [!TIP]
+> 
+> **username** admin@admin.com  
+> **password** 12345678  
 
 ## Start the ContainerLab network
 
@@ -66,8 +66,8 @@ popd
 
 ## Start NetBox with the Slurpit plugin
 
-> [!NOTE]
-> This can take 2-3 minutes. Use `docker compose logs -f` in a separate tab to follow along.
+> [!TIP]
+> This can take 2-3 minutes. Use `docker compose logs -f` in a separate tab to follow along.  
 > If you see `Error` next to the `netbox-docker-netbox-1` container this is often because the healthcheck timeout is shorter than the start up time and it will recover itself automatically.
 
 ```
@@ -82,10 +82,10 @@ echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
 http://139.178.74.171:8001
 ```
 
-> [!NOTE]
-> Default credentials
-> username: admin
-> password: admin
+> [!TIP]
+>  
+> **username** admin  
+> **password** admin
 
 ## Start Icinga
 
@@ -101,10 +101,10 @@ echo "http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 http://139.178.74.171:8002
 ```
 
-> [!NOTE]
-> Default credentials
-> username: icingaadmin
-> password: icinga
+> [!TIP]
+>   
+> **username** icingaadmin  
+> **password** icinga
 
 ## Start Netpicker
 
@@ -120,7 +120,7 @@ echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
 http://139.178.74.171:8003
 ```
 
-> [!NOTE]
-> Default credentials
-> username: admin@admin.com
-> password: 12345678
+> [!TIP]
+> 
+> **username** admin@admin.com  
+> **password** 12345678
