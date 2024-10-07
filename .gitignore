@@ -1,5 +1,7 @@
-slurpit/
 netbox-docker/
 *.bak
 clab-*/
 icinga2/
+slurpit/certs/
+slurpit/db/
+slurpit/logs/

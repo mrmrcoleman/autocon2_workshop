@@ -72,5 +72,3 @@ echo
 docker compose up -d
 
 popd
-
-# Check the static files section in Dockerfile-Plugins to see if they are necessary

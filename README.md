@@ -1,5 +1,13 @@
 # Installation
 
+## Set environment variables
+
+To function correctly we need to tell the services which ports to run on and which fqdn is being used to access them. This script sets all the necessary variables, to change the behaviour you can edit it.
+
+```
+./0_set_envvars.sh
+```
+
 ## Docker and ContainerLab
 
 ```
@@ -42,3 +50,13 @@ Password: 12345678
 ```
 ./5_start_icinga.sh
 ```
+
+## Start Netpicker
+
+```
+pushd netpicker
+./6_start_netpicker.sh
+popd
+```
+
+Now you should be able to log in to Netpicker at URL:8003
