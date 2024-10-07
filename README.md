@@ -51,6 +51,11 @@ Password: 12345678
 ./5_start_icinga.sh
 ```
 
+You should now be able to log into Icinga:
+
+Username: icingaadmin
+Password: icinga
+
 ## Start Netpicker
 
 ```
