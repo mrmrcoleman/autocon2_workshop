@@ -59,9 +59,9 @@ services:
     labels:
       service.netpicker.io: api
     ports:
-      - "8004:8000"
+      - "${NETPICKER_API_PORT}:8000"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://139.178.74.171:8004/api/v1/status"]
+      test: ["CMD", "curl", "-f", "http://${MY_EXTERNAL_IP}:${NETPICKER_API_PORT}/api/v1/status"]
       start_period: 15s
       interval: 5s
 
@@ -114,7 +114,7 @@ services:
     labels:
       service.netpicker.io: front-end
     ports:
-      - "8003:80"
+      - "${NETPICKER_PORT}:80"
     depends_on:
       - api
 
@@ -125,7 +125,7 @@ services:
       service.netpicker.io: kibbitzer
     environment:
       <<: *tag-params
-      SHENV_API_URL: http://api:8004
+      SHENV_API_URL: http://api:${NETPICKER_API_PORT}
       #SHENV_CELERY_BROKER_URL: redis://redis
       #SHENV_CELERY_RESULT_BACKEND: redis://redis
       SHENV_SHOW_RUN_nokia_srl: 'info'
