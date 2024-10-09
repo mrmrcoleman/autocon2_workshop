@@ -148,7 +148,7 @@ Now you can use a browser to log in.
 
 ! Come back to this part when Dave has updated the Icinga installation: https://github.com/mrmrcoleman/autocon2_workshop/issues/11
 
-### Updating the network, the hard way!
+## Updating the network, the hard way!
 
 Organizations are turning to network automation for many reasons including being able to change the network faster, reducing manual errors, compliance and more. The majority of the industry is just getting started though and for many teams changing the network still means the same old process:
 
@@ -194,7 +194,6 @@ A:srl2# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/31
 A:srl2# commit now
 ```
 
-
 And now let's test connectivity. On `clab-autocon2-srl2`.
 
 ```
@@ -215,19 +214,22 @@ Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunate
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
 
-### Moving towards Intent Based Networking
+## Moving towards Intent Based Networking
 
 Much has been written about network automation and Intent Based Networking, so rather than adding to that, we're going to learn by doing. In the next sections we will introduce various modern tools and techniques make sure that changing our networks is less painful.
 
-#### NetBox - Our Network Source of Truth
+### NetBox - Our Network Source of Truth
 
-A Network Source of Truth like NetBox is the cornerstone of any nutritious network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty.
+A Network Source of Truth like [NetBox](https://netboxlabs.com/) is the cornerstone of any nutritious network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty (apart from a site called Slurpit, which you can ignore for now.)
 
 Populating NetBox typically happens in two stages:
 
 1. Set up the organizational specifics like tenants, sites, and more
+2. Import our devices from the network
 
-For our network that will be very simple as our devices will live in a single site called "Denver". Let's go and add that now. First we need to get the IP and port for NetBox.
+#### Set up the organizational specifics like tenants, sites, and more
+
+For our network this step will be very simple as our devices will live in a single site called "Denver". Let's go and add that now. First we need to get the IP and port for NetBox.
 
 ```
 echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
@@ -240,7 +242,59 @@ echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
 > **username** admin
 > **password** admin
 
-INSERT SCREENSHOT
+Now you can log-in and add the site under Organization -> Sites:
 
+<img src="images/netbox/create_site.png" alt="Create NetBox Site" title="Create NetBox Site" width="750" />
 
-2. I
+### Slurpit - Importing our devices from the network
+
+Tools that are used to import operational state from our network into Netbox are typically called **Discovery** tools. Network Discovery typically falls into two categories:
+
+1. Network discovery - Scans a list of IPs or subnets to find any network devices in the network
+2. Device discovery - Logs into specific devices to extract their configurations
+
+[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can also do network discovery across a large selection of network devices and can also do network discovery, but we won't be using that functionality in this workshop.
+
+Let's slurp our network devices into Slurp'it! First we need to get the IP and port for Slurp'it.
+
+```
+echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
+(Example output, yours will differ)
+147.75.34.179:8000
+```
+
+> [!TIP]
+> 
+> **username** admin@admin.com  
+> **password** 12345678
+
+When you initially log in you will be presented with the Slurpit setup wizard.
+
+<img src="images/slurpit/wizard_initial.png" alt="Slurpit Wizard Initial" title="Slurpit Wizard Initial" width="750" />
+
+You can click through most of the steps, but you must populate the Vault step with the SSH credentials for our network devices.
+
+> [!TIP]
+> 
+> **username** admin
+> **password** NokiaSrl1!
+
+<img src="images/slurpit/wizard_vault.png" alt="Slurpit Wizard Vault" title="Slurpit Wizard Vault" width="750" />
+
+Click through the the final step, and then hit "Let's Go :rocket:"
+
+<img src="images/slurpit/wizard_letsgo.png" alt="Slurpit Wizard Let's Go :rocket:" title="Slurpit Wizard Let's Go :rocket:" width="750" />
+
+Now we need to add our devices. Go to Devices and then click on "+ Add ". First we'll add `clab-autocon2-srl1`. Be sure to fill in the `Hostname`, `fqdn` and `Operating System` as shown.
+
+<img src="images/slurpit/devices_srl1.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
+
+You can click on `Device Reachable` and `SSH login` to check that the device is accesible. Then hit `Save`. Now you do the same for `clab-autocon2-srl2` and hit `Save`.
+
+<img src="images/slurpit/devices_srl2.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
+
+Now we're ready to start our initial import. Click on the ellipsis menu (three dots) on each device and click "Schedule Now"
+
+<img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
+
+NOTE: Stopping here until this issue is fixed: https://github.com/mrmrcoleman/autocon2_workshop/issues/2
