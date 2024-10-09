@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo
-echo "--- Setting environment ---"
-echo
-
 # Attempt to fetch the external IPv4 address
 EXTERNAL_IP=$(curl -4 -s ifconfig.me)  # Use -4 to ensure IPv4 is returned
 
@@ -24,7 +20,7 @@ export NETPICKER_API_PORT="8004"
 
 # Debug information to communicate values being used
 echo
-echo "--- Debug: Environment Variables ---"
+echo "--- Environment Variables Set ---"
 echo "External IP: $MY_EXTERNAL_IP"
 echo "Slurpit will be deployed at: $MY_EXTERNAL_IP:$SLURPIT_PORT"
 echo "NetBox will be deployed at: $MY_EXTERNAL_IP:$NETBOX_PORT"
