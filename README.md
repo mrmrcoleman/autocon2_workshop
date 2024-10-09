@@ -209,11 +209,38 @@ PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
 
 Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunately that's not all:
 
-1. If you go back and look at the monitoring in Icinga you'll see that we created a bunch of unnecessary monitoring alerts while making that change, because we forgot an important step: update the monitoring before making the change and then update it again when we're done.
-2. We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices
+1. If you go back and look at the monitoring in Icinga you'll see that we created a bunch of monitoring alerts while making that change, because we forgot an important step: update the monitoring to switch off the alerts before making the change and then switch them back on when we're done.
+2. We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices. How do we ensure that the documentation is updated when many engineers are making changes to the network?
 3. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
 
 ### Moving towards Intent Based Networking
 
+Much has been written about network automation and Intent Based Networking, so rather than adding to that, we're going to learn by doing. In the next sections we will introduce various modern tools and techniques make sure that changing our networks is less painful.
+
+#### NetBox - Our Network Source of Truth
+
+A Network Source of Truth like NetBox is the cornerstone of any nutritious network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty.
+
+Populating NetBox typically happens in two stages:
+
+1. Set up the organizational specifics like tenants, sites, and more
+
+For our network that will be very simple as our devices will live in a single site called "Denver". Let's go and add that now. First we need to get the IP and port for NetBox.
+
+```
+echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
+(Example output, yours will differ)
+147.75.34.179:8001
+```
+
+> [!TIP]
+> 
+> **username** admin
+> **password** admin
+
+INSERT SCREENSHOT
+
+
+2. I
