@@ -210,7 +210,8 @@ Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunate
 
 1. If you go back and look at the monitoring in Icinga you'll see that we created a bunch of monitoring alerts while making that change, because we forgot an important step: update the monitoring to switch off the alerts before making the change and then switch them back on when we're done.
 2. We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices. How do we ensure that the documentation is updated when many engineers are making changes to the network?
-3. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
+3. How can we confirm that our devices are correctly (and securely) configured?
+4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
 
@@ -247,6 +248,8 @@ Now you can log-in and add the site under Organization -> Sites:
 <img src="images/netbox/create_site.png" alt="Create NetBox Site" title="Create NetBox Site" width="750" />
 
 ### Slurpit - Importing our devices from the network
+
+**Discovering our Network with Slurpit**
 
 Tools that are used to import operational state from our network into Netbox are typically called **Discovery** tools. Network Discovery typically falls into two categories:
 
@@ -298,3 +301,44 @@ Now we're ready to start our initial import. Click on the ellipsis menu (three d
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
 NOTE: Stopping here until this issue is fixed: https://github.com/mrmrcoleman/autocon2_workshop/issues/2
+
+**Importing the discovered network from Slurp'it into NetBox**
+
+Now that Slurp'it has discovered our network, we need to import the network into our NetBox instance. (This isn't the last time we'll use Slurpit though!) The Slurp'it team have built a plugin for NetBox to help users intuitively reconcile the data in Slurp'it into NetBox, so let's dive in.
+
+First navigate to your NetBox instance.
+
+```
+echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
+(Example output, yours will differ)
+147.75.34.179:8001
+```
+
+> [!TIP]
+> 
+> **username** admin
+> **password** admin
+
+In the NetBox left-hand menu click on `SLURP'IT` -> `Onboard devices`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+If you now click `Sync` the Slurp'it plugin will pull the information it has discovered about our network over to NetBox.
+
+<img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
+
+Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll presented with the Slurp'it device onboarding screen. Under `Site*` select the `Denver`site we created earlier and then click `Apply`.
+
+<img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />
+
+Now the devices in our network have been successfully imported into NetBox! You can confirm this by returning to the NetBox homepage and navigating to `Devices` -> `Devices`
+
+<img src="images/netbox/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
+
+
+### Icinga - Our monitoring tool
+
+
+
+### NetPicker - Our configuration assurance tool
+
