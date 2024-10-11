@@ -340,5 +340,44 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 
 
-### NetPicker - Our configuration assurance tool
+### Netpicker - Our configuration assurance tool
+
+Netpicker allows us to validate our device configurations. It can be used to validate anything you can express in code, but also makes it easy to generate validations even if you can't code. Perhaps you'd like to know if there are any known vulnerabilities for a platform version you're running in your network, or if your device configurations adhere to your company's security policies? Netpicker can do all of that and more.
+
+To get started we need to tell NetPicker about our devices. Now that we have our NetBox as our Network Source of Truth, we'll obviously be importing our devices from there.
+
+First log-in to Netpicker and click on `Add Device`
+
+```
+echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
+(Example output, yours will differ)
+http://139.178.74.171:8003
+```
+
+> [!TIP]
+> 
+> **username** admin@admin.com  
+> **password** 12345678
+
+INSERT HOMEPAGE ADD DEVICE SCREENSHOT
+
+Now click on `+ Add devices` and then click on `Import from NetBox`
+
+INSERT IMPORT FROM NETBOX MENU SCREENSHOT
+
+Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
+
+```
+echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
+(Example output, yours will differ)
+http://139.178.74.171:8003
+```
+
+INSERT SCREENSHOT NETPICKER NETBOX URL AND API KEY
+
+Then under `Vault` select `autocon_workshop` and click `Next`
+
+INSERT VAULT SELECTION SCREENSHOT
+
+!!!!! This part fails because it probably cannot reach the devices
 
