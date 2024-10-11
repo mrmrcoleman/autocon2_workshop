@@ -8,6 +8,8 @@ This script sets all the necessary envirionment variables so that the correct po
 source ./0_set_envvars.sh
 ```
 
+Keep the output from this handy somewhere as we'll reference it a lot.
+
 ## Install Docker and ContainerLab
 
 ```
@@ -31,7 +33,7 @@ Now you can access Slurpit.
 
 ```
 echo "http://${MY_EXTERNAL_IP}:${SLURPIT_PORT}"
-
+(Example output, yours will differ)
 http://139.178.74.171:8000
 
 ```
@@ -78,7 +80,7 @@ Now you can access NetBox.
 
 ```
 echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
-
+(Example output, yours will differ)
 http://139.178.74.171:8001
 ```
 
@@ -97,7 +99,7 @@ Now you can access Icinga.
 
 ```
 echo "http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
-
+(Example output, yours will differ)
 http://139.178.74.171:8002
 ```
 
@@ -116,7 +118,7 @@ Now you can access Icinga.
 
 ```
 echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
-
+(Example output, yours will differ)
 http://139.178.74.171:8003
 ```
 
