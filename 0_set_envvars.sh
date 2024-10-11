@@ -17,6 +17,14 @@ export NETBOX_PORT="8001"
 export ICINGA_PORT="8002"
 export NETPICKER_PORT="8003"
 export NETPICKER_API_PORT="8004"
+export WORKSHOP_SUBNET="172.24.0.0/24"
+
+echo
+echo "--- Creating Docker Network ---"
+echo
+
+docker network create --driver=bridge --subnet=${WORKSHOP_SUBNET} autocon-workshop
+
 
 # Debug information to communicate values being used
 echo
@@ -27,4 +35,5 @@ echo "NetBox will be deployed at: $MY_EXTERNAL_IP:$NETBOX_PORT"
 echo "Icinga will be deployed at: $MY_EXTERNAL_IP:$ICINGA_PORT"
 echo "NetPicker Frontend will be deployed at: $MY_EXTERNAL_IP:$NETPICKER_PORT"
 echo "NetPicker API will be deployed at: $MY_EXTERNAL_IP:$NETPICKER_API_PORT"
+echo "Workshop Docker network: ${WORKSHOP_SUBNET}"
 echo "-----------------------------------"
