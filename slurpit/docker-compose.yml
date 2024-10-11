@@ -9,7 +9,7 @@ services:
       timeout: 10s
       retries: 360
     networks:
-      - slurpit-network
+      - autocon-workshop
     environment:
       TZ: Europe/Amsterdam
       WAREHOUSE_CALLBACK_SCANNER_URL: http://slurpit-portal/callback/scanner
@@ -29,7 +29,7 @@ services:
       slurpit-warehouse:
         condition: service_healthy
     networks:
-      - slurpit-network
+      - autocon-workshop
     environment:
       TZ: Europe/Amsterdam
       SCRAPER_TIMEOUT: 20
@@ -46,7 +46,7 @@ services:
       slurpit-warehouse:
         condition: service_healthy
     networks:
-      - slurpit-network
+      - autocon-workshop
     environment:
       TZ: Europe/Amsterdam
       SCANNER_POOLSIZE: 4
@@ -60,7 +60,7 @@ services:
     image: slurpit/portal:latest
     container_name: slurpit-portal
     networks:
-      - slurpit-network
+      - autocon-workshop
     environment:
       TZ: Europe/Amsterdam
       PORTAL_BASE_URL: http://localhost
@@ -74,5 +74,5 @@ services:
     restart: always
 
 networks:
-  slurpit-network:
-    driver: bridge
+  autocon-workshop:
+    external: true

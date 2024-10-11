@@ -1,8 +1,7 @@
 name: autocon2
 
 mgmt:
-  network: slurpit_slurpit-network    # management network name
-  ipv4-subnet: 172.24.0.0/16          # ipv4 range
+  network: autocon-workshop
 
 topology:
   nodes:
