@@ -11,7 +11,7 @@
 
 
 
-- Log in to NetBox and navigate SLURP'IT -> Settings
+- Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
   - Under `Data synchronization` choose BOTH and click `Save`
   - Under `Slurp'it server` click `Edit`
     - Enter your Slurp'it URL
@@ -21,9 +21,9 @@
     - You'll now see a populated list of the all the data Slurp'it can reconcile into NetBox
     - Select `All` and then click `Save`
 
+## Set up Netpicker Vault
 
-
-
-- Connect Netpicker to NetBox
-
-- Put initial state in NetBox or do it in the workshop?
+- Log in to NetBox and navigate `Devices` and then click on the `Vault` tab
+  - Click on `+ Add Vault`
+  - Give it any name and the credentials for the network devices (admin:NokiaSrl1!)
+  - Click `Save`
