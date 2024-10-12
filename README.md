@@ -359,11 +359,11 @@ http://139.178.74.171:8003
 > **username** admin@admin.com  
 > **password** 12345678
 
-INSERT HOMEPAGE ADD DEVICE SCREENSHOT
+<img src="images/netpicker/homepage_add_device.png" alt="NetPicker Homepage Add Devices" title="NetPicker Homepage Add Devices" width="1000" />
 
 Now click on `+ Add devices` and then click on `Import from NetBox`
 
-INSERT IMPORT FROM NETBOX MENU SCREENSHOT
+<img src="images/netpicker/add_devices_menu.png" alt="NetPicker Add Devices" title="NetPicker Add Devices Menu" width="300" />
 
 Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
 
@@ -373,11 +373,17 @@ echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
 http://139.178.74.171:8003
 ```
 
-INSERT SCREENSHOT NETPICKER NETBOX URL AND API KEY
+<img src="images/netpicker/netbox_api_details.png" alt="NetBox API Details" title="NetBox API Details" width="1000" />
 
-Then under `Vault` select `autocon_workshop` and click `Next`
+Then on the next screen choose `IP address / FQDN field (required)` choose `name (-)`and under `Vault` select `autocon_workshop`. Then click `Next`
 
-INSERT VAULT SELECTION SCREENSHOT
+<img src="images/netpicker/device_mapping.png" alt="Netpicker Device Mapping" title="Netpicker Device Mapping" width="1000" />
 
-!!!!! This part fails because it probably cannot reach the devices
+Our network devices have now been imported from NetBox into Netpicker!
+
+___
+
+Next we need to ask Netpicker to pull the configuration backups for our devices.
+
+
 
