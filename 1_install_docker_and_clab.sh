@@ -9,7 +9,19 @@ apt-get update
 
 # Install Docker and Compose
 echo "--- Installing Docker and ContainerLab ---"
-curl -sL https://containerlab.dev/setup | sudo bash -s "all"
+if [ -f "setup" ]; then
+    rm -v "setup"
+fi
+
+wget https://containerlab.dev/setup
+sed -i 's/^DOCKER_VERSION="[^"]*"/DOCKER_VERSION="5:27.3.1-1~ubuntu.24.10~oracular"/' setup
+cat setup | sudo bash -s "all"
 
 # Start docker
 systemctl start docker
+
+echo
+echo "--- Creating Docker Network ---"
+echo
+
+docker network create --driver=bridge --subnet=${WORKSHOP_SUBNET} autocon-workshop

@@ -64,7 +64,7 @@ services:
       - "${NETPICKER_API_PORT}:8000"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://${MY_EXTERNAL_IP}:${NETPICKER_API_PORT}/api/v1/status"]
-      start_period: 15s
+      start_period: 30s
       interval: 5s
     networks:
       - autocon-workshop
