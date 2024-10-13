@@ -10,6 +10,9 @@ apt-get update
 # Install venv
 apt install -y python3.12-venv
 
+# Install net-tools
+apt install -y net-tools
+
 # Install Docker and Compose
 echo "--- Installing Docker and ContainerLab ---"
 if [ -f "setup" ]; then

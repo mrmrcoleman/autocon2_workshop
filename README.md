@@ -393,7 +393,7 @@ Navigate over to `Backups` and wait for the backups to arrive. You can hit `Refr
 
 INSERT BACKUPS SCREENSHOT
 
-You can now inspect the backups. Click on `clab-autocon2-srl1`. Then you can click on your backup.
+You can now inspect the backups. Click on `clab-autocon2-srl1`. Then you can click on each backup to view it.
 
 INSERT BACKUP DETAILS VIEW
 
