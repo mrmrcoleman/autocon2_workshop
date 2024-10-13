@@ -8,6 +8,8 @@ topology:
     client:
       kind: linux
       image: ubuntu:latest
+      ports:
+      - 8005:8080
     server:
       kind: linux
       image: ubuntu:latest
