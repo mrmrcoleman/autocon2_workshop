@@ -7,6 +7,9 @@ export DEBIAN_FRONTEND=noninteractive
 echo "\$nrconf{restart} = 'l';" > /etc/needrestart/conf.d/90-autorestart.conf
 apt-get update
 
+# Install venv
+apt install python3.12-venv
+
 # Install Docker and Compose
 echo "--- Installing Docker and ContainerLab ---"
 if [ -f "setup" ]; then

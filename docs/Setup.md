@@ -9,8 +9,6 @@
     - Click `Submit`
     - Click on the copy icon under `Key` and make a note of the key somewhere as we'll need it for the next step
 
-
-
 - Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
   - Under `Data synchronization` choose BOTH and click `Save`
   - Under `Slurp'it server` click `Edit`
@@ -27,3 +25,6 @@
   - Click on `+ Add Vault`
   - Give it any name and the credentials for the network devices (admin:NokiaSrl1!)
   - Click `Save`
+
+- NOTE: Add instructions to disable the policies before running the backups
+- Run the script to create the correct policies as part of the installation too

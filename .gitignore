@@ -6,3 +6,4 @@ slurpit/certs/
 slurpit/db/
 slurpit/logs/
 setup
+workshop_setup/venv/

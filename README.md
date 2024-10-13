@@ -27,14 +27,14 @@ Let's explore the initial state. It's much like many traditional network setups:
 Let's take a look at our devices:
 
 ```
-push network
+pushd network
 clab inspect
 INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
 +---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
 | # |        Name        | Container ID |         Image         |     Kind      |  State  | IPv4 Address  | IPv6 Address |
 +---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
-| 1 | clab-autocon2-srl1 | 4eaea8a8ecbe | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.18.0.6/16 | N/A          |
-| 2 | clab-autocon2-srl2 | 1482f88e74f8 | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.18.0.7/16 | N/A          |
+| 1 | clab-autocon2-srl1 | 4eaea8a8ecbe | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.24.0.6/24 | N/A          |
+| 2 | clab-autocon2-srl2 | 1482f88e74f8 | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.24.0.7/24 | N/A          |
 +---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
 ```
 
@@ -116,7 +116,7 @@ A:srl1# show system lldp neighbor
   +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
 ```
 
-Let's ping it to make sure we have connectivity.
+Let's ping it across the `ethernet-1/1` interface to confirm connectivity.
 
 ```
 A:srl1# ping 192.168.0.2 network-instance default
@@ -194,7 +194,7 @@ A:srl2# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/31
 A:srl2# commit now
 ```
 
-And now let's test connectivity. On `clab-autocon2-srl2`.
+And now let's test connectivity. On `clab-autocon2-srl2`:
 
 ```
 --{ + running }--[  ]--
@@ -221,7 +221,7 @@ Much has been written about network automation and Intent Based Networking, so r
 
 ### NetBox - Our Network Source of Truth
 
-A Network Source of Truth like [NetBox](https://netboxlabs.com/) is the cornerstone of any nutritious network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty (apart from a site called Slurpit, which you can ignore for now.)
+A Network Source of Truth like [NetBox](https://netboxlabs.com/) is the bedrock of any network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty (apart from a site called Slurpit, which you can ignore for now.)
 
 Populating NetBox typically happens in two stages:
 
@@ -256,7 +256,7 @@ Tools that are used to import operational state from our network into Netbox are
 1. Network discovery - Scans a list of IPs or subnets to find any network devices in the network
 2. Device discovery - Logs into specific devices to extract their configurations
 
-[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can also do network discovery across a large selection of network devices and can also do network discovery, but we won't be using that functionality in this workshop.
+[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can also do device discovery across a large selection of network devices and can also do network discovery, but we won't be using that functionality in this workshop.
 
 Let's slurp our network devices into Slurp'it! First we need to get the IP and port for Slurp'it.
 
@@ -344,7 +344,7 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 Netpicker allows us to validate our device configurations. It can be used to validate anything you can express in code, but also makes it easy to generate validations even if you can't code. Perhaps you'd like to know if there are any known vulnerabilities for a platform version you're running in your network, or if your device configurations adhere to your company's security policies? Netpicker can do all of that and more.
 
-To get started we need to tell NetPicker about our devices. Now that we have our NetBox as our Network Source of Truth, we'll obviously be importing our devices from there.
+To get started we need to tell NetPicker about our devices. Now that we have NetBox as our Network Source of Truth, we'll be importing our devices from NetBox into Netpicker.
 
 First log-in to Netpicker and click on `Add Device`
 
@@ -370,7 +370,7 @@ Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
 ```
 echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
 (Example output, yours will differ)
-http://139.178.74.171:8003
+http://139.178.74.171:8001
 ```
 
 <img src="images/netpicker/netbox_api_details.png" alt="NetBox API Details" title="NetBox API Details" width="1000" />
@@ -383,7 +383,19 @@ Our network devices have now been imported from NetBox into Netpicker!
 
 ___
 
-Next we need to ask Netpicker to pull the configuration backups for our devices.
+Next we need to ask Netpicker to pull the configuration backups for our devices so that we can run tests, which Netpicker calls `Policies`, against them.
 
+On the `Devices` screen click `Run backups`
 
+INSERT RUN BACKUPS SCREENSHOT
+
+Navigate over to `Backups` and wait for the backups to arrive. You can hit `Refresh` to update the view until both backups report `Success`.
+
+INSERT BACKUPS SCREENSHOT
+
+You can now inspect the backups. Click on `clab-autocon2-srl1`. Then you can click on your backup.
+
+INSERT BACKUP DETAILS VIEW
+
+Now that Netpicker is pulling the backups from our devices, we can use the real power of Netpicker, `Policies` and `Rules`.
 
