@@ -18,3 +18,17 @@ echo
 pushd netpicker
 docker compose up -d
 popd
+
+echo
+echo "--- Configuring Policies, Rules and Vault ---"
+echo
+
+pushd workshop_setup
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+python netpicker/setup.py
+deactivate
+rm -fr venv/
+popd
