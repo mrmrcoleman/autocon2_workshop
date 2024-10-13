@@ -7,12 +7,12 @@ topology:
   nodes:
     client:
       kind: linux
-      image: ubuntu:latest
+      image: mrmrcoleman/autocon-client:latest
       ports:
       - 8005:8080
     server:
       kind: linux
-      image: ubuntu:latest
+      image: mrmrcoleman/autocon-server:latest
     srl1:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux
