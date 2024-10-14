@@ -1,7 +1,7 @@
 name: slurpit
 services:
   slurpit-warehouse:
-    image: slurpit/warehouse:latest
+    image: slurpit/warehouse@sha256:015aefe52790ea77d72b73934bf607bf57d90b4444582b4f6d792a37b7d08d23
     container_name: slurpit-warehouse
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/services"]
@@ -23,7 +23,7 @@ services:
     restart: always
 
   slurpit-scraper:
-    image: slurpit/scraper:latest
+    image: slurpit/scraper@sha256:dc4b414cba5d99a9652576a0f458141a9af946e68357319b81c00ff3ec15a061
     container_name: slurpit-scraper
     depends_on:
       slurpit-warehouse:
@@ -40,7 +40,7 @@ services:
     restart: always
 
   slurpit-scanner:
-    image: slurpit/scanner:latest
+    image: slurpit/scanner@sha256:b313c998edae561d7d74643560fb52b0c303b66e845ccbe5d7321c1daa109d60
     container_name: slurpit-scanner
     depends_on:
       slurpit-warehouse:
@@ -57,7 +57,7 @@ services:
     restart: always
 
   slurpit-portal:
-    image: slurpit/portal:latest
+    image: slurpit/portal@sha256:4fd04895468ce2cc332561aec71609886553443647ae1cde84a1aac2ccfa00d0
     container_name: slurpit-portal
     networks:
       - autocon-workshop
