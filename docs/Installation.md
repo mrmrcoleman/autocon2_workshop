@@ -117,7 +117,7 @@ http://139.178.74.171:8002
 Now you can access Icinga.
 
 ```
-echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
+echo "http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 (Example output, yours will differ)
 http://139.178.74.171:8003
 ```
