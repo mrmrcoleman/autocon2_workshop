@@ -16,7 +16,7 @@ echo "--- Cloning Icinga ---"
 echo
 
 git clone -b master https://github.com/davekempe/icinga2-docker-stack/
-pushd icinga2
+pushd icinga2-docker-stack
 
 echo
 echo "--- Writing configuration ---"
@@ -25,10 +25,10 @@ echo
 echo "MYSQL_ROOT_PASSWORD=12345678" > secrets_sql.env
 
 # Remove SSL/TLS
-sed -i '/443:443/d' docker-compose.yml
+sed -i '/4443:443/d' docker-compose.yml
 
 # Update the outside port
-sed -i 's/80:80/${ICINGA_PORT}:80/' docker-compose.yml
+sed -i 's/8080:80/${ICINGA_PORT}:80/' docker-compose.yml
 
 # Uncomment the credentials
 sed -i 's/^ *#- ICINGAWEB2_ADMIN_USER=icingaadmin/      - ICINGAWEB2_ADMIN_USER=icingaadmin/' docker-compose.yml

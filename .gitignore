@@ -1,7 +1,7 @@
 netbox-docker/
 *.bak
 clab-*/
-icinga2/
+icinga2-docker-stack/
 slurpit/certs/
 slurpit/db/
 slurpit/logs/
