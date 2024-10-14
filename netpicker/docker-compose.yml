@@ -2,7 +2,7 @@ x-tag-params: &tag-params
   TAG_CONN_PARAMS: '{"slow":{"timeout":120,"conn_timeout":50,"read_timeout_override":80,"fast_cli":false,"keepalive":5}}'
 
 x-api: &api_common
-  image: netpicker/api
+  image: netpicker/api@sha256:0a1f2be3c975d7b2cf30a008c5f760dc52fcbbfc4bea0794311f2e21f8203099
   environment:
     #API_URL: http://api:8000
     ALLOWED_ORIGINS: '["*"]'
@@ -44,7 +44,7 @@ x-api: &api_common
 
 services:
   db:
-    image: netpicker/db
+    image: netpicker/db@sha256:4a57d4c8f5beca2ed908746553febc55e79027c581d6bb737c21c94d4dff7cfd
     container_name: db
     ports:
       - 5432:5432
@@ -93,7 +93,7 @@ services:
       - autocon-workshop
 
   gitd:
-    image: netpicker/gitd
+    image: netpicker/gitd@sha256:039cfa42cedc41a1f1bd4143bd010ac8a940a5fbdbcab8c560e346dfc7000c21
     container_name: gitd
     ports:
       - "9418:9418" # Default port for git:// pull/push
@@ -108,7 +108,7 @@ services:
       - autocon-workshop
 
   swagger:
-    image: swaggerapi/swagger-ui
+    image: swaggerapi/swagger-ui:v5.17.14
     container_name: swagger
     environment:
       SWAGGER_JSON_URL: "/openapi.json"
@@ -121,7 +121,7 @@ services:
       - autocon-workshop
 
   frontend:
-    image: netpicker/frontend
+    image: netpicker/frontend@sha256:93b8f3d5182a2bbd6ece7bac0c08d6a5471c7658271513f87784661139ff75e8
     container_name: frontend
     labels:
       service.netpicker.io: front-end
@@ -133,7 +133,7 @@ services:
       - autocon-workshop
 
   kibbitzer:
-    image: netpicker/kibbitzer
+    image: netpicker/kibbitzer@sha256:469891a9e36d58f9dd4553de7b583b3d199721d23a68acc9930e6139875784e4
     container_name: kibbitzer
     labels:
       service.netpicker.io: kibbitzer
@@ -160,7 +160,7 @@ services:
 
   agent:
     hostname: agent
-    image: netpicker/agent:latest
+    image: netpicker/agent@sha256:4ead631d6d9e99a229f6209c0ab7ac5d0c23c873b3e976c60bed278d685f4876
     container_name: agent
     labels:
       service.netpicker.io: agent
