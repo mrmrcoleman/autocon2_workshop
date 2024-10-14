@@ -15,11 +15,11 @@ topology:
       image: mrmrcoleman/autocon-server:latest
     srl1:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.2
       startup-config: srl1.cfg
     srl2:
       kind: nokia_srlinux
-      image: ghcr.io/nokia/srlinux
+      image: ghcr.io/nokia/srlinux:24.7.2
       startup-config: srl2.cfg
 
   links:
