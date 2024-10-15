@@ -302,7 +302,13 @@ Now we're ready to start our initial import. Click on the ellipsis menu (three d
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
-NOTE: Stopping here until this issue is fixed: https://github.com/mrmrcoleman/autocon2_workshop/issues/2
+Slurp'it will take a short while to discover information about our devices. Then you can view the discovered information by clicking on the new tab icon on each device, and navigating to the `Collected data` tab.
+
+Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
+
+<img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
+
+___
 
 **Importing the discovered network from Slurp'it into NetBox**
 
