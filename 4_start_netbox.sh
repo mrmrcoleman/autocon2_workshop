@@ -51,6 +51,11 @@ services:
       SUPERUSER_EMAIL: ""
       SUPERUSER_NAME: "admin"
       SUPERUSER_PASSWORD: "admin"
+    healthcheck:
+      test: curl -f http://${MY_EXTERNAL_IP}:${NETBOX_PORT}/login/ || exit 1
+      start_period: 360s
+      timeout: 3s
+      interval: 15s
   netbox-worker:
     image: netbox:v4.1-3.0.2-plugins
     pull_policy: never

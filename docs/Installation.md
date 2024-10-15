@@ -71,7 +71,7 @@ popd
 ## Start NetBox with the Slurpit plugin
 
 > [!TIP]
-> This can take 2-3 minutes. Use `docker compose logs -f` in a separate tab to follow along.  
+> This can take up to 5-6 minutes depending on your hardware. Use `docker compose logs -f` in a separate tab to follow along.  
 > If you see `Error` next to the `netbox-docker-netbox-1` container this is often because the healthcheck timeout is shorter than the start up time and it will recover itself automatically.
 
 ```
