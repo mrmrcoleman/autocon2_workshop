@@ -24,14 +24,14 @@ if [ -f "setup" ]; then
 fi
 
 
-# Check if running Ubuntu 24.04
-if grep -q "Ubuntu 24.04" /etc/os-release; then
-    echo "Ubuntu 24.04 detected. Proceeding with wget..."
+# Check if running Ubuntu
+if grep -q "Ubuntu" /etc/os-release; then
+    echo "Ubuntu detected. Proceeding with wget..."
 	wget https://containerlab.dev/setup
 	sed -i 's/^DOCKER_VERSION="[^"]*"/DOCKER_VERSION="5:27.3.1-1~ubuntu.24.10~oracular"/' setup
 	cat setup | sudo bash -s "all"
 else
-    echo "This is not Ubuntu 24.04. trying containerlab install"
+    echo "This is not Ubuntu. trying containerlab install"
 	curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
 fi
 
