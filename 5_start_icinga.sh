@@ -23,8 +23,8 @@ echo "--- Writing configuration ---"
 echo
 
 echo "MYSQL_ROOT_PASSWORD=12345678" > secrets_sql.env
-echo "NETBOX_URL=http://netbox/api" > secrets_sql.env
-echo "NETBOX_APIKEY=1234567890" > secrets_sql.env
+echo "NETBOX_URL=http://netbox/api" >> secrets_sql.env
+echo "NETBOX_APIKEY=1234567890" >> secrets_sql.env
 
 # Remove SSL/TLS
 sed -i '/4443:443/d' docker-compose.yml
@@ -42,5 +42,7 @@ echo
 
 docker compose up -d
 
-#TODO get rid of this
 popd
+echo "Icinga should be at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
+echo "username: icingaadmin"
+echo "password: icinga"
