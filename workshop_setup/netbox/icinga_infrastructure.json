@@ -1,0 +1,41 @@
+{
+    "extras.tags": [{
+        "color": "00bcd4",
+        "name": "Icinga Endpoint",
+        "slug": "icinga-endpoint"
+    }],
+    "extras.custom-fields": [{
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
+            "object_types": ["dcim.platform"],
+            "type": "text",
+            "name": "icinga_import_source",
+            "group_name": "Monitoring",
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
+            "object_types": ["dcim.platform"],
+            "type": "text",
+            "name": "platform_type",
+        },
+        {
+            "weight": "110",
+            "filter_logic": "loose",
+            "search_weight": "110",
+            "object_types": ["dcim.platform"],
+            "type": "text",
+            "name": "platform_version",
+        },
+        {
+            "weight": "120",
+            "filter_logic": "loose",
+            "search_weight": "120",
+            "object_types": ["dcim.platform"],
+            "type": "text",
+            "name": "platform_family",
+        }
+    ]
+}
