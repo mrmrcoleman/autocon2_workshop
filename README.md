@@ -335,7 +335,7 @@ If you now click `Sync` the Slurp'it plugin will pull the information it has dis
 
 <img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
 
-Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll presented with the Slurp'it device onboarding screen. Under `Site*` select the `Denver`site we created earlier and then click `Apply`.
+Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen. Under `Site*` select the `Denver`site we created earlier and then click `Apply`.
 
 <img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />
 
@@ -343,6 +343,7 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 <img src="images/netbox/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
 
+NOTE: For some reason this isn't bringing over the interfaces :-(
 
 ### Icinga - Our monitoring tool
 

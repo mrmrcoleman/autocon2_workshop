@@ -9,6 +9,14 @@
     - Click `Submit`
     - Click on the copy icon under `Key` and make a note of the key somewhere as we'll need it for the next step
 
+- Navigate to Slurpit, and the `Settings` -> `Plugin`
+  - Set the `Plugin URL`: http://YOUR IP:8001/
+  - Set the `API key`: 1234567890
+  - Set `Authorization type` to `Netbox`
+  - Set `Status` to `Enabled`
+  - Enable `IPAM`, `Interfaces` and `Prefix`
+
+
 - Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
   - Under `Data synchronization` choose BOTH and click `Save`
   - Under `Slurp'it server` click `Edit`
