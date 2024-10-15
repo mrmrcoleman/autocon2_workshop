@@ -16,3 +16,7 @@ popd
 pushd icinga2-docker-stack
 docker compose down
 popd
+
+pushd netpicker
+docker compose down
+popd

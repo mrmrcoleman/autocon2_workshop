@@ -46,3 +46,5 @@ popd
 echo "Icinga should be at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 echo "username: icingaadmin"
 echo "password: icinga"
+
+echo "(wait a minute or so for it to finish starting all the bits)"

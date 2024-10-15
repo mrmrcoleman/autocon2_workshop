@@ -32,3 +32,5 @@ python netpicker/setup.py
 deactivate
 rm -fr venv/
 popd
+
+echo "you can get to netpicker on http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
