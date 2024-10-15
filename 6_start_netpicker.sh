@@ -34,3 +34,5 @@ rm -fr venv/
 popd
 
 echo "you can get to netpicker on http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
+echo "username: admin@admin.com"
+echo "password: 12345678"
