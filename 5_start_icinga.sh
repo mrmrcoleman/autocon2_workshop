@@ -23,7 +23,7 @@ echo "--- Writing configuration ---"
 echo
 
 echo "MYSQL_ROOT_PASSWORD=12345678" > secrets_sql.env
-echo "NETBOX_URL=http://netbox/api" >> secrets_sql.env
+echo "NETBOX_URL=http://${MY_EXTERNAL_IP}:${ICINGA_PORT}/api" >> secrets_sql.env
 echo "NETBOX_APIKEY=1234567890" >> secrets_sql.env
 
 # Remove SSL/TLS
