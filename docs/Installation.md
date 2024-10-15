@@ -114,10 +114,10 @@ http://139.178.74.171:8002
 ./6_start_netpicker.sh
 ```
 
-Now you can access Icinga.
+Now you can access Netpicker.
 
 ```
-echo "http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
+echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
 (Example output, yours will differ)
 http://139.178.74.171:8003
 ```

@@ -21,3 +21,7 @@ docker compose up -d
 
 # Return to the original directory
 popd
+
+echo "You should be able to login to slurpit here: http://${MY_EXTERNAL_IP}:${SLURPIT_PORT}"
+echo "username admin@admin.com"
+echo "password 12345678"

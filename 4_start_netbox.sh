@@ -80,3 +80,7 @@ echo
 docker compose up -d
 
 popd
+
+echo "you can now access netbox here: http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
+echo "username: admin"
+echo "password: admin"
