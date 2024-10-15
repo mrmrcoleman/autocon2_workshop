@@ -42,9 +42,32 @@ echo
 
 docker compose up -d
 
+echo
+echo "--- Waiting for Icinga2 to start ---"
+echo
+
+# Variables
+URL="http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
+TIMEOUT=60  # Timeout in seconds
+
+# Counter for time elapsed
+elapsed=0
+
+# Loop to check if the webpage is available
+while ! curl --output /dev/null --silent --head --fail "$URL"; do
+  # Sleep for 1 second
+  sleep 1
+  elapsed=$((elapsed + 1))
+  echo "${elapsed}"
+
+  # Check if the timeout has been reached
+  if [ "$elapsed" -ge "$TIMEOUT" ]; then
+    echo "Timeout after waiting $TIMEOUT seconds for $URL"
+    exit 1
+  fi
+done
+
 popd
-echo "Icinga should be at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
+echo "Icinga is available at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 echo "username: icingaadmin"
 echo "password: icinga"
-
-echo "(wait a minute or so for it to finish starting all the bits)"
