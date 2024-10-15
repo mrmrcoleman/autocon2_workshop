@@ -30,12 +30,14 @@ Let's take a look at our devices:
 pushd network
 clab inspect
 INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
-+---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
-| # |        Name        | Container ID |         Image         |     Kind      |  State  | IPv4 Address  | IPv6 Address |
-+---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
-| 1 | clab-autocon2-srl1 | 4eaea8a8ecbe | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.24.0.6/24 | N/A          |
-| 2 | clab-autocon2-srl2 | 1482f88e74f8 | ghcr.io/nokia/srlinux | nokia_srlinux | running | 172.24.0.7/24 | N/A          |
-+---+--------------------+--------------+-----------------------+---------------+---------+---------------+--------------+
++---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
+| # |         Name         | Container ID |               Image               |     Kind      |  State  | IPv4 Address  | IPv6 Address |
++---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
+| 1 | clab-autocon2-client | 1c78ef9c0455 | mrmrcoleman/autocon-client:latest | linux         | running | 172.24.0.6/24 | N/A          |
+| 2 | clab-autocon2-server | 1edc76fbac02 | mrmrcoleman/autocon-server:latest | linux         | running | 172.24.0.9/24 | N/A          |
+| 3 | clab-autocon2-srl1   | fb9cd192b40e | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.7/24 | N/A          |
+| 4 | clab-autocon2-srl2   | 1a5c96567133 | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.8/24 | N/A          |
++---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
 ```
 
 You can see that we have two Nokia SRLinux devices running in the network. Let's inspect one of them by ssh'ing into `clab-autocon2-srl1`.
@@ -75,7 +77,7 @@ Type 'help' (and press <ENTER>) if you need any help using this.
 Let's inspect the interfaces:
 
 ```
-A:srl1# show interface
+A:clab-autocon2-srl1# show interface
 =======================================================================================================================================================================
 ethernet-1/1 is up, speed 25G, type None
   ethernet-1/1.0 is up
@@ -108,18 +110,18 @@ Summary
 We can see that this device has two active interfaces: `mgmt0` and `ethernet-1/1`. `mgmt0` is the interface we just ssh'd in on, `ethernet-1/1` is connected to our other device in the `192.168.0.0/32` subnet. We can confirmed the link to `clab-autocon2-srl2` with LLDP:
 
 ```
-A:srl1# show system lldp neighbor
-  +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
+A:clab-autocon2-srl1# show system lldp neighbor
+    +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
   |     Name     |     Neighbor      | Neighbor System Name | Neighbor Chassis ID | Neighbor First Message | Neighbor Last Update | Neighbor Port |
   +==============+===================+======================+=====================+========================+======================+===============+
-  | ethernet-1/1 | 1A:1D:01:FF:00:00 | srl2                 | 1A:1D:01:FF:00:00   | a minute ago           | now                  | ethernet-1/1  |
+  | ethernet-1/1 | 1A:A1:03:FF:00:00 | clab-autocon2-srl2   | 1A:A1:03:FF:00:00   | 42 seconds ago         | 12 seconds ago       | ethernet-1/1  |
   +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
 ```
 
 Let's ping it across the `ethernet-1/1` interface to confirm connectivity.
 
 ```
-A:srl1# ping 192.168.0.2 network-instance default
+A:clab-autocon2-srl1# ping 192.168.0.2 network-instance default
 Using network instance default
 PING 192.168.0.2 (192.168.0.2) 56(84) bytes of data.
 64 bytes from 192.168.0.2: icmp_seq=1 ttl=64 time=67.9 ms
@@ -164,16 +166,16 @@ First on `clab-autocon2-srl1`
 
 ```
 --{ running }--[  ]--
-A:srl1# enter candidate
+A:clab-autocon2-srl1# enter candidate
 
 --{ candidate shared default }--[  ]--
-A:srl1# delete /interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/30
+A:clab-autocon2-srl1# delete /interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/30
 
 --{ * candidate shared default }--[  ]--
-A:srl1# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.0/31
+A:clab-autocon2-srl1# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.0/31
 
 --{ * candidate shared default }--[  ]--
-A:srl1# commit now
+A:clab-autocon2-srl1# commit now
  
 All changes have been committed. Leaving candidate mode.
 ```
@@ -182,23 +184,23 @@ Now on `clab-autocon2-srl2`
 
 ```
 --{ running }--[  ]--
-A:srl2# enter candidate
+A:clab-autocon2-srl2# enter candidate
 
 --{ candidate shared default }--[  ]--
-A:srl2# delete / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.2/30
+A:clab-autocon2-srl2# delete / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.2/30
 
 --{ * candidate shared default }--[  ]--
-A:srl2# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/31
+A:clab-autocon2-srl2# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/31
 
 --{ * candidate shared default }--[  ]--
-A:srl2# commit now
+A:clab-autocon2-srl2# commit now
 ```
 
 And now let's test connectivity. On `clab-autocon2-srl2`:
 
 ```
 --{ + running }--[  ]--
-A:srl1# ping 192.168.0.1 network-instance default
+A:clab-autocon2-srl2# ping 192.168.0.1 network-instance default
 Using network instance default
 PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
 64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=68.2 ms
