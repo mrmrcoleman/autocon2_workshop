@@ -69,7 +69,17 @@
             "search_weight": "100",
             "object_types": ["tenancy.contact"],
             "type": "text",
-            "name": "pushover_id"
+            "group_name": "Pushover",
+            "name": "pushover_user"
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
+            "object_types": ["tenancy.contact"],
+            "type": "text",
+            "group_name": "Pushover",
+            "name": "pushover_token"
         }
     ]
 }
