@@ -312,7 +312,7 @@ ___
 
 **Importing the discovered network from Slurp'it into NetBox**
 
-Now that Slurp'it has discovered our network, we need to import the network into our NetBox instance. (This isn't the last time we'll use Slurpit though!) The Slurp'it team have built a plugin for NetBox to help users intuitively reconcile the data in Slurp'it into NetBox, so let's dive in.
+Now that Slurp'it has discovered our network, we need to import it into NetBox. The Slurp'it team have built a plugin for NetBox to help users intuitively reconcile the data in Slurp'it into NetBox, so let's dive in.
 
 First navigate to your NetBox instance.
 
@@ -343,21 +343,31 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 <img src="images/netbox/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
 
-NOTE from Pieter
+Pulling discovered network data into Netbox happens in two stages in Slurp'it. The step, which we just did, is to onboard the devices. The second step is to `Reconcile` the additional data about the devices into NetBox.
 
-- To push the interfaces automatically without waiting:
-  - Call this http://134.209.203.123:8000/run/plugin/sync
-  - Then call this http://134.209.203.123:8000/run/plugin/sync_queue
+In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
 
-Note that for now the Prefix and IPAM sync from Nokia SR Linux doesn't work, so maybe we can work around this for now?
-  
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
 
+> [!TIP]
+> 
+> Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait navigate to the following URLs in your browser  
+> http://<INSERTYOURIP>:8000/run/plugin/sync  
+> http://<INSERTYOURIP>:8000/run/plugin/sync_queue  
 
-NOTE: For some reason this isn't bringing over the interfaces :-(
+Select the `Interfaces` tab, select all the interfaces and then click `Accept`
+
+<img src="images/slurpit/reconcile_interfaces.png" alt="Slurpit Reconcile Devices" title="Slurpit Reconcile Devices" width="750" />
+
+Now the device interfaces have been added to the devices in NetBox. To confirm, navigate to `Devices` -> `Devices` -> `clab-autocon2-srl1` and select the `Interfaces` tab.
+
+<img src="images/netbox/imported_interfaces.png" alt="NetBox Interfaces" title="NetBox Interfaces" width="750" />
+
+____
 
 ### Icinga - Our monitoring tool
 
-
+____
 
 ### Netpicker - Our configuration assurance tool
 
