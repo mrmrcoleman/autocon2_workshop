@@ -15,6 +15,7 @@
   - Set `Authorization type` to `Netbox`
   - Set `Status` to `Enabled`
   - Enable `IPAM`, `Interfaces` and `Prefix`
+  - Click on Sync????
 
 
 - Log in to NetBox and navigate to `SLURP'IT` -> `Settings`

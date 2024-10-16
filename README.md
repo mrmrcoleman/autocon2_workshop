@@ -343,6 +343,16 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 <img src="images/netbox/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
 
+NOTE from Pieter
+
+- To push the interfaces automatically without waiting:
+  - Call this http://134.209.203.123:8000/run/plugin/sync
+  - Then call this http://134.209.203.123:8000/run/plugin/sync_queue
+
+Note that for now the Prefix and IPAM sync from Nokia SR Linux doesn't work, so maybe we can work around this for now?
+  
+
+
 NOTE: For some reason this isn't bringing over the interfaces :-(
 
 ### Icinga - Our monitoring tool
