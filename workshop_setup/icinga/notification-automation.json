@@ -188,7 +188,7 @@
                     "merge_policy": "override",
                     "priority": "2",
                     "source": "Netbox Contacts Enhanced Email (Host Assignment)",
-                    "source_expression": "Notification States and Types"
+                    "source_expression": "Notification States and Types Host"
                 },
                 {
                     "destination_field": "import",
@@ -253,7 +253,7 @@
                     "merge_policy": "override",
                     "priority": "2",
                     "source": "Netbox Contacts Enhanced Email (Service Assignment)",
-                    "source_expression": "Notification States and Types"
+                    "source_expression": "Notification States and Types Service"
                 },
                 {
                     "destination_field": "import",
@@ -318,7 +318,7 @@
                     "merge_policy": "override",
                     "priority": "2",
                     "source": "Netbox Contacts Pushover (Host Assignment)",
-                    "source_expression": "Notification States and Types"
+                    "source_expression": "Notification States and Types Host"
                 },
                 {
                     "destination_field": "import",
@@ -383,7 +383,7 @@
                     "merge_policy": "override",
                     "priority": "2",
                     "source": "Netbox Contacts Pushover (Service Assignment)",
-                    "source_expression": "Notification States and Types"
+                    "source_expression": "Notification States and Types Service"
                 },
                 {
                     "destination_field": "import",
