@@ -1,16 +1,28 @@
 {
     "NotificationTemplate": {
-        "Notification States and Types": {
+        "Notification States and Types Service": {
             "fields": [],
-            "object_name": "Notification States and Types",
+            "object_name": "Notification States and Types Service",
             "object_type": "template",
             "states": [
                 "Critical",
-                "Down",
                 "OK",
                 "Unknown",
-                "Up",
                 "Warning"
+            ],
+            "types": [
+                "Acknowledgement",
+                "Problem",
+                "Recovery"
+            ]
+        },
+        "Notification States and Types Host": {
+            "fields": [],
+            "object_name": "Notification States and Types Host",
+            "object_type": "template",
+            "states": [
+                "Down",
+                "Up"
             ],
             "types": [
                 "Acknowledgement",
