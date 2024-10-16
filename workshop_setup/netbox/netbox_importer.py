@@ -28,6 +28,7 @@ class Netbox:
         self.required_fields = []
         self.init_api()
 
+
     def init_api(self):
         # Initialize pynetbox API connection
         self.nb = pynetbox.api(self.netbox_url, token=self.netbox_token)
@@ -58,7 +59,7 @@ class Netbox:
                     if hasattr(self.obj, key):
                         child_key = next(iter(value))
                         child_value = value[child_key]
-                        if getattr(getattr(self.obj, key), child_key) != child_value:
+                        if not hasattr(self.obj, key) or not hasattr(getattr(self.obj, key), child_key) or getattr(getattr(self.obj, key), child_key) != child_value:
                             print(f"Updating '{key}' from '{getattr(self.obj, key)}' to '{value}'")
                             setattr(self.obj, key, value)
                             updated = True 
@@ -80,7 +81,7 @@ class Netbox:
                 print(f"Object '{self.payload['name']}' created successfully.")              
 
 class NetboxDevice(Netbox):
-    def __init__(self, url, token, payload) -> None:
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
         # Initialize the Netbox superclass with URL and token
         super().__init__(url, token, payload)
         self.object_type = self.nb.dcim.devices
@@ -91,9 +92,13 @@ class NetboxDevice(Netbox):
             "site",
             "status",
         ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 
 class NetboxTag(Netbox):
-    def __init__(self, url, token, payload) -> None:
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
         # Initialize the Netbox superclass with URL and token
         super().__init__(url, token, payload)
         self.object_type = self.nb.extras.tags
@@ -102,9 +107,12 @@ class NetboxTag(Netbox):
             "name",
             "slug"
         ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
 
 class NetboxCustomFields(Netbox):
-    def __init__(self, url, token, payload) -> None:
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
         # Initialize the Netbox superclass with URL and token
         super().__init__(url, token, payload)
         self.object_type = self.nb.extras.custom_fields
@@ -116,8 +124,12 @@ class NetboxCustomFields(Netbox):
             "type",
             "name",
         ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 class NetboxCustomFieldChoiceSets(Netbox):
-    def __init__(self, url, token, payload) -> None:
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
         # Initialize the Netbox superclass with URL and token
         super().__init__(url, token, payload)
         self.object_type = self.nb.extras.custom_field_choice_sets
@@ -126,6 +138,34 @@ class NetboxCustomFieldChoiceSets(Netbox):
             "extra_choices",
 
         ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
+class NetboxContacts(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.tenancy.contacts
+        self.required_fields = [ 
+            "name",
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
+class NetboxContactGroups(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.tenancy.contact_groups
+        self.required_fields = [ 
+            "name",
+            "slug",
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
 
 def read_json_file(file_path):
     # Read the JSON file from disk
@@ -143,20 +183,18 @@ if __name__ == "__main__":
         if k == 'extras.tags':
             for payload in v:
                 obj = NetboxTag(args.url, args.token, payload)
-                obj.findBy('name')
-                obj.createOrUpdate()
         if k == 'extras.custom-field-choice-sets':
             for payload in v:
                 obj = NetboxCustomFieldChoiceSets(args.url, args.token, payload)
-                obj.findBy('name')
-                obj.createOrUpdate()
         if k == 'extras.custom-fields':
             for payload in v:
                 obj = NetboxCustomFields(args.url, args.token, payload)
-                obj.findBy('name')
-                obj.createOrUpdate()
         if k == 'dcim.device':
             for payload in v:
                 obj = NetboxDevice(args.url, args.token, payload)
-                obj.findBy('name')
-                obj.createOrUpdate()
+        if k == 'tenancy.contact-groups':
+            for payload in v:
+                obj = NetboxContactGroups(args.url, args.token, payload)
+        if k == 'tenancy.contacts':
+            for payload in v:
+                obj = NetboxContacts(args.url, args.token, payload)
