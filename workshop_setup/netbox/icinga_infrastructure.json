@@ -41,6 +41,14 @@
             "object_types": ["dcim.platform"],
             "type": "text",
             "name": "platform_family"
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
+            "object_types": ["tenancy.contact"],
+            "type": "text",
+            "name": "pushover_id"
         }
     ]
 }
