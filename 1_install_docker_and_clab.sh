@@ -1,4 +1,3 @@
-# NOTE: This script has only been tested on Ubuntu 22.04 LTS
 #!/bin/bash
 set -euo pipefail
 
