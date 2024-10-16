@@ -116,11 +116,22 @@ class NetboxCustomFields(Netbox):
             "type",
             "name",
         ]
+class NetboxCustomFieldChoiceSets(Netbox):
+    def __init__(self, url, token, payload) -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.extras.custom_field_choice_sets
+        self.required_fields = [ 
+            "name",
+            "extra_choices",
+
+        ]
 
 def read_json_file(file_path):
     # Read the JSON file from disk
     with open(file_path, 'r') as json_file:
         data = json.load(json_file)
+        print(data)
     return data
 
 if __name__ == "__main__":
@@ -129,18 +140,23 @@ if __name__ == "__main__":
         payload = read_json_file(args.file)
 
     for k,v in payload.items():
-        if k == 'dcim.device':
-            for payload in v:
-                obj = NetboxDevice(args.url, args.token, payload)
-                obj.findBy('name')
-                obj.createOrUpdate()
         if k == 'extras.tags':
             for payload in v:
                 obj = NetboxTag(args.url, args.token, payload)
                 obj.findBy('name')
                 obj.createOrUpdate()
+        if k == 'extras.custom-field-choice-sets':
+            for payload in v:
+                obj = NetboxCustomFieldChoiceSets(args.url, args.token, payload)
+                obj.findBy('name')
+                obj.createOrUpdate()
         if k == 'extras.custom-fields':
             for payload in v:
                 obj = NetboxCustomFields(args.url, args.token, payload)
+                obj.findBy('name')
+                obj.createOrUpdate()
+        if k == 'dcim.device':
+            for payload in v:
+                obj = NetboxDevice(args.url, args.token, payload)
                 obj.findBy('name')
                 obj.createOrUpdate()

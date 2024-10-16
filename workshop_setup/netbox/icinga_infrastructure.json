@@ -4,14 +4,19 @@
         "name": "Icinga Endpoint",
         "slug": "icinga-endpoint"
     }],
+    "extras.custom-field-choice-sets": [{
+        "extra_choices": [["no_not_monitor","Do not monitor"],["default","Default"]],
+        "name": "icinga_import_source_choices"
+    }],
     "extras.custom-fields": [{
             "weight": "100",
             "filter_logic": "loose",
             "search_weight": "100",
-            "object_types": ["dcim.platform"],
-            "type": "text",
+            "object_types": ["dcim.device", "virtualization.virtualmachine"],
+            "type": "select",
             "name": "icinga_import_source",
             "group_name": "Monitoring",
+            "choice_set": {"name": "icinga_import_source_choices"}
         },
         {
             "weight": "100",
@@ -19,7 +24,7 @@
             "search_weight": "100",
             "object_types": ["dcim.platform"],
             "type": "text",
-            "name": "platform_type",
+            "name": "platform_type"
         },
         {
             "weight": "110",
@@ -27,7 +32,7 @@
             "search_weight": "110",
             "object_types": ["dcim.platform"],
             "type": "text",
-            "name": "platform_version",
+            "name": "platform_version"
         },
         {
             "weight": "120",
@@ -35,7 +40,7 @@
             "search_weight": "120",
             "object_types": ["dcim.platform"],
             "type": "text",
-            "name": "platform_family",
+            "name": "platform_family"
         }
     ]
 }
