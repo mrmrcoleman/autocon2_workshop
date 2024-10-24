@@ -1,0 +1,12 @@
+---
+collections:
+  - name: community.network
+  - name: community.netbox
+
+
+roles:
+  - name: sol1.haproxy
+    src: git+https://github.com/sol1-ansible/sol1-haproxy
+    version: "v1.2.1"
+
+
