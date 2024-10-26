@@ -16,6 +16,9 @@ sudo apt install -y python3-venv
 # Install net-tools
 sudo apt install -y net-tools
 
+# Install snmpwalk
+sudo apt install -y snmp
+
 # Install Docker and Compose
 echo "--- Installing Docker and ContainerLab ---"
 if [ -f "setup" ]; then
@@ -24,15 +27,8 @@ fi
 
 
 # Check if running Ubuntu
-if grep -q "Ubuntu" /etc/os-release; then
-    echo "Ubuntu detected. Proceeding with wget..."
-	wget https://containerlab.dev/setup
-	sed -i 's/^DOCKER_VERSION="[^"]*"/DOCKER_VERSION="5:27.3.1-1~ubuntu.24.10~oracular"/' setup
-	cat setup | sudo bash -s "all"
-else
-    echo "This is not Ubuntu. trying containerlab install"
-	curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
-fi
+echo "This is not Ubuntu. trying containerlab install"
+curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
 
 
 

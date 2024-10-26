@@ -10,10 +10,10 @@ source ./0_set_envvars.sh
 
 Keep the output from this handy somewhere as we'll reference it a lot.
 
-## Install Docker and ContainerLab
+## Install host tooling
 
 ```
-./1_install_docker_and_clab.sh
+./1_install_host_tooling.sh
 ```
 
 Check it was successful:
