@@ -162,6 +162,11 @@ Organizations are turning to network automation for many reasons including being
 
 Let's try one out in our network. Our imaginary company is extremely constrained on IP address space and that /30 between the two devices is just too big! We've been asked to claw back a single IP address by moving to a /31. Let's roll up our sleeves.
 
+> [!TIP]
+> 
+> If you'd rather skip the manual steps, this command will prepare your network for the next step:  
+> `./3_start_network.sh 1_updated_subnet`
+
 First on `clab-autocon2-srl1`
 
 ```
