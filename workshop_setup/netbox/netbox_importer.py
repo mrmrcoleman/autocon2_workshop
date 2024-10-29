@@ -80,6 +80,20 @@ class Netbox:
                 self.object_type.create(self.payload)
                 print(f"Object '{self.payload['name']}' created successfully.")              
 
+class NetBoxSite(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.dcim.sites
+        self.required_fields = [ 
+            "name",
+            "slug",
+            "status",
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 class NetboxDevice(Netbox):
     def __init__(self, url, token, payload, find_key = 'name') -> None:
         # Initialize the Netbox superclass with URL and token
@@ -189,6 +203,9 @@ if __name__ == "__main__":
         if k == 'extras.custom-fields':
             for payload in v:
                 obj = NetboxCustomFields(args.url, args.token, payload)
+        if k == 'dcim.sites':
+            for payload in v:
+                obj = NetBoxSite(args.url, args.token, payload)
         if k == 'dcim.device':
             for payload in v:
                 obj = NetboxDevice(args.url, args.token, payload)

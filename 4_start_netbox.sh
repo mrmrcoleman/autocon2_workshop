@@ -86,6 +86,17 @@ docker compose up -d
 
 popd
 
+echo
+echo "--- Configuring NetBox ---"
+echo
+
+pushd workshop_setup
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python netbox/netbox_importer.py --url "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}" --token 1234567890 --file netbox/icinga_infrastructure.json
+popd
+
 echo "you can now access netbox here: http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
 echo "username: admin"
 echo "password: admin"

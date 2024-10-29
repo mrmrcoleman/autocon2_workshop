@@ -81,5 +81,10 @@
             "group_name": "Pushover",
             "name": "pushover_token"
         }
-    ]
+    ],
+    "dcim.sites": [{
+        "name": "Denver",
+        "slug": "denver",
+        "status": "active"
+    }]
 }
