@@ -1,0 +1,430 @@
+2024-10-31 06:51:43,510 p=800151 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 06:51:43,510 p=800151 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 06:51:43,510 p=800151 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 06:51:43,511 p=800151 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 06:51:43,739 p=800151 u=dave n=ansible | ERROR! couldn't resolve module/action 'nokia.sros.cli'. This often indicates a misspelling, missing collection, or incorrect module path.
+
+The error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/test.yml': line 6, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  tasks:
+    - name: Display hostname
+      ^ here
+
+2024-10-31 06:53:08,732 p=800199 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 06:53:08,888 p=800199 u=dave n=ansible | Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+2024-10-31 06:54:20,538 p=800227 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 06:54:20,538 p=800227 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 06:54:20,538 p=800227 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 06:54:20,538 p=800227 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 06:54:20,728 p=800227 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 06:54:20,740 p=800227 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 06:54:20,788 p=800227 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "network os nokia.sros.classic is not supported"}
+2024-10-31 06:54:20,800 p=800227 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.sros.classic is not supported"}
+2024-10-31 06:54:20,801 p=800227 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 06:54:20,801 p=800227 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 06:54:20,801 p=800227 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 07:04:15,179 p=800331 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 07:04:15,179 p=800331 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 07:04:15,180 p=800331 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 07:04:15,180 p=800331 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 07:04:15,371 p=800331 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 07:04:15,383 p=800331 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 07:04:15,424 p=800331 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "network os ansible.netcommon.netconf is not supported"}
+2024-10-31 07:04:15,432 p=800331 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.sros.classic is not supported"}
+2024-10-31 07:04:15,433 p=800331 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 07:04:15,434 p=800331 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 07:04:15,434 p=800331 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 07:13:20,114 p=802233 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 07:13:20,115 p=802233 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 07:13:20,115 p=802233 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 07:13:20,115 p=802233 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 07:13:20,282 p=802233 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 07:13:20,292 p=802233 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 07:13:20,323 p=802233 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"changed": false, "msg": "connection local support for this module has been removed use either 'network_cli' or 'ansible.netcommon.network_cli' connection"}
+2024-10-31 07:13:20,337 p=802233 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.sros.classic is not supported"}
+2024-10-31 07:13:20,338 p=802233 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 07:13:20,338 p=802233 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 07:13:20,339 p=802233 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:01:35,391 p=815239 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 08:01:35,391 p=815239 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 08:01:35,391 p=815239 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 08:01:35,391 p=815239 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 08:01:35,556 p=815239 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:01:35,566 p=815239 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:01:35,602 p=815239 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "network os ansible.netcommon.netconf is not supported"}
+2024-10-31 08:01:35,607 p=815239 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.sros.classic is not supported"}
+2024-10-31 08:01:35,608 p=815239 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:01:35,608 p=815239 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:01:35,608 p=815239 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:03:31,625 p=815287 u=dave n=ansible | Starting galaxy role install process
+2024-10-31 08:03:32,497 p=815287 u=dave n=ansible | - extracting sol1.haproxy to /home/dave/.ansible/roles/sol1.haproxy
+2024-10-31 08:03:32,507 p=815287 u=dave n=ansible | - sol1.haproxy (v1.2.1) was installed successfully
+2024-10-31 08:03:32,507 p=815287 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 08:03:32,675 p=815287 u=dave n=ansible | Process install dependency map
+2024-10-31 08:03:32,675 p=815287 u=dave n=ansible | |
+2024-10-31 08:03:32,776 p=815287 u=dave n=ansible | /
+2024-10-31 08:03:32,876 p=815287 u=dave n=ansible | -
+2024-10-31 08:03:32,977 p=815287 u=dave n=ansible | \
+2024-10-31 08:03:33,077 p=815287 u=dave n=ansible | |
+2024-10-31 08:03:33,177 p=815287 u=dave n=ansible | /
+2024-10-31 08:03:33,277 p=815287 u=dave n=ansible | -
+2024-10-31 08:03:33,378 p=815287 u=dave n=ansible | \
+2024-10-31 08:03:33,478 p=815287 u=dave n=ansible | |
+2024-10-31 08:03:33,578 p=815287 u=dave n=ansible | /
+2024-10-31 08:03:33,679 p=815287 u=dave n=ansible | -
+2024-10-31 08:03:33,780 p=815287 u=dave n=ansible | ERROR! Failed to resolve the requested dependencies map. Could not satisfy the following requirements:
+* community.netbox:* (direct request)
+Hint: Pre-releases hosted on Galaxy or Automation Hub are not installed by default unless a specific version is requested. To enable pre-releases globally, use --pre.
+2024-10-31 08:03:44,964 p=815304 u=dave n=ansible | Starting galaxy role install process
+2024-10-31 08:03:44,964 p=815304 u=dave n=ansible | - sol1.haproxy (v1.2.1) is already installed, skipping.
+2024-10-31 08:03:44,964 p=815304 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 08:03:45,101 p=815304 u=dave n=ansible | Process install dependency map
+2024-10-31 08:03:45,102 p=815304 u=dave n=ansible | |
+2024-10-31 08:03:45,202 p=815304 u=dave n=ansible | /
+2024-10-31 08:03:45,303 p=815304 u=dave n=ansible | -
+2024-10-31 08:03:45,403 p=815304 u=dave n=ansible | \
+2024-10-31 08:03:45,503 p=815304 u=dave n=ansible | |
+2024-10-31 08:03:45,603 p=815304 u=dave n=ansible | /
+2024-10-31 08:03:45,704 p=815304 u=dave n=ansible | -
+2024-10-31 08:03:45,804 p=815304 u=dave n=ansible | \
+2024-10-31 08:03:45,904 p=815304 u=dave n=ansible | |
+2024-10-31 08:03:46,004 p=815304 u=dave n=ansible | /
+2024-10-31 08:03:46,105 p=815304 u=dave n=ansible | -
+2024-10-31 08:03:46,206 p=815304 u=dave n=ansible | ERROR! Failed to resolve the requested dependencies map. Could not satisfy the following requirements:
+* community.netbox:* (direct request)
+Hint: Pre-releases hosted on Galaxy or Automation Hub are not installed by default unless a specific version is requested. To enable pre-releases globally, use --pre.
+2024-10-31 08:04:10,727 p=815315 u=dave n=ansible | Starting galaxy role install process
+2024-10-31 08:04:10,727 p=815315 u=dave n=ansible | - sol1.haproxy (v1.2.1) is already installed, skipping.
+2024-10-31 08:04:10,727 p=815315 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 08:04:10,884 p=815315 u=dave n=ansible | Process install dependency map
+2024-10-31 08:04:10,885 p=815315 u=dave n=ansible | |
+2024-10-31 08:04:10,986 p=815315 u=dave n=ansible | /
+2024-10-31 08:04:11,086 p=815315 u=dave n=ansible | -
+2024-10-31 08:04:11,186 p=815315 u=dave n=ansible | \
+2024-10-31 08:04:11,287 p=815315 u=dave n=ansible | |
+2024-10-31 08:04:11,387 p=815315 u=dave n=ansible | /
+2024-10-31 08:04:11,487 p=815315 u=dave n=ansible | -
+2024-10-31 08:04:11,587 p=815315 u=dave n=ansible | \
+2024-10-31 08:04:11,688 p=815315 u=dave n=ansible | |
+2024-10-31 08:04:11,788 p=815315 u=dave n=ansible | /
+2024-10-31 08:04:11,888 p=815315 u=dave n=ansible | -
+2024-10-31 08:04:11,988 p=815315 u=dave n=ansible | \
+2024-10-31 08:04:12,089 p=815315 u=dave n=ansible | |
+2024-10-31 08:04:12,189 p=815315 u=dave n=ansible | /
+2024-10-31 08:04:12,289 p=815315 u=dave n=ansible | -
+2024-10-31 08:04:12,390 p=815315 u=dave n=ansible | \
+2024-10-31 08:04:12,490 p=815315 u=dave n=ansible | |
+2024-10-31 08:04:12,591 p=815315 u=dave n=ansible | ERROR! Failed to resolve the requested dependencies map. Could not satisfy the following requirements:
+* community.netbox:* (direct request)
+Hint: Pre-releases hosted on Galaxy or Automation Hub are not installed by default unless a specific version is requested. To enable pre-releases globally, use --pre.
+2024-10-31 08:06:02,047 p=815337 u=dave n=ansible | Starting galaxy role install process
+2024-10-31 08:06:02,047 p=815337 u=dave n=ansible | - sol1.haproxy (v1.2.1) is already installed, skipping.
+2024-10-31 08:06:02,048 p=815337 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 08:06:02,209 p=815337 u=dave n=ansible | Process install dependency map
+2024-10-31 08:06:02,210 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:02,310 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:02,410 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:02,511 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:02,611 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:02,711 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:02,811 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:02,912 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:03,012 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:03,112 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:03,213 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:03,313 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:03,413 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:03,514 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:03,614 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:03,714 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:03,815 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:03,915 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:04,015 p=815337 u=dave n=ansible | Starting collection install process
+2024-10-31 08:06:04,016 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:04,116 p=815337 u=dave n=ansible | 'community.network:5.0.3' is already installed, skipping.
+2024-10-31 08:06:04,116 p=815337 u=dave n=ansible | 'netbox.netbox:3.20.0' is already installed, skipping.
+2024-10-31 08:06:04,116 p=815337 u=dave n=ansible | 'ansible.netcommon:6.1.3' is already installed, skipping.
+2024-10-31 08:06:04,116 p=815337 u=dave n=ansible | 'ansible.utils:4.1.0' is already installed, skipping.
+2024-10-31 08:06:04,117 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:04,217 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:04,317 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:04,417 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:04,518 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:04,618 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:04,634 p=815337 u=dave n=ansible | Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/nokia-srlinux-0.5.1.tar.gz to /home/dave/.ansible/tmp/ansible-local-815337rd6o704v/tmp2j4a3w33/nokia-srlinux-0.5.1-5xd5jp_n
+2024-10-31 08:06:04,718 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:04,819 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:04,919 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:05,019 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:05,120 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:05,220 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:05,320 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:05,421 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:05,521 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:05,621 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:05,721 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:05,822 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:05,922 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:06,022 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:06,122 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:06,223 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:06,323 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:06,423 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:06,523 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:06,624 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:06,724 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:06,824 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:06,924 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:07,025 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:07,125 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:07,225 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:07,326 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:07,426 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:07,526 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:07,626 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:07,727 p=815337 u=dave n=ansible | /
+2024-10-31 08:06:07,827 p=815337 u=dave n=ansible | -
+2024-10-31 08:06:07,927 p=815337 u=dave n=ansible | \
+2024-10-31 08:06:08,028 p=815337 u=dave n=ansible | |
+2024-10-31 08:06:08,128 p=815337 u=dave n=ansible | Installing 'nokia.srlinux:0.5.1' to '/home/dave/.ansible/collections/ansible_collections/nokia/srlinux'
+2024-10-31 08:06:08,128 p=815337 u=dave n=ansible | nokia.srlinux:0.5.1 was installed successfully
+2024-10-31 08:13:29,768 p=816573 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:13:29,776 p=816573 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:13:30,474 p=816573 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:13:30,477 p=816573 u=dave n=ansible | fatal: [clab-ansible-srl]: FAILED! => {"changed": false, "msg": "Connection type ansible.netcommon.httpapi is not valid for this module"}
+2024-10-31 08:13:30,477 p=816573 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:13:30,478 p=816573 u=dave n=ansible | clab-ansible-srl           : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:14:00,390 p=816581 u=dave n=ansible | persistent connection idle timeout triggered, timeout value is 30 secs.
+See the timeout setting options in the Network Debug and Troubleshooting Guide.
+2024-10-31 08:14:00,493 p=816581 u=dave n=ansible | shutdown complete
+2024-10-31 08:14:19,769 p=816590 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:14:19,777 p=816590 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:14:20,475 p=816590 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:14:20,478 p=816590 u=dave n=ansible | fatal: [clab-ansible-srl]: FAILED! => {"changed": false, "msg": "Connection type ansible.netcommon.httpapi is not valid for this module"}
+2024-10-31 08:14:20,478 p=816590 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:14:20,478 p=816590 u=dave n=ansible | clab-ansible-srl           : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:14:50,387 p=816598 u=dave n=ansible | persistent connection idle timeout triggered, timeout value is 30 secs.
+See the timeout setting options in the Network Debug and Troubleshooting Guide.
+2024-10-31 08:14:50,488 p=816598 u=dave n=ansible | shutdown complete
+2024-10-31 08:15:32,956 p=816630 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:15:32,965 p=816630 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:15:33,011 p=816630 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:15:33,017 p=816630 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:15:33,018 p=816630 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:15:33,018 p=816630 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:15:33,018 p=816630 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:18:28,241 p=817262 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:18:28,251 p=817262 u=dave n=ansible | TASK [Display hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:18:28,288 p=817262 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"changed": false, "msg": "Connection type ssh is not valid for this module"}
+2024-10-31 08:18:28,300 p=817262 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:18:28,301 p=817262 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:18:28,301 p=817262 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:18:28,301 p=817262 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:19:15,147 p=817280 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:19:15,156 p=817280 u=dave n=ansible | TASK [Get /system/information container] ********************************************************************************************************************************************************************************************************************
+2024-10-31 08:19:15,196 p=817280 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:19:16,771 p=817280 u=dave n=ansible | [WARNING]: Unhandled error in Python interpreter discovery for host clab-autocon2-srl1: unexpected output from Python interpreter discovery
+
+2024-10-31 08:19:17,706 p=817280 u=dave n=ansible | [WARNING]: Platform unknown on host clab-autocon2-srl1 is using the discovered Python interpreter at /usr/bin/python3, but future installation of another Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+
+2024-10-31 08:19:17,707 p=817280 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3"}, "changed": false, "module_stderr": "Parsing error: Unknown token '/bin/sh'. Options are ['!', '#', '/', 'acl', 'back', 'bash', 'bfd', 'cls', 'date', 'diff', 'echo', 'enter', 'environment', 'exit', 'file', 'help', 'history', 'info', 'interface', 'list', 'monitor', 'network-instance', 'passwd', 'ping', 'ping6', 'platform', 'pwc', 'qos', 'quit', 'references', 'routing-policy', 'save', 'show', 'source', 'ssh', 'system', 'tcptraceroute', 'tech-support', 'tools', 'traceroute', 'traceroute6', 'tree', 'tunnel', 'tunnel-interface', 'watch', '{']\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-10-31 08:19:17,708 p=817280 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:19:17,708 p=817280 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:19:17,708 p=817280 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:20:31,382 p=817515 u=dave n=ansible | Starting galaxy collection install process
+2024-10-31 08:20:31,518 p=817515 u=dave n=ansible | Nothing to do. All requested collections are already installed. If you want to reinstall them, consider using `--force`.
+2024-10-31 08:22:30,698 p=817869 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:22:30,708 p=817869 u=dave n=ansible | TASK [Get /system/information container] ********************************************************************************************************************************************************************************************************************
+2024-10-31 08:22:30,723 p=817869 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "the connection plugin 'ansible_connection=ansible.netcommon.httpapi' was not found"}
+2024-10-31 08:22:30,761 p=817869 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:22:30,762 p=817869 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:22:30,762 p=817869 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:22:30,762 p=817869 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:05,404 p=817883 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:05,414 p=817883 u=dave n=ansible | TASK [Get /system/information container] ********************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:05,459 p=817883 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:23:06,216 p=817883 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:23:06,625 p=817883 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"changed": false, "msg": "srlinux httpapi returned error 401 with message AuthenticationFailed (status: 1)"}
+2024-10-31 08:23:06,627 p=817883 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:06,627 p=817883 u=dave n=ansible | clab-autocon2-srl1         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:06,627 p=817883 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:06,726 p=817892 u=dave n=ansible | shutdown complete
+2024-10-31 08:23:30,471 p=817925 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:30,482 p=817925 u=dave n=ansible | TASK [Get /system/information container] ********************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:30,526 p=817925 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "network os nokia.srlinux.srlinux is not supported"}
+2024-10-31 08:23:31,208 p=817925 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:23:31,610 p=817925 u=dave n=ansible | ok: [clab-autocon2-srl1]
+2024-10-31 08:23:31,611 p=817925 u=dave n=ansible | TASK [debug] ************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:31,648 p=817925 u=dave n=ansible | ok: [clab-autocon2-srl1] => {
+    "response": {
+        "changed": false,
+        "failed": false,
+        "jsonrpc_req_id": "2024-10-31 08:23:31:481386",
+        "jsonrpc_version": "2.0",
+        "result": [
+            {
+                "current-datetime": "2024-10-31T08:23:31.229Z",
+                "description": "SRLinux-v24.7.2-319-g64b71941f7 7220 IXR-D2L Copyright (c) 2000-2020 Nokia. Kernel 6.1.0-26-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.112-1 (2024-09-30)",
+                "last-booted": "2024-10-31T06:38:39.046Z",
+                "version": "v24.7.2-319-g64b71941f7"
+            }
+        ]
+    }
+}
+2024-10-31 08:23:31,654 p=817925 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:31,654 p=817925 u=dave n=ansible | clab-autocon2-srl1         : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:31,654 p=817925 u=dave n=ansible | clab-autocon2-srl2         : ok=0    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:31,754 p=817934 u=dave n=ansible | shutdown complete
+2024-10-31 08:23:52,087 p=817979 u=dave n=ansible | [WARNING]: While constructing a mapping from /home/dave/src/autocon2_workshop/ansible/content/inventory/static, line 10, column 7, found a duplicate dict key (ansible_password). Using last defined value only.
+
+2024-10-31 08:23:52,251 p=817979 u=dave n=ansible | PLAY [Retrieve hostname from Nokia SR OS router] ************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:52,261 p=817979 u=dave n=ansible | TASK [Get /system/information container] ********************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:52,949 p=817979 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:23:53,092 p=817979 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:23:53,456 p=817979 u=dave n=ansible | ok: [clab-autocon2-srl1]
+2024-10-31 08:23:53,461 p=817979 u=dave n=ansible | ok: [clab-autocon2-srl2]
+2024-10-31 08:23:53,464 p=817979 u=dave n=ansible | TASK [debug] ************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:53,508 p=817979 u=dave n=ansible | ok: [clab-autocon2-srl1] => {
+    "response": {
+        "changed": false,
+        "failed": false,
+        "jsonrpc_req_id": "2024-10-31 08:23:53:288385",
+        "jsonrpc_version": "2.0",
+        "result": [
+            {
+                "current-datetime": "2024-10-31T08:23:53.294Z",
+                "description": "SRLinux-v24.7.2-319-g64b71941f7 7220 IXR-D2L Copyright (c) 2000-2020 Nokia. Kernel 6.1.0-26-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.112-1 (2024-09-30)",
+                "last-booted": "2024-10-31T06:38:39.046Z",
+                "version": "v24.7.2-319-g64b71941f7"
+            }
+        ]
+    }
+}
+2024-10-31 08:23:53,514 p=817979 u=dave n=ansible | ok: [clab-autocon2-srl2] => {
+    "response": {
+        "changed": false,
+        "failed": false,
+        "jsonrpc_req_id": "2024-10-31 08:23:53:316198",
+        "jsonrpc_version": "2.0",
+        "result": [
+            {
+                "current-datetime": "2024-10-31T08:23:52.469Z",
+                "description": "SRLinux-v24.7.2-319-g64b71941f7 7220 IXR-D2L Copyright (c) 2000-2020 Nokia. Kernel 6.1.0-26-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.112-1 (2024-09-30)",
+                "last-booted": "2024-10-31T06:38:37.483Z",
+                "version": "v24.7.2-319-g64b71941f7"
+            }
+        ]
+    }
+}
+2024-10-31 08:23:53,526 p=817979 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:23:53,526 p=817979 u=dave n=ansible | clab-autocon2-srl1         : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:53,527 p=817979 u=dave n=ansible | clab-autocon2-srl2         : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:23:53,625 p=817993 u=dave n=ansible | shutdown complete
+2024-10-31 08:23:53,626 p=817990 u=dave n=ansible | shutdown complete
+2024-10-31 08:27:48,445 p=818132 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 08:27:48,445 p=818132 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 08:27:48,446 p=818132 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 08:27:48,446 p=818132 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 08:27:48,448 p=818132 u=dave n=ansible | [WARNING]: While constructing a mapping from /home/dave/src/autocon2_workshop/ansible/content/inventory/static, line 10, column 7, found a duplicate dict key (ansible_password). Using last defined value only.
+
+2024-10-31 08:27:48,538 p=818132 u=dave n=ansible | ERROR! couldn't resolve module/action 'nokia.srlinux.http_rpc'. This often indicates a misspelling, missing collection, or incorrect module path.
+
+The error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 9, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  tasks:
+    - name: Set the hostname
+      ^ here
+
+2024-10-31 08:29:37,889 p=818145 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 08:29:37,889 p=818145 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 08:29:37,889 p=818145 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 08:29:37,889 p=818145 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 08:29:37,892 p=818145 u=dave n=ansible | [WARNING]: While constructing a mapping from /home/dave/src/autocon2_workshop/ansible/content/inventory/static, line 10, column 7, found a duplicate dict key (ansible_password). Using last defined value only.
+
+2024-10-31 08:29:38,031 p=818145 u=dave n=ansible | PLAY [Set hostname on Nokia SR Linux devices] ***************************************************************************************************************************************************************************************************************
+2024-10-31 08:29:38,043 p=818145 u=dave n=ansible | TASK [Set the hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:29:38,780 p=818145 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:29:38,799 p=818145 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:29:39,391 p=818145 u=dave n=ansible | changed: [clab-autocon2-srl2]
+2024-10-31 08:29:39,487 p=818145 u=dave n=ansible | changed: [clab-autocon2-srl1]
+2024-10-31 08:29:39,652 p=818145 u=dave n=ansible | changed: [clab-ansible-srl]
+2024-10-31 08:29:39,654 p=818145 u=dave n=ansible | TASK [Verify the hostname change] ***************************************************************************************************************************************************************************************************************************
+2024-10-31 08:29:40,922 p=818145 u=dave n=ansible | ok: [clab-autocon2-srl2]
+2024-10-31 08:29:41,090 p=818145 u=dave n=ansible | ok: [clab-autocon2-srl1]
+2024-10-31 08:29:41,214 p=818145 u=dave n=ansible | ok: [clab-ansible-srl]
+2024-10-31 08:29:41,217 p=818145 u=dave n=ansible | TASK [Display the new hostname] *****************************************************************************************************************************************************************************************************************************
+2024-10-31 08:29:41,243 p=818145 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'ansible.utils.unsafe_proxy.AnsibleUnsafeText object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:29:41,244 p=818145 u=dave n=ansible | fatal: [clab-ansible-srl]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'ansible.utils.unsafe_proxy.AnsibleUnsafeText object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:29:41,244 p=818145 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'ansible.utils.unsafe_proxy.AnsibleUnsafeText object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:29:41,345 p=818160 u=dave n=ansible | shutdown complete
+2024-10-31 08:29:41,346 p=818163 u=dave n=ansible | shutdown complete
+2024-10-31 08:29:41,363 p=818145 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:29:41,363 p=818145 u=dave n=ansible | clab-ansible-srl           : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:29:41,363 p=818145 u=dave n=ansible | clab-autocon2-srl1         : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:29:41,364 p=818145 u=dave n=ansible | clab-autocon2-srl2         : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:56:58,869 p=818950 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with auto plugin: <urlopen error [Errno -2] Name or service not known>
+
+2024-10-31 08:56:58,870 p=818950 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with yaml plugin: Plugin configuration YAML file, not YAML inventory
+
+2024-10-31 08:56:58,870 p=818950 u=dave n=ansible | [WARNING]:  * Failed to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml with ini plugin: Invalid host pattern '---' supplied, '---' is normally a sign this is a YAML file.
+
+2024-10-31 08:56:58,870 p=818950 u=dave n=ansible | [WARNING]: Unable to parse /home/dave/src/autocon2_workshop/ansible/content/inventory/netbox.yml as an inventory source
+
+2024-10-31 08:56:58,873 p=818950 u=dave n=ansible | [WARNING]: While constructing a mapping from /home/dave/src/autocon2_workshop/ansible/content/inventory/static, line 10, column 7, found a duplicate dict key (ansible_password). Using last defined value only.
+
+2024-10-31 08:56:59,018 p=818950 u=dave n=ansible | PLAY [Set hostname on Nokia SR Linux devices] ***************************************************************************************************************************************************************************************************************
+2024-10-31 08:56:59,031 p=818950 u=dave n=ansible | TASK [Set the hostname] *************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:56:59,741 p=818950 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:56:59,907 p=818950 u=dave n=ansible | platform_type is set to nokia.srlinux.srlinux
+2024-10-31 08:57:00,206 p=818950 u=dave n=ansible | ok: [clab-autocon2-srl1]
+2024-10-31 08:57:00,247 p=818950 u=dave n=ansible | ok: [clab-autocon2-srl2]
+2024-10-31 08:57:00,302 p=818950 u=dave n=ansible | ok: [clab-ansible-srl]
+2024-10-31 08:57:00,304 p=818950 u=dave n=ansible | TASK [Verify the hostname change] ***************************************************************************************************************************************************************************************************************************
+2024-10-31 08:57:01,407 p=818950 u=dave n=ansible | ok: [clab-autocon2-srl1]
+2024-10-31 08:57:01,411 p=818950 u=dave n=ansible | ok: [clab-autocon2-srl2]
+2024-10-31 08:57:01,497 p=818950 u=dave n=ansible | ok: [clab-ansible-srl]
+2024-10-31 08:57:01,499 p=818950 u=dave n=ansible | TASK [Display the new hostname] *****************************************************************************************************************************************************************************************************************************
+2024-10-31 08:57:01,515 p=818950 u=dave n=ansible | fatal: [clab-autocon2-srl1]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'list object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:57:01,518 p=818950 u=dave n=ansible | fatal: [clab-autocon2-srl2]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'list object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:57:01,524 p=818950 u=dave n=ansible | fatal: [clab-ansible-srl]: FAILED! => {"msg": "The task includes an option with an undefined variable.. 'list object' has no attribute 'host-name'\n\nThe error appears to be in '/home/dave/src/autocon2_workshop/ansible/content/playbooks/set-hostname.yml': line 22, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Display the new hostname\n      ^ here\n"}
+2024-10-31 08:57:01,626 p=818964 u=dave n=ansible | shutdown complete
+2024-10-31 08:57:01,627 p=818967 u=dave n=ansible | shutdown complete
+2024-10-31 08:57:01,627 p=818950 u=dave n=ansible | PLAY RECAP **************************************************************************************************************************************************************************************************************************************************
+2024-10-31 08:57:01,627 p=818950 u=dave n=ansible | clab-ansible-srl           : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:57:01,628 p=818950 u=dave n=ansible | clab-autocon2-srl1         : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2024-10-31 08:57:01,628 p=818950 u=dave n=ansible | clab-autocon2-srl2         : ok=2    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   

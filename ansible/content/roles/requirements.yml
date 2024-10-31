@@ -1,7 +1,8 @@
 ---
 collections:
   - name: community.network
-  - name: community.netbox
+  - name: nokia.srlinux
+  - name: netbox.netbox
 
 
 roles:
