@@ -14,7 +14,7 @@
   - Set the `API key`: 1234567890
   - Set `Authorization type` to `Netbox`
   - Set `Status` to `Enabled`
-  - Enable `Interfaces` (`IPAM` and `Prefix` are broken at the moment, Pieter is looking into it)
+  - Enable `Interfaces` and `IPAM`
   - Click on Sync????
 
 - Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
