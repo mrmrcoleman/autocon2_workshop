@@ -10,10 +10,10 @@ source ./0_set_envvars.sh
 
 Keep the output from this handy somewhere as we'll reference it a lot.
 
-## Install Docker and ContainerLab
+## Install host tooling
 
 ```
-./1_install_docker_and_clab.sh
+./1_install_host_tooling.sh
 ```
 
 Check it was successful:
@@ -46,26 +46,7 @@ http://139.178.74.171:8000
 ## Start the ContainerLab network
 
 ```
-./3_start_network.sh
-```
-
-Check it's working:
-
-```
-pushd network
-
-clab inspect
-INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-| # |         Name         | Container ID |               Image               |     Kind      |  State  | IPv4 Address  | IPv6 Address |
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-| 1 | clab-autocon2-client | 735ca05560ba | mrmrcoleman/autocon-client:latest | linux         | running | 172.24.0.8/24 | N/A          |
-| 2 | clab-autocon2-server | 13fea0572cbb | mrmrcoleman/autocon-server:latest | linux         | running | 172.24.0.7/24 | N/A          |
-| 3 | clab-autocon2-srl1   | 4597ee74f8e8 | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.9/24 | N/A          |
-| 4 | clab-autocon2-srl2   | f6e672e36f59 | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.6/24 | N/A          |
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-
-popd
+./3_start_network.sh 0_initial
 ```
 
 ## Start NetBox with the Slurpit plugin

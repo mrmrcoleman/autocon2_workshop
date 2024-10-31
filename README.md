@@ -162,6 +162,11 @@ Organizations are turning to network automation for many reasons including being
 
 Let's try one out in our network. Our imaginary company is extremely constrained on IP address space and that /30 between the two devices is just too big! We've been asked to claw back a single IP address by moving to a /31. Let's roll up our sleeves.
 
+> [!TIP]
+> 
+> If you'd rather skip the manual steps, this command will prepare your network for the next step:  
+> `./3_start_network.sh 1_updated_subnet`
+
 First on `clab-autocon2-srl1`
 
 ```
@@ -216,6 +221,8 @@ Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunate
 4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
+
+INSERT SKIP COMMAND TO REDPLOY WITH THE CORRECT SETTING HERE.
 
 ## Moving towards Intent Based Networking
 
@@ -290,7 +297,35 @@ Click through the the final step, and then hit "Let's Go :rocket:"
 
 <img src="images/slurpit/wizard_letsgo.png" alt="Slurpit Wizard Let's Go :rocket:" title="Slurpit Wizard Let's Go :rocket:" width="750" />
 
-Now we need to add our devices. Go to Devices and then click on "+ Add ". First we'll add `clab-autocon2-srl1`. Be sure to fill in the `Hostname`, `fqdn` and `Operating System` as shown.
+Now we need to add our devices.
+
+# NEW DEVICE SECTION
+
+1. Click on `Devices`
+2. Click on `Device Finder`
+3. Under the `Finder` tab click `+ Add`
+4. Configure your Device Finder
+
+>| Field | Value |
+>|----------|----------|
+>| Name | workshop-finder |
+>| SNMP Version | snmpv3 |
+>| Username | snmpuser |
+>| Authtype | sha |
+>| Authkey | snmppassword |
+>| Privtype | aes128 |
+>| Privkey | snmpprivpassword |
+>| Target | 172.24.0.0/24 |
+
+5. Click `Save`
+6. Click `Start`
+7. Navigate back to `Devices` and you'll now see your devices have been discovered in the network
+
+# NEW DEVICE SECTION
+
+# OLD DEVICE SECTION
+
+Go to Devices and then click on "+ Add ". First we'll add `clab-autocon2-srl1`. Be sure to fill in the `Hostname`, `fqdn` and `Operating System` as shown.
 
 <img src="images/slurpit/devices_srl1.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
 
@@ -307,6 +342,8 @@ Slurp'it will take a short while to discover information about our devices. Then
 Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
 
 <img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
+
+# OLD DEVICE SECTION
 
 ___
 
