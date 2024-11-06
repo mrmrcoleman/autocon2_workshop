@@ -19,18 +19,20 @@ sudo apt install -y net-tools
 # Install snmpwalk
 sudo apt install -y snmp
 
-# Install Docker and Compose
-echo "--- Installing Docker and ContainerLab ---"
-if [ -f "setup" ]; then
-    rm -v "setup"
-fi
+# Install Docker
+echo "--- Installing Docker ---"
+
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo install -o root -g root /dev/stdin /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
-# Check if running Ubuntu
-echo "This is not Ubuntu. trying containerlab install"
-curl -sL https://containerlab.dev/setup | sudo -E bash -s "all"
+# Install ContainerLab
+echo "--- Installing ContainerLab ---"
 
-
+curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
 
 
 # Start docker
