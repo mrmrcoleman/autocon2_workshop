@@ -1,7 +1,7 @@
 name: slurpit
 services:
   slurpit-warehouse:
-    image: slurpit/warehouse:0.9.163
+    image: slurpit/warehouse:0.9.164
     container_name: slurpit-warehouse
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/services"]
@@ -40,7 +40,7 @@ services:
     restart: always
 
   slurpit-scanner:
-    image: slurpit/scanner:0.9.148
+    image: slurpit/scanner:0.9.152
     container_name: slurpit-scanner
     depends_on:
       slurpit-warehouse:
@@ -57,7 +57,7 @@ services:
     restart: always
 
   slurpit-portal:
-    image: slurpit/portal:1.1.26
+    image: slurpit/portal:1.1.37
     container_name: slurpit-portal
     networks:
       - autocon-workshop

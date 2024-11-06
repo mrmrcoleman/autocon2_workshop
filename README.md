@@ -265,9 +265,9 @@ Tools that are used to import operational state from our network into Netbox are
 1. Network discovery - Scans a list of IPs or subnets to find any network devices in the network
 2. Device discovery - Logs into specific devices to extract their configurations
 
-[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can also do device discovery across a large selection of network devices and can also do network discovery, but we won't be using that functionality in this workshop.
+[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can do network and device discovery across a large selection of network devices.
 
-Let's slurp our network devices into Slurp'it! First we need to get the IP and port for Slurp'it.
+Let's slurp our network devices into Slurp'it using network discovery. First we need to get the IP and port for Slurp'it.
 
 ```
 echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
@@ -297,14 +297,11 @@ Click through the the final step, and then hit "Let's Go :rocket:"
 
 <img src="images/slurpit/wizard_letsgo.png" alt="Slurpit Wizard Let's Go :rocket:" title="Slurpit Wizard Let's Go :rocket:" width="750" />
 
-Now we need to add our devices.
+Now we need to discovery our devices in the network. Start by clicking on `Devices`, then `Device Finder`, and then under the `Finder` tab click on `+ Add`.
 
-# NEW DEVICE SECTION
+INSERT SCREENSHOT
 
-1. Click on `Devices`
-2. Click on `Device Finder`
-3. Under the `Finder` tab click `+ Add`
-4. Configure your Device Finder
+Now configure your Device Finder with the values shown below.
 
 >| Field | Value |
 >|----------|----------|
@@ -317,23 +314,11 @@ Now we need to add our devices.
 >| Privkey | snmpprivpassword |
 >| Target | 172.24.0.0/24 |
 
-5. Click `Save`
-6. Click `Start`
-7. Navigate back to `Devices` and you'll now see your devices have been discovered in the network
+Then click on `Save`, and then `Start`.
 
-# NEW DEVICE SECTION
+___
 
-# OLD DEVICE SECTION
-
-Go to Devices and then click on "+ Add ". First we'll add `clab-autocon2-srl1`. Be sure to fill in the `Hostname`, `fqdn` and `Operating System` as shown.
-
-<img src="images/slurpit/devices_srl1.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
-
-You can click on `Device Reachable` and `SSH login` to check that the device is accesible. Then hit `Save`. Now you do the same for `clab-autocon2-srl2` and hit `Save`.
-
-<img src="images/slurpit/devices_srl2.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
-
-Now we're ready to start our initial import. Click on the ellipsis menu (three dots) on each device and click "Schedule Now"
+Navigate back to `Devices` and you'll see our lab devices have been discovered in the network. Now we're ready to start our device discovery. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
@@ -342,8 +327,6 @@ Slurp'it will take a short while to discover information about our devices. Then
 Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
 
 <img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
-
-# OLD DEVICE SECTION
 
 ___
 
@@ -368,11 +351,15 @@ In the NetBox left-hand menu click on `SLURP'IT` -> `Onboard devices`
 
 <img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
 
-If you now click `Sync` the Slurp'it plugin will pull the information it has discovered about our network over to NetBox.
+If you now click `Sync` the Slurp'it plugin will pull the devices it has discovered about our network over to NetBox.
 
 <img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
 
-Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen. Under `Site*` select the `Denver`site we created earlier and then click `Apply`.
+Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen.
+
+- Under `Management Interface*` enter `mgmt0`
+- Under `Site*` select the `Denver`site that was pre-populated in NetBox
+- Click `Apply`
 
 <img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />
 
@@ -382,15 +369,19 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 Pulling discovered network data into Netbox happens in two stages in Slurp'it. The step, which we just did, is to onboard the devices. The second step is to `Reconcile` the additional data about the devices into NetBox.
 
-In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
-
-<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
-
 > [!TIP]
 > 
 > Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait navigate to the following URLs in your browser  
 > http://<INSERTYOURIP>:8000/run/plugin/sync  
 > http://<INSERTYOURIP>:8000/run/plugin/sync_queue  
+
+In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+Select the `IPAM` tab, select all the IPs and then click `Accept`.
+
+<img src="images/slurpit/reconcile_ipam.png" alt="Slurpit Reconcile Devices" title="Slurpit Reconcile Devices" width="750" />
 
 Select the `Interfaces` tab, select all the interfaces and then click `Accept`
 
