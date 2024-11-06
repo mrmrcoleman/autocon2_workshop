@@ -1,7 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
+# Check if all required environment variables are set
+REQUIRED_VARS=("WORKSHOP_SUBNET")
 
+for var in "${REQUIRED_VARS[@]}"; do
+  if [ -z "${!var:-}" ]; then
+    echo "Error: Required environment variable '$var' is not set."
+    exit 0
+  fi
+done
 
 sudo apt install needrestart -y
 
