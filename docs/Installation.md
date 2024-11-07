@@ -1,5 +1,16 @@
 # Installation
 
+> [!TIP]
+>  
+> 1. This workshop is resource intensive. We recommend using a machine with 16GB of RAM and 8 cores.  
+> 2. The workshop assumes it is running on an internet accessible machine and relies on the public IP  
+> for a lot of the functionality. This means that it _probably_ won't work on your local machine, but we aim  
+> to add that at a later stage.
+
+> [!TIP]
+>  
+> Installation is easy to follow, but takes about 10 minutes  
+
 ## Set environment variables
 
 This script sets all the necessary envirionment variables so that the correct ports are used for the services and defaults to using the public IPv4 of the host for service URLs.
@@ -46,7 +57,7 @@ http://139.178.74.171:8000
 ## Start the ContainerLab network
 
 ```
-./3_start_network.sh 0_initial
+./3_start_network.sh 1_the_hard_way
 ```
 
 ## Start NetBox with the Slurpit plugin
@@ -109,3 +120,7 @@ http://139.178.74.171:8003
 > 
 > **username** admin@admin.com  
 > **password** 12345678
+
+# Initial Setup
+
+See setup instructions here: [Link](docs/Setup.md)
