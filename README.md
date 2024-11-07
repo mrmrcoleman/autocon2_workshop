@@ -165,7 +165,7 @@ Let's try one out in our network. Our imaginary company is extremely constrained
 > [!TIP]
 > 
 > If you'd rather skip the manual steps, this command will prepare your network for the next step:  
-> `./3_start_network.sh 1_updated_subnet`
+> `./3_start_network.sh 1_the_hard_way`
 
 First on `clab-autocon2-srl1`
 
@@ -394,6 +394,7 @@ Now the device interfaces have been added to the devices in NetBox. To confirm, 
 ____
 
 ### Icinga - Our monitoring tool
+
 
 ____
 
