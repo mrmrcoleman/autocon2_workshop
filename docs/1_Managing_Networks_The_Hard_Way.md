@@ -1,3 +1,10 @@
+**Proctor Summary**
+
+- Explore the network
+- Make a manual change
+- See how hard it is
+
+
 # Managing Networks the Hard Way
 
 Let's explore the initial state. It's much like many traditional network setups: some devices, some monitoring and not a lot of documentation.
@@ -109,25 +116,6 @@ PING 192.168.0.2 (192.168.0.2) 56(84) bytes of data.
 
 Great, the simple network is up and running. Let's have a look at our monitoring.
 
-### Monitoring
-
-For monitoring we're using Icinga. Let's log in and take a look around. First we need to get the correct IP and port.
-
-```
-echo ${MY_EXTERNAL_IP}:${ICINGA_PORT}
-(Example output, yours will differ)
-147.75.34.179:8002
-```
-
-Now you can use a browser to log in.
-
-> [!TIP]
-> 
-> **username** icingaadmin
-> **password** icinga
-
-! Come back to this part when Dave has updated the Icinga installation: https://github.com/mrmrcoleman/autocon2_workshop/issues/11
-
 ## Updating the network, the hard way!
 
 Organizations are turning to network automation for many reasons including being able to change the network faster, reducing manual errors, compliance and more. The majority of the industry is just getting started though and for many teams changing the network still means the same old process:
@@ -142,8 +130,8 @@ Let's try one out in our network. Our imaginary company is extremely constrained
 
 > [!TIP]
 > 
-> If you'd rather skip the manual steps, this command will prepare your network for the next step:  
-> `./3_start_network.sh 1_the_hard_way`
+> If you'd rather skip the manual steps, this command will prepare your network for the next section:  
+> `./3_start_network.sh 2_introducing_intent_based`
 
 First on `clab-autocon2-srl1`
 
@@ -163,7 +151,7 @@ A:clab-autocon2-srl1# commit now
 All changes have been committed. Leaving candidate mode.
 ```
 
-Now on `clab-autocon2-srl2`
+Use `Ctrl+D` to exit `clab-autocon2-srl1`. Now on `clab-autocon2-srl2`
 
 ```
 --{ running }--[  ]--
@@ -183,7 +171,7 @@ And now let's test connectivity. On `clab-autocon2-srl2`:
 
 ```
 --{ + running }--[  ]--
-A:clab-autocon2-srl2# ping 192.168.0.1 network-instance default
+A:clab-autocon2-srl2# ping -c 4 192.168.0.1 network-instance default
 Using network instance default
 PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
 64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=68.2 ms
@@ -191,13 +179,13 @@ PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
 64 bytes from 192.168.0.1: icmp_seq=3 ttl=64 time=2.83 ms
 ```
 
+Use `Ctrl+D` to exit `clab-autocon2-srl2`
+
 Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunately that's not all:
 
-1. If you go back and look at the monitoring in Icinga you'll see that we created a bunch of monitoring alerts while making that change, because we forgot an important step: update the monitoring to switch off the alerts before making the change and then switch them back on when we're done.
-2. We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices. How do we ensure that the documentation is updated when many engineers are making changes to the network?
-3. How can we confirm that our devices are correctly (and securely) configured?
-4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
+1. If this were a real network, you might have needed to let the monitoring team know there were some changes coming, or accept some alerts going off.
+2. We also need to go back and update the network documentation now, if it's exists. Otherwise how future engineers will know what they are getting themselves into when they SSH into these devices.
+3. We did a quick ping to check connectivity, but how can we confirm that our devices are correctly (and securely) configured?
+4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How?
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
-
-INSERT SKIP COMMAND TO REDPLOY WITH THE CORRECT SETTING HERE.
