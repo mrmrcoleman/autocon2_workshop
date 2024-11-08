@@ -1,0 +1,574 @@
+{
+    "ServiceGroup": {
+        "srvg_check_ping": {
+            "assign_filter": "service.check_command=%22ping%22|service.check_command=%22ping4%22|service.check_command=%22ping6%22|service.check_command=%22ping-windows%22|service.check_command=%22ping4-windows%22|service.check_command=%22ping6-windows%22|service.check_command=%22fping4%22|service.check_command=%22fping6%22",
+            "display_name": "Check: Ping",
+            "object_name": "srvg_check_ping",
+            "object_type": "object"
+        },
+        "srvg_check_icinga": {
+            "display_name": "Check: Icinga",
+            "object_name": "srvg_check_icinga",
+            "object_type": "object"
+        },
+        "srvg_check_icinga_cluster": {
+            "display_name": "Check: Icinga Cluster",
+            "object_name": "srvg_check_icinga_cluster",
+            "object_type": "object"
+        },
+        "srvg_check_http": {
+            "assign_filter": "service.check_command=%22http%22",
+            "display_name": "Check: HTTP",
+            "object_name": "srvg_check_http",
+            "object_type": "object"
+        },
+        "srvg_check_load": {
+            "assign_filter": "service.check_command=%22load%22",
+            "display_name": "Check: Load",
+            "object_name": "srvg_check_load",
+            "object_type": "object"
+        }
+    },
+    "ServiceTemplate": {
+        "Global Defaults": {
+            "fields": [],
+            "object_name": "Global Defaults",
+            "object_type": "template"
+        },
+        "srvt ping": {
+            "fields": [],
+            "groups": [
+                "srvg_check_ping"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt ping",
+            "object_type": "template"
+        },
+        "srvt ping windows": {
+            "check_command": "ping-windows",
+            "fields": [{
+                    "datafield_id": 96,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 97,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 98,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 99,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 100,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 101,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 102,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "imports": [
+                "srvt ping"
+            ],
+            "object_name": "srvt ping windows",
+            "object_type": "template"
+        },
+        "srvt ping linux": {
+            "check_command": "ping",
+            "fields": [{
+                    "datafield_id": 103,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 104,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 105,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 106,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 107,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 108,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 109,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "imports": [
+                "srvt ping"
+            ],
+            "object_name": "srvt ping linux",
+            "object_type": "template"
+        },
+        "srvt icinga": {
+            "fields": [],
+            "object_name": "srvt icinga",
+            "object_type": "template"
+        },
+        "srvt icinga cluster": {
+            "check_command": "cluster",
+            "fields": [],
+            "groups": [
+                "srvg_check_icinga_cluster"
+            ],
+            "imports": [
+                "srvt icinga"
+            ],
+            "object_name": "srvt icinga cluster",
+            "object_type": "template"
+        },
+        "srvt icinga service": {
+            "check_command": "icinga",
+            "fields": [],
+            "groups": [
+                "srvg_check_icinga"
+            ],
+            "imports": [
+                "srvt icinga"
+            ],
+            "object_name": "srvt icinga service",
+            "object_type": "template"
+        },
+        "srvt http": {
+            "check_command": "http",
+            "fields": [{
+                    "datafield_id": 110,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 112,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 118,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 113,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 114,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 115,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_http"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt http",
+            "object_type": "template"
+        },
+        "srvt https": {
+            "fields": [{
+                    "datafield_id": 116,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 117,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "imports": [
+                "srvt http"
+            ],
+            "object_name": "srvt https",
+            "object_type": "template"
+        },
+        "srvt load": {
+            "fields": [],
+            "groups": [
+                "srvg_check_load"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt load",
+            "object_type": "template"
+        },
+        "srvt load linux": {
+            "check_command": "load",
+            "fields": [{
+                    "datafield_id": 119,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 120,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 121,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 125,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 122,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 123,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 124,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "imports": [
+                "srvt load"
+            ],
+            "object_name": "srvt load linux",
+            "object_type": "template"
+        }
+    },
+    "Datafield": {
+        "96": {
+
+            "varname": "ping_win_address",
+            "caption": "ping_win_address",
+            "description": "Address to ping",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "97": {
+
+            "varname": "ping_win_cpl",
+            "caption": "ping_win_cpl",
+            "description": "Warning threshold: RTA and package loss seperated by comma",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "98": {
+
+            "varname": "ping_win_crta",
+            "caption": "ping_win_crta",
+            "description": "Warning threshold: RTA and package loss seperated by comma",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "99": {
+
+            "varname": "ping_win_packets",
+            "caption": "ping_win_packets",
+            "description": "Number of packages to send",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "100": {
+
+            "varname": "ping_win_timeout",
+            "caption": "ping_win_timeout",
+            "description": "Timeout in ms",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "101": {
+
+            "varname": "ping_win_wpl",
+            "caption": "ping_win_wpl",
+            "description": "Warning threshold: RTA and package loss seperated by comma",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "102": {
+
+            "varname": "ping_win_wrta",
+            "caption": "ping_win_wrta",
+            "description": "Warning threshold: RTA and package loss seperated by comma",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "103": {
+
+            "varname": "ping_address",
+            "caption": "ping_address",
+            "description": "host to ping",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "104": {
+
+            "varname": "ping_cpl",
+            "caption": "ping_cpl",
+            "description": "critical threshold pair",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "105": {
+
+            "varname": "ping_crta",
+            "caption": "ping_crta",
+            "description": "critical threshold pair",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "106": {
+
+            "varname": "ping_packets",
+            "caption": "ping_packets",
+            "description": "number of ICMP ECHO packets to send (Default: 5)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "107": {
+
+            "varname": "ping_timeout",
+            "caption": "ping_timeout",
+            "description": "Seconds before connection times out (default: 10)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "108": {
+
+            "varname": "ping_wpl",
+            "caption": "ping_wpl",
+            "description": "warning threshold pair",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "109": {
+
+            "varname": "ping_wrta",
+            "caption": "ping_wrta",
+            "description": "warning threshold pair",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "110": {
+
+            "varname": "http_address",
+            "caption": "http_address",
+            "description": "IP address or name (use numeric address if possible to bypass DNS lookup)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "112": {
+
+            "varname": "http_port",
+            "caption": "http_port",
+            "description": "Port number (default: 80)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "118": {
+
+            "varname": "http_post",
+            "caption": "http_post",
+            "description": "URL encoded http POST data",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "113": {
+
+            "varname": "http_timeout",
+            "caption": "http_timeout",
+            "description": "Seconds before connection times out",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "114": {
+
+            "varname": "http_uri",
+            "caption": "http_maxage",
+            "description": "Warn if document is more than seconds old",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "115": {
+
+            "varname": "http_vhost",
+            "caption": "http_verify_host",
+            "description": "Verify SSL certificate is for the -H hostname (with --sni and -S)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "116": {
+
+            "varname": "http_sni",
+            "caption": "http_certificate",
+            "description": "Minimum number of days a certificate has to be valid. This parameter explicitely sets the port to 443 and ignores the URL if passed.",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeBoolean",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "117": {
+
+            "varname": "http_ssl",
+            "caption": "http_ssl",
+            "description": "Connect via SSL",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeBoolean",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "119": {
+
+            "varname": "load_cload1",
+            "caption": "load_cload1",
+            "description": "Exit with CRITICAL status if load average exceed CLOADn; the load average format is the same used by 'uptime' and 'w'",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "120": {
+
+            "varname": "load_cload15",
+            "caption": "load_cload15",
+            "description": "Exit with CRITICAL status if load average exceed CLOADn; the load average format is the same used by 'uptime' and 'w'",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "121": {
+
+            "varname": "load_cload5",
+            "caption": "load_cload5",
+            "description": "Exit with CRITICAL status if load average exceed CLOADn; the load average format is the same used by 'uptime' and 'w'",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "125": {
+
+            "varname": "load_percpu",
+            "caption": "load_percpu",
+            "description": "Divide the load averages by the number of CPUs (when possible)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeBoolean",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "122": {
+
+            "varname": "load_wload1",
+            "caption": "load_wload1",
+            "description": "Exit with WARNING status if load average exceeds WLOADn",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "123": {
+
+            "varname": "load_wload15",
+            "caption": "load_wload15",
+            "description": "Exit with WARNING status if load average exceeds WLOADn",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "124": {
+
+            "varname": "load_wload5",
+            "caption": "load_wload5",
+            "description": "Exit with WARNING status if load average exceeds WLOADn",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        }
+    }
+}

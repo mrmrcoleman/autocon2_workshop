@@ -12,21 +12,24 @@
     "tenancy.contacts": [{
         "name": "Mark Coleman",
         "email": "mcoleman@netboxlabs.com",
-        "group": {"name": "Awesome"}
+        "group": { "name": "Awesome" }
 
-    },{
+    }, {
         "name": "Matthew Smith",
         "email": "matthew.smith@sol1.com.au",
-        "group": {"name": "Awesome"}
+        "group": { "name": "Awesome" }
 
-    },{
+    }, {
         "name": "Dave Kempe",
         "email": "dave@sol1.com.au",
-        "group": {"name": "Awesome"}
+        "group": { "name": "Awesome" }
 
     }],
     "extras.custom-field-choice-sets": [{
-        "extra_choices": [["no_not_monitor","Do not monitor"],["default","Default"]],
+        "extra_choices": [
+            ["no_not_monitor", "Do not monitor"],
+            ["default", "Default"]
+        ],
         "name": "icinga_import_source_choices"
     }],
     "extras.custom-fields": [{
@@ -37,7 +40,7 @@
             "type": "select",
             "name": "icinga_import_source",
             "group_name": "Monitoring",
-            "choice_set": {"name": "icinga_import_source_choices"}
+            "choice_set": { "name": "icinga_import_source_choices" }
         },
         {
             "weight": "100",
@@ -86,5 +89,23 @@
         "name": "Denver",
         "slug": "denver",
         "status": "active"
+    }],
+    "virtualization.cluster-types": [{
+        "name": "Digital Ocean Droplets",
+        "slug": "digital-ocean-droplets"
+    }],
+    "virtualization.clusters": [{
+        "name": "Autocon Workshop",
+        "type": { "name": "Digital Ocean Droplets" },
+        "status": "active"
+    }],
+    "virtualization.virtual-machines": [{
+        "name": "icinga2",
+        "cluster": { "name": "Autocon Workshop" },
+        "status": "active",
+        "tags": [{ "name": "Icinga Endpoint" }],
+        "custom_fields": {
+            "icinga_import_source": "default"
+        }
     }]
 }

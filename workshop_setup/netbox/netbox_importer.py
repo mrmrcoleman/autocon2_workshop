@@ -181,6 +181,46 @@ class NetboxContactGroups(Netbox):
         self.findBy(self.find_key)
         self.createOrUpdate()
 
+class NetboxClusterTypes(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.virtualization.cluster_types
+        self.required_fields = [ 
+            "name",
+            "slug",
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
+class NetboxClusters(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.virtualization.clusters
+        self.required_fields = [ 
+            "name",
+            "type",
+            "status",
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
+class NetboxVirtualMachines(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.virtualization.virtual_machines
+        self.required_fields = [ 
+            "name",
+            "status"
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 def read_json_file(file_path):
     # Read the JSON file from disk
     with open(file_path, 'r') as json_file:
@@ -215,3 +255,12 @@ if __name__ == "__main__":
         if k == 'tenancy.contacts':
             for payload in v:
                 obj = NetboxContacts(args.url, args.token, payload)
+        if k == 'virtualization.cluster-types':
+            for payload in v:
+                obj = NetboxClusterTypes(args.url, args.token, payload)
+        if k == 'virtualization.clusters':
+            for payload in v:
+                obj = NetboxClusters(args.url, args.token, payload)
+        if k == 'virtualization.virtual-machines':
+            for payload in v:
+                obj = NetboxVirtualMachines(args.url, args.token, payload)
