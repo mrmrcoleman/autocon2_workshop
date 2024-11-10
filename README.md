@@ -1,228 +1,25 @@
-# Requirements
+# NetBox Automation - Zero to Hero
 
-> [!TIP]
->  
-> This workshop is resource intensive. We recommend using a machine with 16GB of RAM and 8 cores.
+Welcome to NetBox Automation - Zero to Hero! In this workshop we will build a fully functioning intent-based network automation stack. While most vendors do a great job of showing you how to use their tool, network automation is a multi-tool adventure and there is lack of tutorials and documentation showing how everything fits together.
 
-# Installation
+This workshop is intended to teach you the high-level concepts around intent-based networking, while also delivering you a fully functioning stack you can continue to experiment with. The workshop is split into sections covering different elements of the story. You should follow them sequentially.
 
-> [!TIP]
->  
-> Installation is straightforward, but takes about 10 minutes  
 
-Follow the installation instructions here to get all the tooling installed: [Link](docs/Installation.md)
+## Sections
+
+1. [Managing Networks the Hard Way](docs/1_Managing_Networks_The_Hard_Way.md) - A look at a "traditional" network management stack, and we'll discuss some of the issues with it.
+2. [Introducing Intent-Based Network Automation](docs/2_Introducing_Intent_Based_Network_Automation.md) - A brief introduction to the high-level concepts that we'll be building through the rest of the workshop.
+3. [Source of Truth: NetBox](docs/3_Source_Of_Truth_NetBox.md) - An introduction to NetBox, our Network Source of Truth that will drive our intent-based networking
+4. [Discovery and Reconcilliation: Slurpit](docs/4_Discovery_Reconciliation_Slurpit.md)
+5. [Monitoring: Icinga](docs/5_Monitoring_Icinga.md)
+6. [Configuration Assurance: Netpicker](docs/6_Configuration_Assurance_Netpicker.md)
+7. [Automated Network Changes: Ansible](docs/7_Automated_Network_Changes_Ansible.md)
 
 # Initial Setup
 
 See setup instructions here: [Link](docs/Setup.md)
 
 # Workshop
-
-## Initial state
-
-Let's explore the initial state. It's much like many traditional network setups: some devices, some monitoring and not a lot of documentation.
-
-### Network
-
-Let's take a look at our devices:
-
-```
-pushd network
-clab inspect
-INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-| # |         Name         | Container ID |               Image               |     Kind      |  State  | IPv4 Address  | IPv6 Address |
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-| 1 | clab-autocon2-client | 1c78ef9c0455 | mrmrcoleman/autocon-client:latest | linux         | running | 172.24.0.6/24 | N/A          |
-| 2 | clab-autocon2-server | 1edc76fbac02 | mrmrcoleman/autocon-server:latest | linux         | running | 172.24.0.9/24 | N/A          |
-| 3 | clab-autocon2-srl1   | fb9cd192b40e | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.7/24 | N/A          |
-| 4 | clab-autocon2-srl2   | 1a5c96567133 | ghcr.io/nokia/srlinux:24.7.2      | nokia_srlinux | running | 172.24.0.8/24 | N/A          |
-+---+----------------------+--------------+-----------------------------------+---------------+---------+---------------+--------------+
-```
-
-You can see that we have two Nokia SRLinux devices running in the network. Let's inspect one of them by ssh'ing into `clab-autocon2-srl1`.
-
-> [!TIP]
-> 
-> **username** admin
-> **password** NokiaSrl1!  
-
-```
-ssh admin@clab-autocon2-srl1
-Warning: Permanently added 'clab-autocon2-srl1' (ED25519) to the list of known hosts.
-................................................................
-:                  Welcome to Nokia SR Linux!                  :
-:              Open Network OS for the NetOps era.             :
-:                                                              :
-:    This is a freely distributed official container image.    :
-:                      Use it - Share it                       :
-:                                                              :
-: Get started: https://learn.srlinux.dev                       :
-: Container:   https://go.srlinux.dev/container-image          :
-: Docs:        https://doc.srlinux.dev/24-7                    :
-: Rel. notes:  https://doc.srlinux.dev/rn24-7-2                :
-: YANG:        https://yang.srlinux.dev/v24.7.2                :
-: Discord:     https://go.srlinux.dev/discord                  :
-: Contact:     https://go.srlinux.dev/contact-sales            :
-................................................................
-
-(admin@clab-autocon2-srl1) Password:
-Using configuration file(s): ['/home/admin/.srlinuxrc']
-Welcome to the srlinux CLI.
-Type 'help' (and press <ENTER>) if you need any help using this.
-
---{ running }--[  ]--
-```
-
-Let's inspect the interfaces:
-
-```
-A:clab-autocon2-srl1# show interface
-=======================================================================================================================================================================
-ethernet-1/1 is up, speed 25G, type None
-  ethernet-1/1.0 is up
-    Network-instances:
-      * Name: default (default)
-    Encapsulation   : null
-    Type            : routed
-    IPv4 addr    : 192.168.0.1/30 (static, preferred, primary)
-    IPv6 addr    : 2002::c0a8:0/127 (static, preferred, primary)
-    IPv6 addr    : fe80::18c7:ff:feff:1/64 (link-layer, preferred)
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-mgmt0 is up, speed 1G, type None
-  mgmt0.0 is up
-    Network-instances:
-      * Name: mgmt (ip-vrf)
-    Encapsulation   : null
-    Type            : None
-    IPv4 addr    : 172.18.0.7/16 (dhcp, preferred)
-    IPv6 addr    : fe80::42:acff:fe12:7/64 (link-layer, preferred)
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-=======================================================================================================================================================================
-Summary
-  0 loopback interfaces configured
-  1 ethernet interfaces are up
-  1 management interfaces are up
-  2 subinterfaces are up
-=======================================================================================================================================================================
-```
-
-We can see that this device has two active interfaces: `mgmt0` and `ethernet-1/1`. `mgmt0` is the interface we just ssh'd in on, `ethernet-1/1` is connected to our other device in the `192.168.0.0/32` subnet. We can confirmed the link to `clab-autocon2-srl2` with LLDP:
-
-```
-A:clab-autocon2-srl1# show system lldp neighbor
-    +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
-  |     Name     |     Neighbor      | Neighbor System Name | Neighbor Chassis ID | Neighbor First Message | Neighbor Last Update | Neighbor Port |
-  +==============+===================+======================+=====================+========================+======================+===============+
-  | ethernet-1/1 | 1A:A1:03:FF:00:00 | clab-autocon2-srl2   | 1A:A1:03:FF:00:00   | 42 seconds ago         | 12 seconds ago       | ethernet-1/1  |
-  +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
-```
-
-Let's ping it across the `ethernet-1/1` interface to confirm connectivity.
-
-```
-A:clab-autocon2-srl1# ping 192.168.0.2 network-instance default
-Using network instance default
-PING 192.168.0.2 (192.168.0.2) 56(84) bytes of data.
-64 bytes from 192.168.0.2: icmp_seq=1 ttl=64 time=67.9 ms
-64 bytes from 192.168.0.2: icmp_seq=2 ttl=64 time=4.29 ms
-64 bytes from 192.168.0.2: icmp_seq=3 ttl=64 time=3.95 ms
-```
-
-Great, the simple network is up and running. Let's have a look at our monitoring.
-
-### Monitoring
-
-For monitoring we're using Icinga. Let's log in and take a look around. First we need to get the correct IP and port.
-
-```
-echo ${MY_EXTERNAL_IP}:${ICINGA_PORT}
-(Example output, yours will differ)
-147.75.34.179:8002
-```
-
-Now you can use a browser to log in.
-
-> [!TIP]
-> 
-> **username** icingaadmin
-> **password** icinga
-
-! Come back to this part when Dave has updated the Icinga installation: https://github.com/mrmrcoleman/autocon2_workshop/issues/11
-
-## Updating the network, the hard way!
-
-Organizations are turning to network automation for many reasons including being able to change the network faster, reducing manual errors, compliance and more. The majority of the industry is just getting started though and for many teams changing the network still means the same old process:
-
-1. Receieve a ticket in the ITSM system
-2. Figure out what changes are needed to satisfy the ticket
-3. (Sometimes) submit the changes for approval
-4. SSH into the devices and make the changes manually
-5. Pray!
-
-Let's try one out in our network. Our imaginary company is extremely constrained on IP address space and that /30 between the two devices is just too big! We've been asked to claw back a single IP address by moving to a /31. Let's roll up our sleeves.
-
-> [!TIP]
-> 
-> If you'd rather skip the manual steps, this command will prepare your network for the next step:  
-> `./3_start_network.sh 1_updated_subnet`
-
-First on `clab-autocon2-srl1`
-
-```
---{ running }--[  ]--
-A:clab-autocon2-srl1# enter candidate
-
---{ candidate shared default }--[  ]--
-A:clab-autocon2-srl1# delete /interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/30
-
---{ * candidate shared default }--[  ]--
-A:clab-autocon2-srl1# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.0/31
-
---{ * candidate shared default }--[  ]--
-A:clab-autocon2-srl1# commit now
- 
-All changes have been committed. Leaving candidate mode.
-```
-
-Now on `clab-autocon2-srl2`
-
-```
---{ running }--[  ]--
-A:clab-autocon2-srl2# enter candidate
-
---{ candidate shared default }--[  ]--
-A:clab-autocon2-srl2# delete / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.2/30
-
---{ * candidate shared default }--[  ]--
-A:clab-autocon2-srl2# set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.0.1/31
-
---{ * candidate shared default }--[  ]--
-A:clab-autocon2-srl2# commit now
-```
-
-And now let's test connectivity. On `clab-autocon2-srl2`:
-
-```
---{ + running }--[  ]--
-A:clab-autocon2-srl2# ping 192.168.0.1 network-instance default
-Using network instance default
-PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
-64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=68.2 ms
-64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=3.92 ms
-64 bytes from 192.168.0.1: icmp_seq=3 ttl=64 time=2.83 ms
-```
-
-Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunately that's not all:
-
-1. If you go back and look at the monitoring in Icinga you'll see that we created a bunch of monitoring alerts while making that change, because we forgot an important step: update the monitoring to switch off the alerts before making the change and then switch them back on when we're done.
-2. We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices. How do we ensure that the documentation is updated when many engineers are making changes to the network?
-3. How can we confirm that our devices are correctly (and securely) configured?
-4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
-
-Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
-
-INSERT SKIP COMMAND TO REDPLOY WITH THE CORRECT SETTING HERE.
 
 ## Moving towards Intent Based Networking
 
@@ -265,9 +62,9 @@ Tools that are used to import operational state from our network into Netbox are
 1. Network discovery - Scans a list of IPs or subnets to find any network devices in the network
 2. Device discovery - Logs into specific devices to extract their configurations
 
-[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can also do device discovery across a large selection of network devices and can also do network discovery, but we won't be using that functionality in this workshop.
+[Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can do network and device discovery across a large selection of network devices.
 
-Let's slurp our network devices into Slurp'it! First we need to get the IP and port for Slurp'it.
+Let's slurp our network devices into Slurp'it using network discovery. First we need to get the IP and port for Slurp'it.
 
 ```
 echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
@@ -297,14 +94,11 @@ Click through the the final step, and then hit "Let's Go :rocket:"
 
 <img src="images/slurpit/wizard_letsgo.png" alt="Slurpit Wizard Let's Go :rocket:" title="Slurpit Wizard Let's Go :rocket:" width="750" />
 
-Now we need to add our devices.
+Now we need to discovery our devices in the network. Start by clicking on `Devices`, then `Device Finder`, and then under the `Finder` tab click on `+ Add`.
 
-# NEW DEVICE SECTION
+INSERT SCREENSHOT
 
-1. Click on `Devices`
-2. Click on `Device Finder`
-3. Under the `Finder` tab click `+ Add`
-4. Configure your Device Finder
+Now configure your Device Finder with the values shown below.
 
 >| Field | Value |
 >|----------|----------|
@@ -317,23 +111,11 @@ Now we need to add our devices.
 >| Privkey | snmpprivpassword |
 >| Target | 172.24.0.0/24 |
 
-5. Click `Save`
-6. Click `Start`
-7. Navigate back to `Devices` and you'll now see your devices have been discovered in the network
+Then click on `Save`, and then `Start`.
 
-# NEW DEVICE SECTION
+___
 
-# OLD DEVICE SECTION
-
-Go to Devices and then click on "+ Add ". First we'll add `clab-autocon2-srl1`. Be sure to fill in the `Hostname`, `fqdn` and `Operating System` as shown.
-
-<img src="images/slurpit/devices_srl1.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
-
-You can click on `Device Reachable` and `SSH login` to check that the device is accesible. Then hit `Save`. Now you do the same for `clab-autocon2-srl2` and hit `Save`.
-
-<img src="images/slurpit/devices_srl2.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="750" />
-
-Now we're ready to start our initial import. Click on the ellipsis menu (three dots) on each device and click "Schedule Now"
+Navigate back to `Devices` and you'll see our lab devices have been discovered in the network. Now we're ready to start our device discovery. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
@@ -342,8 +124,6 @@ Slurp'it will take a short while to discover information about our devices. Then
 Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
 
 <img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
-
-# OLD DEVICE SECTION
 
 ___
 
@@ -368,11 +148,15 @@ In the NetBox left-hand menu click on `SLURP'IT` -> `Onboard devices`
 
 <img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
 
-If you now click `Sync` the Slurp'it plugin will pull the information it has discovered about our network over to NetBox.
+If you now click `Sync` the Slurp'it plugin will pull the devices it has discovered about our network over to NetBox.
 
 <img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
 
-Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen. Under `Site*` select the `Denver`site we created earlier and then click `Apply`.
+Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen.
+
+- Under `Management Interface*` enter `mgmt0`
+- Under `Site*` select the `Denver`site that was pre-populated in NetBox
+- Click `Apply`
 
 <img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />
 
@@ -382,15 +166,19 @@ Now the devices in our network have been successfully imported into NetBox! You 
 
 Pulling discovered network data into Netbox happens in two stages in Slurp'it. The step, which we just did, is to onboard the devices. The second step is to `Reconcile` the additional data about the devices into NetBox.
 
-In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
-
-<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
-
 > [!TIP]
 > 
 > Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait navigate to the following URLs in your browser  
 > http://<INSERTYOURIP>:8000/run/plugin/sync  
 > http://<INSERTYOURIP>:8000/run/plugin/sync_queue  
+
+In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+Select the `IPAM` tab, select all the IPs and then click `Accept`.
+
+<img src="images/slurpit/reconcile_ipam.png" alt="Slurpit Reconcile Devices" title="Slurpit Reconcile Devices" width="750" />
 
 Select the `Interfaces` tab, select all the interfaces and then click `Accept`
 
@@ -403,6 +191,7 @@ Now the device interfaces have been added to the devices in NetBox. To confirm, 
 ____
 
 ### Icinga - Our monitoring tool
+
 
 ____
 

@@ -15,7 +15,7 @@ echo
 echo "--- Cloning Icinga2 ---"
 echo
 
-git clone -b master https://github.com/davekempe/icinga2-docker-stack/
+git clone -b master https://github.com/mrmrcoleman/icinga2-docker-stack.git
 pushd icinga2-docker-stack
 
 echo
