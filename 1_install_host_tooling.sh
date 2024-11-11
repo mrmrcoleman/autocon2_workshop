@@ -42,40 +42,6 @@ echo "--- Installing ContainerLab ---"
 
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
 
-# Check the OS type and version
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-else
-    echo "Cannot determine OS type."
-    exit 1
-fi
-
-if [ "$ID" == "ubuntu" ]; then
-    # Ubuntu installation steps
-    sudo apt update
-    sudo apt install -y software-properties-common
-    sudo add-apt-repository --yes --update ppa:ansible/ansible
-    sudo apt install -y ansible
-    echo "Ansible installed on Ubuntu."
-
-elif [ "$ID" == "debian" ] && [ "$VERSION_ID" == "12" ]; then
-    # Debian 12 installation steps
-    UBUNTU_CODENAME=jammy
-    wget -O- "https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367" | sudo gpg --dearmour -o /usr/share/keyrings/ansible-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/ansible.list
-    sudo apt update
-    sudo apt install -y ansible
-    echo "Ansible installed on Debian 12."
-else
-    echo "Unsupported OS or version."
-    exit 1
-fi
-
-# set netbox url in the inventory file
-#
-sed -i "s/%%URL%%/$MY_EXTERNAL_IP:$NETBOX_PORT/" ansible/inventory/netbox.yml
-
-
 # Start docker
 sudo systemctl start docker
 
