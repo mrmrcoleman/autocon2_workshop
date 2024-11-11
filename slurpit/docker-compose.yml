@@ -61,6 +61,11 @@ services:
     container_name: slurpit-portal
     networks:
       - autocon-workshop
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://${MY_EXTERNAL_IP}:${SLURPIT_PORT}"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     environment:
       TZ: Europe/Amsterdam
       PORTAL_BASE_URL: http://localhost
