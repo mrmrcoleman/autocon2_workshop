@@ -65,6 +65,7 @@ services:
       TZ: Europe/Amsterdam
       PORTAL_BASE_URL: http://localhost
       PORTAL_WAREHOUSE_URL: http://slurpit-warehouse
+      PORTAL_CREATE_DEFAULT_API_KEY: true
     volumes:
       - ./logs/nginx:/var/log/nginx/
       - ./logs/mysql:/var/log/mysql/
