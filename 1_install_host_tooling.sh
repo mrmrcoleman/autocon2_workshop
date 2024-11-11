@@ -42,7 +42,6 @@ echo "--- Installing ContainerLab ---"
 
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
 
-
 # Start docker
 sudo systemctl start docker
 
