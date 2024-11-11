@@ -16,5 +16,3 @@ topology:
 
   links:
     - endpoints: ["srl1:e1-1", "srl2:e1-1"]
-    - endpoints: ["client:eth1", "srl1:e1-2"]
-    - endpoints: ["server:eth1", "srl2:e1-2"]
