@@ -211,3 +211,49 @@ if plugin_config_response.status_code == 200:
 else:
     print('Plugin configuration failed with status code:', plugin_config_response.status_code)
     print('Response:', plugin_config_response.text)
+
+# -------------------------
+# Step 4: Add a Vault to Slurpit
+# -------------------------
+
+# AddVault URL and headers
+add_vault_url = f'{base_url}/vault/addVault'
+add_vault_headers = {
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'Accept-Language': 'en-US,en;q=0.9,nl;q=0.8,fr;q=0.7',
+    'Connection': 'keep-alive',
+    'DNT': '1',
+    'Origin': base_url,
+    'Referer': f'{base_url}/admin/vault',
+    'User-Agent': 'Mozilla/5.0 (compatible; Python script)',
+    'X-Requested-With': 'XMLHttpRequest',
+}
+
+# Vault form data
+add_vault_data = {
+    'username': 'admin',
+    'password': 'NokiaSrl1!',
+    'password_confirm': 'NokiaSrl1!',
+    'device_os': 'nokia_srl',
+    'comment': '',
+}
+
+# Prepare multipart/form-data
+add_vault_encoder = MultipartEncoder(fields=add_vault_data)
+add_vault_headers['Content-Type'] = add_vault_encoder.content_type
+
+# Perform the addVault request
+add_vault_response = session.post(
+    add_vault_url,
+    headers=add_vault_headers,
+    data=add_vault_encoder,
+    verify=False
+)
+
+# Check if the request was successful
+if add_vault_response.status_code == 200:
+    print('Vault addition successful.')
+    print('Response:', add_vault_response.text)
+else:
+    print('Vault addition failed with status code:', add_vault_response.status_code)
+    print('Response:', add_vault_response.text)
