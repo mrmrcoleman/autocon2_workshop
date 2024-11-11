@@ -6,6 +6,12 @@
             "object_name": "srvg_check_ping",
             "object_type": "object"
         },
+        "srvg_check_tcp": {
+            "assign_filter": "service.check_command=%22tcp%22",
+            "display_name": "Check: Ping",
+            "object_name": "srvg_check_tcp",
+            "object_type": "object"
+        },
         "srvg_check_icinga": {
             "display_name": "Check: Icinga",
             "object_name": "srvg_check_icinga",
@@ -44,6 +50,69 @@
                 "Global Defaults"
             ],
             "object_name": "srvt ping",
+            "object_type": "template"
+        },
+        "srvt tcp": {
+            "check_command": "tcp",
+            "fields": [
+                {
+                    "datafield_id": 196,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 197,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_tcp"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt tcp",
+            "object_type": "template"
+        },
+        "srvt tcp Icinga": {
+            "fields": [],
+            "imports": [
+                "srvt tcp"
+            ],
+            "object_name": "srvt tcp Icinga",
+            "object_type": "template"
+        },
+        "srvt tcp Meerkat": {
+            "fields": [],
+            "imports": [
+                "srvt tcp"
+            ],
+            "object_name": "srvt tcp Meerkat",
+            "object_type": "template"
+        },
+        "srvt tcp Netbox": {
+            "fields": [],
+            "imports": [
+                "srvt tcp"
+            ],
+            "object_name": "srvt tcp Netbox",
+            "object_type": "template"
+        },
+        "srvt tcp Netpicker": {
+            "fields": [],
+            "imports": [
+                "srvt tcp"
+            ],
+            "object_name": "srvt tcp Netpicker",
+            "object_type": "template"
+        },
+        "srvt tcp Slurpit": {
+            "fields": [],
+            "imports": [
+                "srvt tcp"
+            ],
+            "object_name": "srvt tcp Slurpit",
             "object_type": "template"
         },
         "srvt ping windows": {
@@ -565,6 +634,24 @@
             "varname": "load_wload5",
             "caption": "load_wload5",
             "description": "Exit with WARNING status if load average exceeds WLOADn",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "196": {
+            "varname": "tcp_address",
+            "caption": "tcp_address",
+            "description": "Host name, IP Address, or unix socket (must be an absolute path).",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "197": {
+            "varname": "tcp_port",
+            "caption": "tcp_port",
+            "description": "The TCP port number.",
             "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
             "format": null,
             "settings": {},
