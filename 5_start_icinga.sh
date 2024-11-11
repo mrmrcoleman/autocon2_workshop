@@ -23,7 +23,8 @@ echo "--- Writing configuration ---"
 echo
 
 echo "MYSQL_ROOT_PASSWORD=12345678" > secrets_sql.env
-echo "NETBOX_URL=http://${MY_EXTERNAL_IP}:${NETBOX_PORT}/api" >> secrets_sql.env
+echo "DEFAULT_MYSQL_PASSW=12345678" >> secrets_sql.env
+echo "NETBOX_URL=http://${MY_EXTERNAL_IP}:${NETBOX_PORT}" >> secrets_sql.env
 echo "NETBOX_APIKEY=1234567890" >> secrets_sql.env
 
 # Remove SSL/TLS
