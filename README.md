@@ -155,7 +155,7 @@ If you now click `Sync` the Slurp'it plugin will pull the devices it has discove
 Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen.
 
 - Under `Management Interface*` enter `mgmt0`
-- Under `Site*` select the `Denver`site that was pre-populated in NetBox
+- Under `Site*` select the `Denver` site that was pre-populated in NetBox
 - Click `Apply`
 
 <img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />

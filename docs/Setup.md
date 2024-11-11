@@ -15,7 +15,8 @@
   - Set `Authorization type` to `Netbox`
   - Set `Status` to `Enabled`
   - Make sure that `Devices`, `Sites`, `IPAM`, and `Interfaces` are set to `sync`
-  - Click on Sync???? ******
+  - Test the connection to NetBox by clicking on `Test API`
+  - Click `Save`
 
 - Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
   - Under `Data synchronization` choose BOTH and click `Save`
