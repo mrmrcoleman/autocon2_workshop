@@ -7,27 +7,38 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 requests.packages.urllib3.disable_warnings()
 
 # -------------------------
-# Step 0: Retrieve IP Address and Subnet from Environment Variables
+# Step 0: Retrieve IP Address, Ports, and Subnet from Environment Variables
 # -------------------------
 
 # Retrieve the IP address from the environment variable
 my_external_ip = os.getenv('MY_EXTERNAL_IP')
 
+# Retrieve the ports from the environment variables
+slurpit_port = os.getenv('SLURPIT_PORT')
+netbox_port = os.getenv('NETBOX_PORT')
+
 # Retrieve the subnet for the workshop
 workshop_subnet = os.getenv('WORKSHOP_SUBNET')
 
-# Check if the environment variable is set
+# Check if the environment variables are set
 if not my_external_ip:
     print('Error: The environment variable MY_EXTERNAL_IP is not set.')
     exit(1)
 
-# Check if the environment variable is set
+if not slurpit_port:
+    print('Error: The environment variable SLURPIT_PORT is not set.')
+    exit(1)
+
+if not netbox_port:
+    print('Error: The environment variable NETBOX_PORT is not set.')
+    exit(1)
+
 if not workshop_subnet:
     print('Error: The environment variable WORKSHOP_SUBNET is not set.')
     exit(1)
 
-# Base URL for the server
-base_url = f'http://{my_external_ip}:8000'
+# Base URL for the Slurpit server
+base_url = f'http://{my_external_ip}:{slurpit_port}'
 
 # Create a session
 session = requests.Session()
@@ -100,7 +111,7 @@ else:
     exit(1)
 
 # -------------------------
-# Step 2: Make Authenticated Request
+# Step 2: Make Authenticated Request to Add Scanner
 # -------------------------
 
 # AddScanner URL and headers
@@ -148,3 +159,55 @@ if add_scanner_response.status_code == 200:
 else:
     print('addScanner request failed with status code:', add_scanner_response.status_code)
     print('Response:', add_scanner_response.text)
+
+# -------------------------
+# Step 3: Configure NetBox Plugin in Slurpit
+# -------------------------
+
+# Plugin configuration URL and headers
+plugin_config_url = f'{base_url}/Settings/update_plugin'
+plugin_config_headers = {
+    'Accept': '*/*',
+    'Accept-Language': 'en-US,en;q=0.9,nl;q=0.8,fr;q=0.7',
+    'Connection': 'keep-alive',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'DNT': '1',
+    'Origin': base_url,
+    'Referer': f'{base_url}/admin/settings',
+    'User-Agent': 'Mozilla/5.0 (compatible; Python script)',
+    'X-Requested-With': 'XMLHttpRequest',
+}
+
+# Plugin configuration data
+plugin_config_data = {
+    'plugin_url': f'http://{my_external_ip}:{netbox_port}',  # Use NETBOX_PORT here
+    'plugin_key': '1234567890',
+    'plugin_authorization': 'NetBox',
+    'plugin_status': '1',
+    'plugin_sync_netbox_devices': '1',
+    'plugin_sync_netbox_sites': '1',
+    'plugin_sync_netbox_ipam': '1',
+    'plugin_sync_netbox_interfaces': '1',
+    'plugin_sync_netbox_prefix': '0',
+    'plugin_sync_nautobot_devices': '1',
+    'plugin_sync_nautobot_sites': '1',
+    'plugin_sync_nautobot_ipam': '0',
+    'plugin_sync_nautobot_interfaces': '0',
+    'plugin_sync_nautobot_prefix': '0',
+}
+
+# Perform the plugin configuration request
+plugin_config_response = session.post(
+    plugin_config_url,
+    headers=plugin_config_headers,
+    data=plugin_config_data,
+    verify=False
+)
+
+# Check if the request was successful
+if plugin_config_response.status_code == 200:
+    print('Plugin configuration successful.')
+    print('Response:', plugin_config_response.text)
+else:
+    print('Plugin configuration failed with status code:', plugin_config_response.status_code)
+    print('Response:', plugin_config_response.text)

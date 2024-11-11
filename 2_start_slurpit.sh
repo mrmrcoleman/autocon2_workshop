@@ -5,7 +5,7 @@ set -euo pipefail
 pushd slurpit
 
 # Check if all required environment variables are set
-REQUIRED_VARS=("MY_EXTERNAL_IP" "SLURPIT_PORT")
+REQUIRED_VARS=("MY_EXTERNAL_IP" "SLURPIT_PORT" "WORKSHOP_SUBNET" "NETBOX_PORT")
 
 for var in "${REQUIRED_VARS[@]}"; do
   if [ -z "${!var:-}" ]; then

@@ -77,45 +77,9 @@ echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
 > **username** admin@admin.com  
 > **password** 12345678
 
-When you initially log in you will be presented with the Slurpit setup wizard.
-
-<img src="images/slurpit/wizard_initial.png" alt="Slurpit Wizard Initial" title="Slurpit Wizard Initial" width="750" />
-
-You can click through most of the steps, but you must populate the Vault step with the SSH credentials for our network devices.
-
-> [!TIP]
-> 
-> **username** admin
-> **password** NokiaSrl1!
-
-<img src="images/slurpit/wizard_vault.png" alt="Slurpit Wizard Vault" title="Slurpit Wizard Vault" width="750" />
-
-Click through the the final step, and then hit "Let's Go :rocket:"
-
-<img src="images/slurpit/wizard_letsgo.png" alt="Slurpit Wizard Let's Go :rocket:" title="Slurpit Wizard Let's Go :rocket:" width="750" />
-
-Now we need to discovery our devices in the network. Start by clicking on `Devices`, then `Device Finder`, and then under the `Finder` tab click on `+ Add`.
-
-INSERT SCREENSHOT
-
-Now configure your Device Finder with the values shown below.
-
->| Field | Value |
->|----------|----------|
->| Name | workshop-finder |
->| SNMP Version | snmpv3 |
->| Username | snmpuser |
->| Authtype | sha |
->| Authkey | snmppassword |
->| Privtype | aes128 |
->| Privkey | snmpprivpassword |
->| Target | 172.24.0.0/24 |
-
-Then click on `Save`, and then `Start`.
-
 ___
 
-Navigate back to `Devices` and you'll see our lab devices have been discovered in the network. Now we're ready to start our device discovery. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
+Navigate to `Devices` and you'll see our lab devices. Now we're ready to start our device discovery. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
@@ -128,6 +92,18 @@ Feel free to explore the data Slurp'it has discovered about our devices. For exa
 ___
 
 **Importing the discovered network from Slurp'it into NetBox**
+
+### Connect Slurpit to NetBox
+
+- Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
+  - Under `Data synchronization` choose BOTH and click `Save`
+  - Under `Slurp'it server` click `Edit`
+    - Enter your Slurp'it URL
+    - Enter the Slurp'it API key you made
+    - Click `Save`
+  - Go to `Data tabs` and under `Planning` click `Sync`
+    - You'll now see a populated list of the all the data Slurp'it can reconcile into NetBox
+    - Select `All` and then click `Save`
 
 Now that Slurp'it has discovered our network, we need to import it into NetBox. The Slurp'it team have built a plugin for NetBox to help users intuitively reconcile the data in Slurp'it into NetBox, so let's dive in.
 
