@@ -89,9 +89,8 @@ Pulling discovered network data into Netbox happens in two stages in Slurp'it. T
 
 > [!TIP]
 > 
-> Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait navigate to the following URLs in your browser  
-> http://<INSERTYOURIP>:8000/run/plugin/sync  
-> http://<INSERTYOURIP>:8000/run/plugin/sync_queue  
+> Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait run this script
+> `./slurpit/sync_to_netbox.sh`  
 
 In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
 
