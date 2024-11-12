@@ -44,7 +44,7 @@ ___
   - Under `Data synchronization` choose BOTH and click `Save`
   - Under `Slurp'it server` click `Edit`
     - Enter your Slurp'it URL
-    - Enter the Slurp'it API key you made
+    - Enter the Slurp'it API token: `1234567890abcdefghijklmnopqrstuvwxqz`
     - Click `Save`
   - Go to `Data tabs` and under `Planning` click `Sync`
     - You'll now see a populated list of the all the data Slurp'it can reconcile into NetBox
