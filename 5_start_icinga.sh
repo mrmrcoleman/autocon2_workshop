@@ -15,7 +15,7 @@ echo
 echo "--- Cloning Icinga2 ---"
 echo
 
-git clone -b master https://github.com/mrmrcoleman/icinga2-docker-stack.git
+git clone -b master https://github.com/davekempe/icinga2-docker-stack.git
 pushd icinga2-docker-stack
 
 echo
@@ -43,9 +43,9 @@ echo
 
 docker compose up -d
 
-docker cp workshop_setup/icinga/. icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
+docker cp ../workshop_setup/icinga/. icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
 
-for json in workshop_setup/icinga/*.json; do echo $json;docker cp $json icinga2-docker-stack-icinga2-1:/opt/baskets/; done
+for json in ../workshop_setup/icinga/*.json; do echo $json;docker cp $json icinga2-docker-stack-icinga2-1:/opt/baskets/; done
 
 echo
 echo "--- Waiting for Icinga2 to start ---"
@@ -74,7 +74,7 @@ done
 
 popd
 
-python3 workshop_setup/icinga/director_api.py -s http://localhost:8002 -u icingaadmin -p icinga
+docker cp  workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
 
 echo "Icinga is available at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 echo "username: icingaadmin"
