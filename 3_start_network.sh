@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-NETWORK_DIR="network/$1"
+NETWORK_DIR="$1"
 
 # Check if the specified directory exists
 if [ ! -d "$NETWORK_DIR" ]; then
