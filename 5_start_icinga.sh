@@ -43,6 +43,10 @@ echo
 
 docker compose up -d
 
+docker cp workshop_setup/icinga/. icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
+
+for json in workshop_setup/icinga/*.json; do echo $json;docker cp $json icinga2-docker-stack-icinga2-1:/opt/baskets/; done
+
 echo
 echo "--- Waiting for Icinga2 to start ---"
 echo
@@ -69,6 +73,9 @@ while ! curl --output /dev/null --silent --head --fail "$URL"; do
 done
 
 popd
+
+python3 workshop_setup/icinga/director_api.py -s http://localhost:8002 -u icingaadmin -p icinga
+
 echo "Icinga is available at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 echo "username: icingaadmin"
 echo "password: icinga"

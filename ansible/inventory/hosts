@@ -1,0 +1,2 @@
+[clab]
+clab-ansible-srl ansible_connection=ansible.netcommon.httpapi ansible_user=admin ansible_password=NokiaSrl1! ansible_network_os=nokia.srlinux.srlinux ansible_httpapi_ciphers=ECDHE-RSA-AES256-SHA ansible_host=172.20.20.3 ansible_httpapi_validate_certs=false

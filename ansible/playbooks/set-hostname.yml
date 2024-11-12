@@ -1,0 +1,25 @@
+---
+- name: Set hostname on Nokia SR Linux devices
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Set the hostname
+      nokia.srlinux.config:
+        update:
+          - path: /system/name
+            value:
+              host-name: "{{ hostname }}"
+      register: set_response
+
+    - name: Verify the hostname change
+      nokia.srlinux.get:
+        paths:
+          - path: /system/name/host-name
+            datastore: state
+            yang_models: srl
+      register: verify_response
+
+    - name: Display the new hostname
+      debug:
+        msg: "Hostname of {{ inventory_hostname }} is now {{ verify_response.result['host-name'] }}"
+
