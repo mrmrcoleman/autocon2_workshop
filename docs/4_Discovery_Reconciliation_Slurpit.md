@@ -9,7 +9,7 @@ Tools that are used to import operational state from our network into Netbox are
 
 [Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can do network and device discovery across a large selection of network devices.
 
-Let's slurp our network devices into Slurp'it using network discovery. First we need to get the IP and port for Slurp'it.
+Let's slurp our network devices into Slurp'it using network discovery.
 
 ```
 echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
@@ -24,7 +24,9 @@ echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
 
 ___
 
-Navigate to `Devices` and you'll see our lab devices. Now we're ready to start our device discovery. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
+Navigate to `Adminstrator` -> `Device Finder` and you'll see our device finder which has already been configured for you. Click on `Start` in the top right, and Slurpit will discover the devices in our network.
+
+Now navigate to `Devices` and you'll see our lab devices. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 

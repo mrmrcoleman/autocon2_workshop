@@ -17,6 +17,8 @@ URL_SYNC_QUEUE="http://${MY_EXTERNAL_IP}:${SLURPIT_PORT}/run/plugin/sync_queue"
 echo "Navigating to $URL_SYNC..."
 curl -fsS "$URL_SYNC"
 
+sleep 5
+
 echo "Navigating to $URL_SYNC_QUEUE..."
 curl -fsS "$URL_SYNC_QUEUE"
 
