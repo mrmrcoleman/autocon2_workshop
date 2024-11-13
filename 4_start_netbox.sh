@@ -91,11 +91,25 @@ echo "--- Configuring NetBox ---"
 echo
 
 pushd workshop_setup
+
+# Create virtualenv
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
+# Preconfigure NetBox objects
 python netbox/netbox_importer.py --url "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}" --token 1234567890 --file netbox/icinga_infrastructure.json
+
+# Preconfigure Slurpit plugin
+python netbox/configure_slurpit.py --slurpittoken 1234567890abcdefghijklmnopqrstuvwxqz --netboxuser admin --netboxpass admin
+
+# Remove virtualenv
+deactivate
+rm -fr venv/
+
 popd
+
+# End
 
 echo "you can now access netbox here: http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
 echo "username: admin"
