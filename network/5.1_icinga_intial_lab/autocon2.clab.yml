@@ -8,10 +8,12 @@ topology:
     srl1:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.7.2
+      mgmt-ipv4: 172.24.0.100
       startup-config: srl1.cfg
     srl2:
       kind: nokia_srlinux
       image: ghcr.io/nokia/srlinux:24.7.2
+      mgmt-ipv4: 172.24.0.101
       startup-config: srl2.cfg
 
   links:
