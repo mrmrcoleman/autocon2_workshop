@@ -48,7 +48,7 @@ session = requests.Session()
 # -------------------------
 
 login_url = f'{base_url}/login'
-timeout_seconds = 30
+timeout_seconds = 60
 start_time = time.time()
 
 while True:

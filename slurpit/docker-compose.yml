@@ -57,7 +57,7 @@ services:
     restart: always
 
   slurpit-portal:
-    image: slurpit/portal:1.1.37
+    image: slurpit/portal:1.1.47
     container_name: slurpit-portal
     networks:
       - autocon-workshop
