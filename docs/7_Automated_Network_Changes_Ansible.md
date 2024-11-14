@@ -7,6 +7,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ansible-galaxy install -r roles/requirements.yml
 ansible-galaxy collection install git+https://github.com/nokia/srlinux-ansible-collection.git
+popd
 ```
 
 !! Need to add a step here to `sed` the correct IP into `/root/autocon2_workshop/ansible/inventory/netbox.yml`
