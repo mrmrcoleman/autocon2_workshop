@@ -1,6 +1,6 @@
 ---
 plugin: netbox.netbox.nb_inventory
-api_endpoint: http://167.99.87.177:8001
+api_endpoint: http://REPLACETHIS:8001
 token: 1234567890
 
 max_uri_length: 1000

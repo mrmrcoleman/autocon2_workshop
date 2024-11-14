@@ -1,4 +1,15 @@
+## Installation
 
+```
+pushd ansible
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+ansible-galaxy install -r roles/requirements.yml
+ansible-galaxy collection install git+https://github.com/nokia/srlinux-ansible-collection.git
+```
+
+!! Need to add a step here to `sed` the correct IP into `/root/autocon2_workshop/ansible/inventory/netbox.yml`
 
 ## Usage
 
@@ -6,13 +17,6 @@
 - Gets the NetBox inventory and caches it: `ansible-inventory --list`
 - Set the hostname: ansible-playbook playbooks/set-hostname.yml
 - Set the ntp servers (requires that you populate the custom field on the site): ansible-playbook playbooks/set-ntp.yml
-
-## Installation stuff
-
-```
-ansible-galaxy collection list | grep srlinux
-ansible-galaxy collection install git+https://github.com/nokia/srlinux-ansible-collection.git
-```
 
 ## Other
 

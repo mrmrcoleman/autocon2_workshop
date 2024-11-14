@@ -36,14 +36,13 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Start docker
+sudo systemctl start docker
 
 # Install ContainerLab
 echo "--- Installing ContainerLab ---"
 
 curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
-
-# Start docker
-sudo systemctl start docker
 
 # Get the current username using whoami
 current_user=$(whoami)

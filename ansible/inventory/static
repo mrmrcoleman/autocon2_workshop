@@ -1,15 +1,12 @@
 all:
   hosts:
     clab-autocon2-srl1:
-      #ansible_host: 172.20.20.3
       ansible_user: admin
       ansible_password: NokiaSrl1!
       ansible_network_os: nokia.srlinux.srlinux
       ansible_connection: ansible.netcommon.httpapi
     clab-autocon2-srl2:
-      #ansible_host: 172.20.20.2
       ansible_user: admin
-      ansible_password: admin
       ansible_password: NokiaSrl1!
       ansible_network_os: nokia.srlinux.srlinux
       ansible_connection: ansible.netcommon.httpapi
