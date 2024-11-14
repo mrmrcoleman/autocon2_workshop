@@ -46,6 +46,14 @@
             "weight": "100",
             "filter_logic": "loose",
             "search_weight": "100",
+            "object_types": ["dcim.site"],
+            "type": "text",
+            "name": "ntp_servers"
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
             "object_types": ["dcim.platform"],
             "type": "text",
             "name": "platform_type"
