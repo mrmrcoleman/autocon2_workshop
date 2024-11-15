@@ -95,9 +95,7 @@ In Slurpit navigate to `Devices` -> `Overview` and you'll see our lab devices. F
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
-Slurp'it will take a short while to discover information about our devices. Then you can view the discovered information by clicking on the new tab icon on each device, and navigating to the `Collected data` tab.
-
-Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
+Slurp'it will take a short while to discover information about our devices. Then you can view the discovered information by clicking on the hostname on each device, and navigating to the `Collected data` tab. Feel free to explore the data Slurp'it has discovered about our devices. For example, under the `Interfaces` tab we can see the following:
 
 <img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
 
