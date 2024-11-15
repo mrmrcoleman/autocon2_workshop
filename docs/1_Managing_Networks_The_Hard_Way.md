@@ -112,15 +112,7 @@ Now exit the device, and return to the working directory for the next steps.
 > 
 > Use `Ctrl+D`to exit the Nokia SR Linux CLI
 
-```
-A:clab-autocon2-srl1#  (Ctrl+D)
-EOF encountered
-Connection to clab-autocon2-srl1 closed.
-popd
-~/autocon2_workshop
-```
-
-Great, the simple network is up and running.
+Run `popd` to return to the correct directory. Great, the simple network is up and running!
 
 ## Updating the network, the hard way!
 
@@ -140,6 +132,11 @@ Let's try one out in our network. Our imaginary company is extremely constrained
 > `./3_start_network.sh network/4.1_discovery_reconciliation`
 
 First on `clab-autocon2-srl1`
+
+> [!TIP]
+> 
+> **username** admin
+> **password** NokiaSrl1!  
 
 ```
 --{ running }--[  ]--
