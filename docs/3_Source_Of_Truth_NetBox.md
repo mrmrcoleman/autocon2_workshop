@@ -11,11 +11,6 @@ So we can focus on intent-based networking, the NetBox instance is already pre-c
 
 > [!TIP]
 > **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
-> **username** admin@admin.com  
-> **password** 12345678
-
-> [!TIP]
-> 
 > **username** admin
 > **password** admin
 
