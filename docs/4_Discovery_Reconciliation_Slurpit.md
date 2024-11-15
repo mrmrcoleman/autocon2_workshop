@@ -184,4 +184,8 @@ Select the `Interfaces` tab, now you can see that Slurpit has found the operatio
 
 <img src="images/slurpit/interface_drift.png" alt="Slurpit Interface Drift" title="Slurpit Interface Drift" width="750" />
 
- It's important to remember that when we discover operational drift, we don't always have to import it into NetBox. In this case we decide that the source of truth is correct and the network is wrong. `ethernet-1/1` on `clab-autocon2-srl1` _should_ be enabled, so there's an issue in the network and it should be fix there. In this case, select the item and hit `Decline`
+ It's important to remember that when we discover operational drift, we don't always have to import it into NetBox.
+ 
+ In this case we decide that the source of truth is correct and the network is wrong. `ethernet-1/1` on `clab-autocon2-srl1` _should_ be enabled, so there's an issue in the network and it should be fixed there.
+ 
+ In this case, select the item and hit `Decline`
