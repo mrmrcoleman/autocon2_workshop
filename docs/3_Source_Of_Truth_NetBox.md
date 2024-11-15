@@ -9,11 +9,10 @@ Populating NetBox typically happens in two stages:
 
 So we can focus on intent-based networking, the NetBox instance is already pre-configured with our organizational specifics. Let's take a look.
 
-```
-echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
-(Example output, yours will differ)
-147.75.34.179:8001
-```
+> [!TIP]
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
+> **username** admin@admin.com  
+> **password** 12345678
 
 > [!TIP]
 > 
