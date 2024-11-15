@@ -19,11 +19,9 @@ Now click on `+ Add devices` and then click on `Import from NetBox`
 
 Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
 
-```
-echo "http://${MY_EXTERNAL_IP}:${NETBOX_PORT}"
-(Example output, yours will differ)
-http://139.178.74.171:8001
-```
+> [!TIP]
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`
+> **NetBox API Key**: `1234567890`
 
 <img src="images/netpicker/netbox_api_details.png" alt="NetBox API Details" title="NetBox API Details" width="1000" />
 
