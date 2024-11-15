@@ -39,6 +39,12 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # Start docker
 sudo systemctl start docker
 
+echo
+echo "--- Creating Docker Network ---"
+echo
+
+docker network create --driver=bridge --subnet=${WORKSHOP_SUBNET} autocon-workshop
+
 # Install ContainerLab
 echo "--- Installing ContainerLab ---"
 
@@ -55,8 +61,3 @@ else
 	sudo adduser $current_user docker
 fi
 
-echo
-echo "--- Creating Docker Network ---"
-echo
-
-docker network create --driver=bridge --subnet=${WORKSHOP_SUBNET} autocon-workshop
