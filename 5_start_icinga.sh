@@ -75,6 +75,7 @@ done
 popd
 
 docker cp  workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
+docker cp  workshop_setup/icinga/check_nokia_ping.sh icinga2-docker-stack-icinga2-1:/usr/lib/nagios/plugins/
 
 echo "Icinga is available at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
 echo "username: icingaadmin"

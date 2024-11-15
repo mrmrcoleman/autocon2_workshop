@@ -40,7 +40,8 @@
             "type": "select",
             "name": "icinga_import_source",
             "group_name": "Monitoring",
-            "choice_set": { "name": "icinga_import_source_choices" }
+            "choice_set": { "name": "icinga_import_source_choices" },
+            "default": "default"
         },
         {
             "weight": "100",
