@@ -248,6 +248,20 @@ class NetboxIPAddresses(Netbox):
         self.findBy(self.find_key)
         self.createOrUpdate()
 
+class NetboxServiceTemplates(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.ipam.service_templates
+        self.required_fields = [ 
+            "name",
+            "protocol",
+            "ports"
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 def read_json_file(file_path):
     # Read the JSON file from disk
     with open(file_path, 'r') as json_file:
@@ -297,3 +311,6 @@ if __name__ == "__main__":
         if k == 'ipam.ip-addresses':
             for payload in v:
                 obj = NetboxIPAddresses(args.url, args.token, payload)
+        if k == 'ipam.service-templates':
+            for payload in v:
+                obj = NetboxServiceTemplates(args.url, args.token, payload)

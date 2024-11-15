@@ -92,6 +92,15 @@
             "type": "text",
             "group_name": "Pushover",
             "name": "pushover_token"
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
+            "object_types": ["ipam.service","ipam.servicetemplate"],
+            "type": "text",
+            "group_name": "Monitoring",
+            "name": "icinga_list"
         }
     ],
     "dcim.sites": [{
@@ -116,5 +125,10 @@
         "custom_fields": {
             "icinga_import_source": "default"
         }
+    }],
+    "ipam.service-templates": [{
+        "name": "SSL",
+        "protocol": "tcp",
+        "ports": ["443"]
     }]
 }
