@@ -152,6 +152,10 @@ interface ethernet-1/1 subinterface 0 ipv4 admin-state disable
 commit now
 ```
 
+> [!TIP]
+> 
+> Use `Ctrl+D`to exit the Nokia SR Linux CLI
+
 ### Rediscovering device data in Slurpit
 
 > [!TIP]
