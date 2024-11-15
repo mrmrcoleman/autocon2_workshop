@@ -57,7 +57,7 @@ http://139.178.74.171:8000
 ## Start the ContainerLab network
 
 ```
-./3_start_network.sh 1_the_hard_way
+./3_start_network.sh network/1_the_hard_way
 ```
 
 ## Start NetBox with the Slurpit plugin
@@ -120,7 +120,3 @@ http://139.178.74.171:8003
 > 
 > **username** admin@admin.com  
 > **password** 12345678
-
-# Initial Setup
-
-See setup instructions here: [Link](docs/Setup.md)

@@ -15,10 +15,6 @@ This workshop is intended to teach you the high-level concepts around intent-bas
 6. [Configuration Assurance: Netpicker](docs/6_Configuration_Assurance_Netpicker.md)
 7. [Automated Network Changes: Ansible](docs/7_Automated_Network_Changes_Ansible.md)
 
-# Initial Setup
-
-See setup instructions here: [Link](docs/Setup.md)
-
 # Workshop
 
 ## Moving towards Intent Based Networking
