@@ -11,11 +11,6 @@ First log-in to Netpicker and click on `Add Device`
 > **username** admin@admin.com  
 > **password** 12345678
 
-> [!TIP]
-> 
-> **username** admin@admin.com  
-> **password** 12345678
-
 <img src="images/netpicker/homepage_add_device.png" alt="NetPicker Homepage Add Devices" title="NetPicker Homepage Add Devices" width="1000" />
 
 Now click on `+ Add devices` and then click on `Import from NetBox`
