@@ -78,6 +78,16 @@ def main():
         #     "vars": {}
         # },
         {
+            "object_name": "SSL - ",
+            "object_type": "apply",
+            "imports": ["srvt ssl certificate"],
+            "assign_filter": "host.vars.ssl=true",
+            "apply_for": "host.vars.ssl",
+            "vars": {
+                "ssl_cert_hostname": "$config$"
+            }
+        },
+        {
             "object_name": "Icinga2",
             "object_type": "apply",
             "imports": ["srvt icinga service"],

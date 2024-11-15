@@ -830,6 +830,15 @@
             "format": null,
             "settings": {},
             "category": null
+        },
+        "600": {
+            "varname": "ssl",
+            "caption": "ssl",
+            "description": null,
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeArray",
+            "format": null,
+            "settings": {},
+            "category": null
         }
     }
 }
