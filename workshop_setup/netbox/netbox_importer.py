@@ -291,3 +291,9 @@ if __name__ == "__main__":
         if k == 'virtualization.virtual-machines':
             for payload in v:
                 obj = NetboxVirtualMachines(args.url, args.token, payload)
+        if k == 'dcim.interfaces':
+            for payload in v:
+                obj = NetboxDeviceInterface(args.url, args.token, payload)
+        if k == 'ipam.ip-addresses':
+            for payload in v:
+                obj = NetboxIPAddresses(args.url, args.token, payload)
