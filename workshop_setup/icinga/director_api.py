@@ -70,6 +70,34 @@ def main():
 
     # Example service apply rule data (this can be customized as needed)
     service_apply_rules = [
+        # {
+        #     "object_name": "HTTP",
+        #     "object_type": "apply",
+        #     "imports": ["srvt http"],
+        #     "assign_filter": "host.vars.model=%227220 IXR-D2L%22",
+        #     "vars": {}
+        # },
+        {
+            "object_name": "Icinga2",
+            "object_type": "apply",
+            "imports": ["srvt icinga service"],
+            "assign_filter": "%22icinga-endpoint%22=host.vars.tags",
+            "vars": {}
+        },
+        {
+            "object_name": "Icinga2 Cluster",
+            "object_type": "apply",
+            "imports": ["srvt icinga cluster"],
+            "assign_filter": "%22icinga-endpoint%22=host.vars.tags",
+            "vars": {}
+        },
+        {
+            "object_name": "Load",
+            "object_type": "apply",
+            "imports": ["srvt load linux"],
+            "assign_filter": "%22icinga-endpoint%22=host.vars.tags",
+            "vars": {}
+        },
         {
             "object_name": "Ping",
             "object_type": "apply",
