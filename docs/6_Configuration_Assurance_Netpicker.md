@@ -7,7 +7,7 @@ To get started we need to tell NetPicker about our devices. Now that we have Net
 First log-in to Netpicker and click on `Add Device`
 
 > [!TIP]
-> **Netpicker URL**: `./0_set_envvars.sh | grep -i netpicker`  
+> **Netpicker URL**: `./0_set_envvars.sh | grep -i netpicker`   
 > **username** admin@admin.com  
 > **password** 12345678
 
