@@ -156,6 +156,11 @@ All changes have been committed. Leaving candidate mode.
 
 Use `Ctrl+D` to exit `clab-autocon2-srl1`. Now on `clab-autocon2-srl2`
 
+> [!TIP]
+> 
+> **username** admin
+> **password** NokiaSrl1!  
+
 ```
 --{ running }--[  ]--
 A:clab-autocon2-srl2# enter candidate
