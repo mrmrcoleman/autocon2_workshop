@@ -25,7 +25,7 @@ Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
 
 <img src="images/netpicker/netbox_api_details.png" alt="NetBox API Details" title="NetBox API Details" width="1000" />
 
-Then on the next screen choose `IP address / FQDN field (required)` choose `name (-)`and under `Vault` select `autocon_workshop`. Then click `Next`
+Then on the next screen under `Vault` select `autocon_workshop`. Then click `Next`
 
 <img src="images/netpicker/device_mapping.png" alt="Netpicker Device Mapping" title="Netpicker Device Mapping" width="1000" />
 
