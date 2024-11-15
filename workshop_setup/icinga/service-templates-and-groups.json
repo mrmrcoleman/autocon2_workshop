@@ -1,4 +1,26 @@
 {
+    "Command": {
+        "cmd_check_nokia_ping": {
+            "arguments": {
+                "--target": {
+                    "description": "Ping Host",
+                    "value": "$nokia_ping_target$",
+                    "order": "4"
+                },
+                "-H": {
+                    "description": "SSH Host",
+                    "value": "$nokia_ping_host$",
+                    "order": "2"
+                }
+            },
+            "command": "PluginDir + /check_nokia_ping.sh",
+            "fields": [],
+            "methods_execute": "PluginCheck",
+            "object_name": "cmd_check_nokia_ping",
+            "object_type": "object",
+            "uuid": "ef9a222d-c79a-434e-87fc-91ca0388509a"
+        }
+    },
     "ServiceGroup": {
         "srvg_check_ping": {
             "assign_filter": "service.check_command=%22ping%22|service.check_command=%22ping4%22|service.check_command=%22ping6%22|service.check_command=%22ping-windows%22|service.check_command=%22ping4-windows%22|service.check_command=%22ping6-windows%22|service.check_command=%22fping4%22|service.check_command=%22fping6%22",
@@ -51,6 +73,32 @@
             ],
             "object_name": "srvt ping",
             "object_type": "template"
+        },
+        "srvt nokia ping": {
+            "check_command": "cmd_check_nokia_ping",
+            "fields": [
+                {
+                    "datafield_id": 127,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 128,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_ping"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt nokia ping",
+            "object_type": "template",
+            "vars": {
+                "nokia_ping_host": "$host.address$"
+            }
         },
         "srvt tcp": {
             "check_command": "tcp",
@@ -634,6 +682,24 @@
             "varname": "load_wload5",
             "caption": "load_wload5",
             "description": "Exit with WARNING status if load average exceeds WLOADn",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "127": {
+            "varname": "nokia_ping_host",
+            "caption": "nokia_ping_host",
+            "description": "SSH Host",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "128": {
+            "varname": "nokia_ping_target",
+            "caption": "nokia_ping_target",
+            "description": "Ping Host",
             "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
             "format": null,
             "settings": {},

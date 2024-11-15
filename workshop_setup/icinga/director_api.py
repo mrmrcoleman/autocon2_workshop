@@ -33,7 +33,7 @@ def create_service_apply_rule(server, username, password, rule):
         existing_rules = existing_rules_response.json().get('objects', [])
         for existing_rule in existing_rules:
             if existing_rule.get('object_name') == rule['object_name']:
-                print(f"Service apply rule '{rule['object_name']}' already exists. {rule.get('assign_filter', 'no filter')}")
+                print(f"Service apply rule '{rule['object_name']}' already exists. Existing filter is {existing_rule.get('assign_filter', 'no filter')}")
                 requests.delete(
                     f"{service_url}?name={rule['object_name']}",
                     auth=(username, password),
@@ -74,8 +74,26 @@ def main():
             "object_name": "Ping",
             "object_type": "apply",
             "imports": ["srvt ping linux"],
-            "assign_filter": "%22icinga-endpoint%22=host.vars.tags",
+            "assign_filter": "host.address=true",
             "vars": {}
+        },
+        {
+            "object_name": "Nokia Ping srl2",
+            "object_type": "apply",
+            "imports": ["srvt nokia ping"],
+            "assign_filter": "host.name=%22clab-autocon2-srl2%22",
+            "vars": {
+                "nokia_ping_target": "192.168.0.1"
+            }
+        },
+        {
+            "object_name": "Nokia Ping srl1",
+            "object_type": "apply",
+            "imports": ["srvt nokia ping"],
+            "assign_filter": "host.name=%22clab-autocon2-srl1%22",
+            "vars": {
+                "nokia_ping_target": "192.168.0.2"
+            }
         },
         {
             "object_name": "Icinga TCP",
