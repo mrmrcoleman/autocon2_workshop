@@ -6,11 +6,10 @@ To get started we need to tell NetPicker about our devices. Now that we have Net
 
 First log-in to Netpicker and click on `Add Device`
 
-```
-echo "http://${MY_EXTERNAL_IP}:${NETPICKER_PORT}"
-(Example output, yours will differ)
-http://139.178.74.171:8003
-```
+> [!TIP]
+> **Netpicker URL**: `./0_set_envvars.sh | grep -i netpicker`  
+> **username** admin@admin.com  
+> **password** 12345678
 
 > [!TIP]
 > 
