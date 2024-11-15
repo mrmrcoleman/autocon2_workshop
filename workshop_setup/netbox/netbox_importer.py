@@ -110,6 +110,20 @@ class NetboxDevice(Netbox):
         self.findBy(self.find_key)
         self.createOrUpdate()
 
+class NetboxDeviceInterface(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.dcim.interfaces
+        self.required_fields = [ 
+            "device",
+            "name",
+            "type"      # virtual
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
 
 class NetboxTag(Netbox):
     def __init__(self, url, token, payload, find_key = 'name') -> None:
@@ -216,6 +230,19 @@ class NetboxVirtualMachines(Netbox):
         self.required_fields = [ 
             "name",
             "status"
+        ]
+        self.find_key = find_key
+        self.findBy(self.find_key)
+        self.createOrUpdate()
+
+class NetboxIPAddresses(Netbox):
+    def __init__(self, url, token, payload, find_key = 'name') -> None:
+        # Initialize the Netbox superclass with URL and token
+        super().__init__(url, token, payload)
+        self.object_type = self.nb.ipam.ip_addresses
+        self.required_fields = [ 
+            "address",
+            "status"    
         ]
         self.find_key = find_key
         self.findBy(self.find_key)
