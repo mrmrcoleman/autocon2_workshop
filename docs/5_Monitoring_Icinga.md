@@ -1,3 +1,15 @@
+**Section 5 - Monitoring - Icinga**
+
+- Network - 5.1_monitoring
+
+- Introduce Icinga and explain the benefits of using NetBox to drive the monitoring, instead of updating it manually
+- Make devices active as this is when Icinga will “see” the devices
+- Introduce the checks: https://github.com/mrmrcoleman/autocon2_workshop/issues/50
+    - Then they will start getting pinged on the mgmt interfaces
+    - Then the ping check between ethernet-1/1 interfaces will start
+    - Enrich the checks with an SSH check and an snmp check
+- Update the ethernet-1/1 IP to something random in NetBox, Icinga will pick this up and it will break
+
 ### Icinga - Our monitoring tool
 
 At this point NetBox will already contain the discovered network. Reset the network to a known good state for this section.

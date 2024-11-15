@@ -1,3 +1,11 @@
+**Section 2 - Introducing Intent Based Network Automation**
+
+- Network - N/A
+
+- Show the reference architecture. Many automation tutorials focus on the right of the diagram, but as we’ll see if you only focus there you can find yourself in the situation of accelerating an already bad process
+- Explain the high level concepts - Understanding each of the tools isn’t difficult, understanding how they all fit together is. That’s what we’re doing today
+- Fire them up for some learning, we’re going to learn by doing
+
 **Proctor Summary**
 
 - Show that despite much investment, many are still struggling with network automation
