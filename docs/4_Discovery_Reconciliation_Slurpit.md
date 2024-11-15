@@ -91,7 +91,7 @@ With Slurpit, pulling discovered network data into Netbox happens in two stages.
 > **username** admin@admin.com  
 > **password** 12345678
 
-In Slurpit navigate to `Devices` -> `Overview` and you'll see our lab devices. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
+In Slurpit navigate to `Devices` -> `Overview` and you'll see our lab devices. For both devices click on the ellipsis menu (three dots) on the far right side of device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
