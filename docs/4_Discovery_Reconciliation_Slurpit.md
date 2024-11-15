@@ -178,7 +178,7 @@ In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
 
 <img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
 
-Select the `Interfaces` tab, now you can see that Slurpit has found the operational drift.
+Select the `Interfaces` tab, now you can see that Slurpit has found the operational drift. In this case you can see that in the `Enabled` column `ethernet-1/1` now has cross next to it.
 
 <img src="images/slurpit/interface_drift.png" alt="Slurpit Interface Drift" title="Slurpit Interface Drift" width="750" />
 
