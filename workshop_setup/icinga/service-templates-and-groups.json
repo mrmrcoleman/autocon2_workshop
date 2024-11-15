@@ -17,8 +17,36 @@
             "fields": [],
             "methods_execute": "PluginCheck",
             "object_name": "cmd_check_nokia_ping",
-            "object_type": "object",
-            "uuid": "ef9a222d-c79a-434e-87fc-91ca0388509a"
+            "object_type": "object"
+        },
+        "cmd_check_ssl_certificate": {
+            "arguments": {
+                "--critical": {
+                    "description": "Critical threshold for expiry in days",
+                    "value": "$ssl_cert_critical$",
+                    "order": "10"
+                },
+                "--hostname": {
+                    "description": "Hostname of the certificate to check",
+                    "value": "$ssl_cert_hostname$",
+                    "order": "5"
+                },
+                "--ip": {
+                    "description": "IP address of the host to send the request to",
+                    "value": "$ssl_cert_ip$",
+                    "order": "5"
+                },
+                "--warning": {
+                    "description": "Warning threshold for expiry in days",
+                    "value": "$ssl_cert_warning$",
+                    "order": "10"
+                }
+            },
+            "command": "PluginDir + /sol1/check_ssl_certificate.py",
+            "fields": [],
+            "methods_execute": "PluginCheck",
+            "object_name": "cmd_check_ssl_certificate",
+            "object_type": "object"
         }
     },
     "ServiceGroup": {
@@ -28,9 +56,15 @@
             "object_name": "srvg_check_ping",
             "object_type": "object"
         },
+        "srvg_check_ssl": {
+            "assign_filter": "",
+            "display_name": "Check: SSL",
+            "object_name": "srvg_check_ssl",
+            "object_type": "object"
+        },
         "srvg_check_tcp": {
             "assign_filter": "service.check_command=%22tcp%22",
-            "display_name": "Check: Ping",
+            "display_name": "Check: TCP",
             "object_name": "srvg_check_tcp",
             "object_type": "object"
         },
@@ -98,6 +132,44 @@
             "object_type": "template",
             "vars": {
                 "nokia_ping_host": "$host.address$"
+            }
+        },
+        "srvt ssl certificate": {
+            "check_command": "cmd_check_ssl_certificate",
+            "fields": [
+                {
+                    "datafield_id": 529,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 530,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 531,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 532,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_ssl"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt ssl certificate",
+            "object_type": "template",
+            "vars": {
+                "ssl_cert_critical": "7",
+                "ssl_cert_ip": "$host.address$",
+                "ssl_cert_warning": "14"
             }
         },
         "srvt tcp": {
@@ -718,6 +790,42 @@
             "varname": "tcp_port",
             "caption": "tcp_port",
             "description": "The TCP port number.",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "529": {
+            "varname": "ssl_cert_critical",
+            "caption": "ssl_cert_critical",
+            "description": "Critical threshold for expiry in days",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "530": {
+            "varname": "ssl_cert_hostname",
+            "caption": "ssl_cert_hostname",
+            "description": "Hostname of the certificate to check",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "531": {
+            "varname": "ssl_cert_ip",
+            "caption": "ssl_cert_ip",
+            "description": "IP address of the host to send the request to",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "532": {
+            "varname": "ssl_cert_warning",
+            "caption": "ssl_cert_warning",
+            "description": "Warning threshold for expiry in days",
             "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
             "format": null,
             "settings": {},
