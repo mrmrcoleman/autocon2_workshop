@@ -48,7 +48,6 @@ Warning: Permanently added 'clab-autocon2-srl1' (ED25519) to the list of known h
 (admin@clab-autocon2-srl1) Password:
 Using configuration file(s): ['/home/admin/.srlinuxrc']
 Welcome to the srlinux CLI.
-Type 'help' (and press <ENTER>) if you need any help using this.
 ```
 
 Let's inspect the interfaces:
