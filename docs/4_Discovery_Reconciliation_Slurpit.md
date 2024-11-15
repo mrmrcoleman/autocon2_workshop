@@ -1,6 +1,4 @@
-### Slurpit - Importing our devices from the network
-
-**Discovering our Network with Slurpit**
+# Discovery and Reconciliation - Slurpit
 
 Tools that are used to import operational state from our network into Netbox are typically called **Discovery** tools. Network Discovery typically falls into two categories:
 
@@ -10,23 +8,90 @@ Tools that are used to import operational state from our network into Netbox are
 [Slurp'it](https://slurpit.io/) is a fully featured discovery tool. As the website says "If there’s a `show` command we can slurp’it!" Slurp'it can do network and device discovery across a large selection of network devices.
 
 Let's slurp our network devices into Slurp'it using network discovery.
+___
 
-```
-echo ${MY_EXTERNAL_IP}:${SLURPIT_PORT}
-(Example output, yours will differ)
-147.75.34.179:8000
-```
+> [!TIP]
+> This section requires switching between Slurpit and NetBox, so double check which tool you should be using at the beginning of each section
 
 > [!TIP]
 > 
+> To make sure your network is in the right state for this section, you can use the following command:
+> `./3_start_network.sh network/4.1_discovery_reconciliation
+
+## Discovering our network
+
+### Use Slurpit to find our devices
+
+> [!TIP]
+> **Slurpit URL**: `./0_set_envvars.sh | grep -i slurpit`  
 > **username** admin@admin.com  
 > **password** 12345678
 
+Slurpit provides a `Device Finder` that will scan a subnet to find network devices. This has already been configured in the lab to scan `172.24.0.0/24` which is where our ContainerLab devies are running. Navigate to `Administrator` -> `Device Finder` and then click on `Start` in the top right.
+
+<img src="images/slurpit/device_finder.png" alt="Slurpit Add Device" title="Slurpit Device Finder" width="800" />
+
+Now navigate to `Devices` -> `Overview` and after a short wait you'll see our lab devices have been discovered.
+
+<img src="images/slurpit/device_overview.png" alt="Slurpit Device Overview" title="Slurpit Device Finder" width="800" />
+
+### Onboard our devices into NetBox
+
+Now that Slurp'it has discovered our network devices, we need to onboard those devices into NetBox. The Slurp'it team have built a plugin for NetBox to help with this, so let's dive in.
+
+> [!TIP]
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
+> **username** admin  
+> **password** admin
+
+First we need to configure the Slurpit plugin in NetBox. Most of this has been preconfigured, but there are a couple of manual steps we need to do ourselves.
+
+Navigate to the NetBox left-hand menu and click on `SLURP'IT` -> `Settings`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+Select `BOTH` from the `Data Synchronization` dropdown menu, and click `Save`
+
+<img src="images/slurpit/plugin_settings.png" alt="Slurpit Plugin Settings" title="Slurpit Plugin Settings" width="800" />
+
+Now click in the `Data tabs` tab, click `Sync`, then check `All` and then hit `Save`
+
+<img src="images/slurpit/plugin_planning_settings.png" alt="Slurpit Plugin Planning Settings" title="Slurpit Plugin Planning Settings" width="600" />
+
+---
+
+Now that the plugin is configured, navigate back to the NetBox left-hand menu and click on `SLURP'IT` -> `Onboard devices`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+If you now click `Sync` the Slurp'it plugin will pull the devices it has discovered in our network over to NetBox.
+
+<img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
+
+Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen.
+
+- Under `Management Interface*` enter `mgmt0`
+- Under `Site*` select the `Denver` site that was pre-populated in NetBox
+- Click `Apply` at the bottom of the form
+
+<img src="images/slurpit/device_onboarding_import.png" alt="Slurpit Device Onboarding Import" title="Slurpit Device Onboarding Import" width="1000" />
+
+Now the devices in our network have been successfully imported into NetBox! You can confirm this by returning to the NetBox homepage and navigating to `Devices` -> `Devices`
+
+<img src="images/slurpit/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
+
 ___
 
-Navigate to `Adminstrator` -> `Device Finder` and you'll see our device finder which has already been configured for you. Click on `Start` in the top right, and Slurpit will discover the devices in our network.
+### Use Slurpit to discover additional device data
 
-Now navigate to `Devices` and you'll see our lab devices. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
+With Slurpit, pulling discovered network data into Netbox happens in two stages. The first step, which we just did, is to onboard the devices. The second step is to `Reconcile` the additional data about the devices into NetBox, but first we need to discover that additional  device data using Slurpit.
+
+> [!TIP]
+> **Slurpit URL**: `./0_set_envvars.sh | grep -i slurpit`  
+> **username** admin@admin.com  
+> **password** 12345678
+
+In Slurpit navigate to `Devices` -> `Overview` and you'll see our lab devices. Click on the ellipsis menu (three dots) on the far right side of each device and click `Schedule Now`.
 
 <img src="images/slurpit/device_schedule.png" alt="Slurpit Add Device" title="Slurpit Add Device" width="400" />
 
@@ -36,63 +101,14 @@ Feel free to explore the data Slurp'it has discovered about our devices. For exa
 
 <img src="images/slurpit/discovered_interfaces.png" alt="Slurpit Discovered Interfaces" title="Slurpit Discovered Interfaces" width="500" />
 
-___
+### Reconcile discovered device data into NetBox
 
-**Importing the discovered network from Slurp'it into NetBox**
-
-### Connect Slurpit to NetBox
-
-- Log in to NetBox and navigate to `SLURP'IT` -> `Settings`
-  - Under `Data synchronization` choose BOTH and click `Save`
-  - Under `Slurp'it server` click `Edit`
-    - Enter your Slurp'it URL
-    - Enter the Slurp'it API token: `1234567890abcdefghijklmnopqrstuvwxqz`
-    - Click `Save`
-  - Go to `Data tabs` and under `Planning` click `Sync`
-    - You'll now see a populated list of the all the data Slurp'it can reconcile into NetBox
-    - Select `All` and then click `Save`
-
-Now that Slurp'it has discovered our network, we need to import it into NetBox. The Slurp'it team have built a plugin for NetBox to help users intuitively reconcile the data in Slurp'it into NetBox, so let's dive in.
-
-First navigate to your NetBox instance.
-
-```
-echo ${MY_EXTERNAL_IP}:${NETBOX_PORT}
-(Example output, yours will differ)
-147.75.34.179:8001
-```
+Finally, we need to reconcile the discovered addtional device data into NetBox. We do this using the Slurpit NetBox plugin.
 
 > [!TIP]
-> 
-> **username** admin
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
+> **username** admin  
 > **password** admin
-
-In the NetBox left-hand menu click on `SLURP'IT` -> `Onboard devices`
-
-<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
-
-If you now click `Sync` the Slurp'it plugin will pull the devices it has discovered about our network over to NetBox.
-
-<img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
-
-Now select both `clab-autocon2-srl1` and `clab-autocon2-srl2` click on `+ Onboard`. You'll see the Slurp'it device onboarding screen.
-
-- Under `Management Interface*` enter `mgmt0`
-- Under `Site*` select the `Denver` site that was pre-populated in NetBox
-- Click `Apply`
-
-<img src="images/slurpit/device_reconciliation.png" alt="Slurpit Device Reconciliation" title="Slurpit Device Reconciliation" width="1000" />
-
-Now the devices in our network have been successfully imported into NetBox! You can confirm this by returning to the NetBox homepage and navigating to `Devices` -> `Devices`
-
-<img src="images/netbox/imported_devices.png" alt="NetBox Imported Devices" title="NetBox Imported Devices" width="750" />
-
-Pulling discovered network data into Netbox happens in two stages in Slurp'it. The step, which we just did, is to onboard the devices. The second step is to `Reconcile` the additional data about the devices into NetBox.
-
-> [!TIP]
-> 
-> Slurp'it automatically pushes new data to be reconciled to NetBox every minute, but if you don't want to wait run this script
-> `./slurpit/sync_to_netbox.sh`  
 
 In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
 
@@ -109,3 +125,63 @@ Select the `Interfaces` tab, select all the interfaces and then click `Accept`
 Now the device interfaces have been added to the devices in NetBox. To confirm, navigate to `Devices` -> `Devices` -> `clab-autocon2-srl1` and select the `Interfaces` tab.
 
 <img src="images/netbox/imported_interfaces.png" alt="NetBox Interfaces" title="NetBox Interfaces" width="750" />
+
+## Testing reconiliation
+
+When we're getting started with intent-based network automation, the first important step is using discovery tools like Slurpit is populate our source of intent, NetBox. This gives us a baseline view of the network to compare against, but discovery tools have another purpose: detecting operational drift.
+
+With our baseline view of the network in place, let's see how Slurpit can help us to detect operational drift, or differences between the network and our source of truth.
+
+### Making a change in our network
+
+First need to introduce some operational drift, let's do that by making a change in the network by disabling `ethernet-1/1` on `clab-autocon2-srl1`.
+
+> [!TIP]
+> 
+> If you'd rather skip the manual steps, this command will prepare your network for the next practical section:  
+> `./3_start_network.sh network/4.2_discovery_reconciliation`
+
+> [!TIP]
+> 
+> **username** admin
+> **password** NokiaSrl1!  
+
+```
+ssh admin@clab-autocon2-srl1
+enter candidate
+interface ethernet-1/1 admin-state disable
+interface ethernet-1/1 subinterface 0 ipv4 admin-state disable
+commit now
+```
+
+### Rediscovering device data in Slurpit
+
+> [!TIP]
+> **Slurpit URL**: `./0_set_envvars.sh | grep -i slurpit`  
+> **username** admin@admin.com  
+> **password** 12345678
+
+This time instead of running the entire discovery, we can save ourselves a bit of time by just running discovery for interface details. Go to `Dashboard` the scroll down and under `Task Scheduler` click the `>` next to `Ìnterfaces`
+
+<img src="images/slurpit/run_interfaces_task.png" alt="NetBox Run Interfaces Task" title="NetBox Run Interfaces Task" width="500" />
+
+Slurpit will now discover that the interface status for `ethernet-1/1` on `admin@clab-autocon2-srl1` has changed, and send it NetBox.
+
+### Reconcile operational drift in NetBox
+
+Now in NetBox
+
+> [!TIP]
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
+> **username** admin  
+> **password** admin
+
+In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
+
+<img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
+
+Select the `Interfaces` tab, now you can see that Slurpit has found the operational drift.
+
+<img src="images/slurpit/interface_drift.png" alt="Slurpit Interface Drift" title="Slurpit Interface Drift" width="750" />
+
+ It's important to remember that when we discover operational drift, we don't always have to import it into NetBox. In this case we decide that the source of truth is correct and the network is wrong. `ethernet-1/1` on `clab-autocon2-srl1` _should_ be enabled, so there's an issue in the network and it should be fix there. In this case, select the item and hit `Decline`

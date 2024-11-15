@@ -137,8 +137,8 @@ Let's try one out in our network. Our imaginary company is extremely constrained
 
 > [!TIP]
 > 
-> If you'd rather skip the manual steps, this command will prepare your network for the next section:  
-> `./3_start_network.sh network/2_introducing_intent_based`
+> If you'd rather skip the manual steps, this command will prepare your network for the next practical section:  
+> `./3_start_network.sh network/4.1_discovery_reconciliation`
 
 First on `clab-autocon2-srl1`
 
