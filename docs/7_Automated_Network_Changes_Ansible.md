@@ -30,6 +30,9 @@
 * Get Ansible working in virtual environment
 
 
+* BEFORE WHEN WE FIXED THE NTP SERVERS WE FOUND OURSELVES DOING A LOT OF REPEATED STEPS ACROSS DEVICES.... NOW IMAGINE YOU HAVE 100's of devices in the site and you need to configure the NTP servers. THERE's a better way.... with Ansible
+
+
 ## Installation
 
 ```

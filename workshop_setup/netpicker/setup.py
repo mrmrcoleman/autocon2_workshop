@@ -138,10 +138,10 @@ def main():
         delete_existing_policies(token)
 
         # Step 3: Create the policy
-        create_policy(token)
+        #create_policy(token)
 
         # Step 4: Create the rule within the policy
-        create_rule(token)
+        #create_rule(token)
 
         # Step 5: Create the vault
         create_vault(token)
