@@ -40,7 +40,7 @@ Now click on `+ Add devices` and then click on `Import from NetBox`
 
 <img src="images/netpicker/add_devices_menu.png" alt="NetPicker Add Devices" title="NetPicker Add Devices Menu" width="300" />
 
-Then provide your NetBox URL, NetBox API key (1234567890) and click `Next`
+Then provide your NetBox URL, NetBox API key and click `Next`
 
 > [!TIP]
 > **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
