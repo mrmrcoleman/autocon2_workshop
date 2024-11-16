@@ -1,10 +1,12 @@
-### Netpicker - Our configuration assurance tool
+# Netpicker - Our configuration assurance tool
 
 > [!TIP]
 > Make sure your lab devices are in the correct state by running:
 > `./3_start_network.sh network/6.1_assurance/`  
 
 Netpicker allows us to validate our device configurations. It can be used to validate anything you can express in code, but also makes it easy to generate validations even if you can't code. Perhaps you'd like to know if there are any known vulnerabilities for a platform version you're running in your network, or if your device configurations adhere to your company's security policies? Netpicker can do all of that and more.
+
+## Import devices from NetBox
 
 To get started we need to tell NetPicker about our devices. Now that we have NetBox as our Network Source of Truth, we'll be importing our devices from NetBox into Netpicker.
 
@@ -35,7 +37,7 @@ Then on the next screen under `Vault` select `autocon_workshop`. Then click `Nex
 
 Our network devices have now been imported from NetBox into Netpicker!
 
-___
+## Run backups
 
 Netpicker is a powerful tool for staying in control of our device configurations. Let's first ask Netpicker to backup our device configurations. On the `Devices` screen click `Run backups`
 
@@ -49,14 +51,14 @@ You can now inspect the backups. Click on `clab-autocon2-srl1`, and then click o
 
 <img src="images/netpicker/backup_details.png" alt="Netpicker Backup Details" title="Netpicker Backup Details" width="1000" />
 
-___
+## Policies and Rules
 
 Now that Netpicker has pulled the configuration backups from our devices, we can use the real power of Netpicker, `Policies` and `Rules`. `Policies` are logical groupings of `Rules`. There are two different types of `Rules`:
 
 1. Simple rules - require no coding knowledge and can be used to express simple checks against our configuration backups using plain text or regexes
 2. Python rules - allow you to use the Python language to create powerful checks that can also include input from NetBox
 
-#### Creating a Netpicker simple rule
+### Creating a Netpicker simple rule
 
 Let's start by creating a simple rule to check if `ntp` is configured on our devices. First we need to create a `Policy` for our simple rule to live in. Click on `Policies` in the left hand menu bar, and then `+ Create Policy` in the top right. Give your policy a name, and then click `Create`.
 
@@ -80,7 +82,7 @@ After a few seconds you'll see the output of the debug run on the right. In this
 
 Try the same, but this time with `clab-autocon2-srl2`. When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
 
-#### Creating a Netpicker Python rule
+### Creating a Netpicker Python rule
 
 As mentioned earlier, Netpicker Python rules afford us much more flexibility, because we can write our tests in code. Python rules also allow us to query the Source of Truth, NetBox. Let's create a Python rule to check if the hostname on the device, is the same as it's hostname in NetBox!
 
@@ -112,7 +114,7 @@ After a few seconds you'll see the output of the debug run on the right. In this
 
 Try the same, but this time with `clab-autocon2-srl2`. When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
 
-#### Making our network compliant
+## Making our network compliant
 
 We now have two Netpicker rules set up to help us check when our device configurations are not compliant. Our simple rule states that `ntp` should be configured on the devices, and our Python rules states that the `hostname` in the device configurations must match the `hostname` in NetBox. Both are currently failing, so let's fix that.
 
@@ -175,7 +177,7 @@ commit now
 > 
 > Use `Ctrl+D`to exit the Nokia SR Linux CLI
 
-#### Check the compliance of our network
+## Check the compliance of our network
 
 We have now configured `ntp` and added the correct `hostname` for each of our lab devices, so our network should be compliant. First let's manually inspect the differences.
 
@@ -196,7 +198,6 @@ Let's compare the two backups to see what has changed. Check the checkboxes on t
 
 Scroll through the differences between the two configurations until you find the `hostname` section.
 
-
 <img src="images/netpicker/hostname_diff.png" alt="Netpicker Hostname Diff" title="Netpicker Hostname Diff" width="800" />
 
 Keep scrolling until you find the `ntp` section.
@@ -207,7 +208,7 @@ Our changes look good. Let's see if Netpicker policy agrees!
 
 ___
 
-#### Run the policy
+## Run the policy
 
 So far we have been using Netpicker's debug mode to run our rules, but running individual rules per device doesn't scale very well, so let's run our whole policy in one go.
 
