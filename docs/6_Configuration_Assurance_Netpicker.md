@@ -1,26 +1,3 @@
-**Section 6 - Configuration Assurance - Netpicker**
-
-- Network - 6.1_assurance (no NTP)
-- Add devices from NetBox
-    - Automate adding the NetBox details
-- Backup the devices
-- Add Simple rule - “ntp” should be present
-- Run policies, show that they fail
-
-- Network - 6.2_assurance (with NTP)
-- Backup the devices
-    - Look at the diff
-    - Sometimes seeing failures in the backups, rerunning them fixes it (need to update to the latest versions)
-- Run policies, show that they pass
-
-- Python test - hostname in NetBox is present in the config
-    - Update Nokia devices to change the hostname
-    - Show that the python test fails
-- Run policies, show that they have been passing
-
-
-
-
 ### Netpicker - Our configuration assurance tool
 
 > [!TIP]
