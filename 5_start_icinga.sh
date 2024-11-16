@@ -74,6 +74,9 @@ done
 
 popd
 
+sed -i 's/meerkat/${MY_EXTERNAL_IP}/' workshop_setup/icinga/menu.ini
+
+docker cp  workshop_setup/icinga/menu.ini icinga2-docker-stack-icinga2-1:/etc/icingaweb2/navigation/
 docker cp  workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
 docker cp  workshop_setup/icinga/check_nokia_ping.sh icinga2-docker-stack-icinga2-1:/usr/lib/nagios/plugins/
 
