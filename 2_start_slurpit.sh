@@ -17,6 +17,7 @@ done
 echo
 echo "--- Starting Slurpit ---"
 echo
+
 docker compose up -d
 
 # Return to the original directory
