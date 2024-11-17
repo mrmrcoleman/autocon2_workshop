@@ -8,7 +8,7 @@ Netpicker allows us to validate our device configurations. It can be used to val
 
 ## Import devices from NetBox
 
-To get started we need to tell NetPicker about our devices. Now that we have NetBox as our Network Source of Truth, we'll be importing our devices from NetBox into Netpicker.
+To get started we need to tell Netpicker about our devices. Now that we have NetBox as our Network Source of Truth, we'll be importing our devices from NetBox into Netpicker.
 
 First log-in to Netpicker and click on `Add Device`
 
@@ -17,11 +17,11 @@ First log-in to Netpicker and click on `Add Device`
 > **username** admin@admin.com  
 > **password** 12345678
 
-<img src="images/netpicker/homepage_add_device.png" alt="NetPicker Homepage Add Devices" title="NetPicker Homepage Add Devices" width="1000" />
+<img src="images/netpicker/homepage_add_device.png" alt="Netpicker Homepage Add Devices" title="Netpicker Homepage Add Devices" width="1000" />
 
 Now click on `+ Add devices` and then click on `Import from NetBox`
 
-<img src="images/netpicker/add_devices_menu.png" alt="NetPicker Add Devices" title="NetPicker Add Devices Menu" width="300" />
+<img src="images/netpicker/add_devices_menu.png" alt="Netpicker Add Devices" title="Netpicker Add Devices Menu" width="300" />
 
 Then provide your NetBox URL, NetBox API key and click `Next`
 
