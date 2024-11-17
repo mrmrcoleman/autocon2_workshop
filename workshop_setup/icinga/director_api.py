@@ -78,6 +78,19 @@ def main():
         #     "vars": {}
         # },
         {
+            "object_name": "SNMP",
+            "object_type": "apply",
+            "imports": ["srvt snmpv3"],
+            "assign_filter": "host.vars.model=%227220 IXR-D2L%22",
+            "vars": {
+                "snmpv3_auth_key": "snmppassword",
+                "snmpv3_label": "Uptime is",
+                "snmpv3_oid": "1.3.6.1.2.1.1.3.0",
+                "snmpv3_priv_key": "snmpprivpassword",
+                "snmpv3_user": "snmpuser"
+            }
+        },
+        {
             "object_name": "SSL - ",
             "object_type": "apply",
             "imports": ["srvt ssl certificate"],
