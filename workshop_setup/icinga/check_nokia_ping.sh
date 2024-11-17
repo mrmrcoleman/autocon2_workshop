@@ -26,8 +26,9 @@ if [[ -z "$HOST" || -z "$TARGET" ]]; then
   usage
 fi
 
+SSHPASS="NokiaSrl1!"
 # Perform ping and check the result
-ping -c 2 -W 2 "$TARGET" > /dev/null 2>&1
+sshpass -p $SSHPASS ssh admin@$HOST ping -c 2 -W 2 "$TARGET" > /dev/null 2>&1
 PING_STATUS=$?
 if [[ $PING_STATUS -eq 0 ]]; then
   echo "OK: Ping to $TARGET from $HOST is successful."
