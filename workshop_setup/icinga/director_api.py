@@ -115,22 +115,13 @@ def main():
             "assign_filter": "host.address=true",
             "vars": {}
         },
-        {
-            "object_name": "Nokia Ping srl2",
+            {
+            "object_name": "Ping the other Nokia",
             "object_type": "apply",
             "imports": ["srvt nokia ping"],
-            "assign_filter": "host.name=%22clab-autocon2-srl2%22",
+            "assign_filter": "host.vars.ping_target=true",
             "vars": {
-                "nokia_ping_target": "192.168.0.1"
-            }
-        },
-        {
-            "object_name": "Nokia Ping srl1",
-            "object_type": "apply",
-            "imports": ["srvt nokia ping"],
-            "assign_filter": "host.name=%22clab-autocon2-srl1%22",
-            "vars": {
-                "nokia_ping_target": "192.168.0.2"
+                "nokia_ping_target": "$host.vars.ping_target$"
             }
         },
         {
