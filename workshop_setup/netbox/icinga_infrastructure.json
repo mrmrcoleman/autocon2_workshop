@@ -63,6 +63,14 @@
             "weight": "100",
             "filter_logic": "loose",
             "search_weight": "100",
+            "object_types": ["dcim.device", "virtualization.virtualmachine"],
+            "type": "text",
+            "name": "ssl_hostname"
+        },
+        {
+            "weight": "100",
+            "filter_logic": "loose",
+            "search_weight": "100",
             "object_types": ["dcim.platform"],
             "type": "text",
             "name": "platform_type"
