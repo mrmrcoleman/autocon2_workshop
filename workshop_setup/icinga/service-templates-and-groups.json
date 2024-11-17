@@ -62,6 +62,12 @@
             "object_name": "srvg_check_ssl",
             "object_type": "object"
         },
+        "srvg_check_snmp": {
+            "assign_filter": "service.check_command=%22snmp%22",
+            "display_name": "Check: SNMP",
+            "object_name": "srvg_check_snmp",
+            "object_type": "object"
+        },
         "srvg_check_tcp": {
             "assign_filter": "service.check_command=%22tcp%22",
             "display_name": "Check: TCP",
@@ -95,7 +101,8 @@
         "Global Defaults": {
             "fields": [],
             "object_name": "Global Defaults",
-            "object_type": "template"
+            "object_type": "template",
+            "check_interval": 30
         },
         "srvt ping": {
             "fields": [],
@@ -133,6 +140,81 @@
             "vars": {
                 "nokia_ping_host": "$host.address$"
             }
+        },
+        "srvt snmp": {
+            "check_command": "snmp",
+            "fields": [],
+            "groups": [
+                "srvg_check_snmp"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt snmp",
+            "object_type": "template"
+        },
+        "srvt snmpv3": {
+            "check_command": "snmpv3",
+            "fields": [
+                {
+                    "datafield_id": 142,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 146,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 141,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 143,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 144,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 148,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 147,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 139,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 145,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 140,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_snmp"
+            ],
+            "imports": [
+                "srvt snmp"
+            ],
+            "object_name": "srvt snmpv3",
+            "object_type": "template"
         },
         "srvt ssl certificate": {
             "check_command": "cmd_check_ssl_certificate",
@@ -772,6 +854,106 @@
             "varname": "nokia_ping_target",
             "caption": "nokia_ping_target",
             "description": "Ping Host",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "142": {
+            "uuid": "b8961ccf-1468-4dcf-82d5-a5dfeaef2826",
+            "varname": "snmpv3_address",
+            "caption": "snmpv3_address",
+            "description": "Host name, IP Address, or unix socket (must be an absolute path)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "146": {
+            "uuid": "9c30cccc-cc1c-4e9d-b423-d31d63359d6b",
+            "varname": "snmpv3_auth_alg",
+            "caption": "snmpv3_auth_alg",
+            "description": "SNMPv3 auth proto",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "141": {
+            "uuid": "138f43d4-6e5d-4ad9-b4dd-3e7d99523cc7",
+            "varname": "snmpv3_auth_key",
+            "caption": "snmpv3_auth_key",
+            "description": "SNMPv3 authentication password",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "143": {
+            "uuid": "253fd21d-125f-4ae2-aa99-20152684f29f",
+            "varname": "snmpv3_label",
+            "caption": "snmpv3_label",
+            "description": "Prefix label for output from plugin",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "144": {
+            "uuid": "a21482aa-7b56-458e-9e50-57857cc0d813",
+            "varname": "snmpv3_oid",
+            "caption": "snmpv3_oid",
+            "description": "Object identifier(s) or SNMP variables whose value you wish to query",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "148": {
+            "uuid": "7de7e7f6-29db-4ccb-a5f5-eec745b7773a",
+            "varname": "snmpv3_priv_alg",
+            "caption": "snmpv3_priv_alg",
+            "description": "SNMPv3 priv proto (default DES)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "147": {
+            "uuid": "2f73d591-eb40-4d83-977b-5889a5da8372",
+            "varname": "snmpv3_priv_key",
+            "caption": "snmpv3_priv_key",
+            "description": "SNMPv3 privacy password",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "139": {
+            "uuid": "8c52ba78-b1c3-4a51-b906-8ef465e45237",
+            "varname": "snmpv3_seclevel",
+            "caption": "snmpv3_seclevel",
+            "description": "SNMPv3 securityLevel",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "145": {
+            "uuid": "cd6ad47b-ab1b-46f6-9ce6-907b162a5671",
+            "varname": "snmpv3_timeout",
+            "caption": "snmpv3_timeout",
+            "description": "Seconds before connection times out (default: 10)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "140": {
+            "uuid": "80b0c92c-c2ee-4981-8e8b-5ea52bb8766a",
+            "varname": "snmpv3_user",
+            "caption": "snmpv3_user",
+            "description": "SNMPv3 username",
             "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
             "format": null,
             "settings": {},
