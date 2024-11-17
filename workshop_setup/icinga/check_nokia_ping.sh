@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # Icinga plugin to ping a specified target
 # Usage: ./ping_plugin.sh -H admin@host --target <target IP/hostname>
 # Function to show usage
