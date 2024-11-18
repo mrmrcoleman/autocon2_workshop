@@ -78,6 +78,19 @@ def main():
         #     "vars": {}
         # },
         {
+            "object_name": "SNMP",
+            "object_type": "apply",
+            "imports": ["srvt snmpv3"],
+            "assign_filter": "host.vars.model=%227220 IXR-D2L%22",
+            "vars": {
+                "snmpv3_auth_key": "snmppassword",
+                "snmpv3_label": "Uptime is",
+                "snmpv3_oid": "1.3.6.1.2.1.1.3.0",
+                "snmpv3_priv_key": "snmpprivpassword",
+                "snmpv3_user": "snmpuser"
+            }
+        },
+        {
             "object_name": "SSL - ",
             "object_type": "apply",
             "imports": ["srvt ssl certificate"],
@@ -86,6 +99,13 @@ def main():
             "vars": {
                 "ssl_cert_hostname": "$config$"
             }
+        },
+        {
+            "object_name": "SSH",
+            "object_type": "apply",
+            "imports": ["srvt ssh"],
+            "assign_filter": "host.vars.model=%227220 IXR-D2L%22",
+            "vars": {}
         },
         {
             "object_name": "Icinga2",
@@ -115,22 +135,13 @@ def main():
             "assign_filter": "host.address=true",
             "vars": {}
         },
-        {
-            "object_name": "Nokia Ping srl2",
+            {
+            "object_name": "Ping the other Nokia",
             "object_type": "apply",
             "imports": ["srvt nokia ping"],
-            "assign_filter": "host.name=%22clab-autocon2-srl2%22",
+            "assign_filter": "host.vars.ping_target=true",
             "vars": {
-                "nokia_ping_target": "192.168.0.1"
-            }
-        },
-        {
-            "object_name": "Nokia Ping srl1",
-            "object_type": "apply",
-            "imports": ["srvt nokia ping"],
-            "assign_filter": "host.name=%22clab-autocon2-srl1%22",
-            "vars": {
-                "nokia_ping_target": "192.168.0.2"
+                "nokia_ping_target": "$host.vars.ping_target$"
             }
         },
         {

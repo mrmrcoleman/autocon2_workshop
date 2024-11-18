@@ -62,6 +62,18 @@
             "object_name": "srvg_check_ssl",
             "object_type": "object"
         },
+        "srvg_check_ssh": {
+            "assign_filter": "service.check_command=%22ssh%22",
+            "display_name": "Check: SSH",
+            "object_name": "srvg_check_ssh",
+            "object_type": "object"
+        },
+        "srvg_check_snmp": {
+            "assign_filter": "service.check_command=%22snmp%22",
+            "display_name": "Check: SNMP",
+            "object_name": "srvg_check_snmp",
+            "object_type": "object"
+        },
         "srvg_check_tcp": {
             "assign_filter": "service.check_command=%22tcp%22",
             "display_name": "Check: TCP",
@@ -95,7 +107,8 @@
         "Global Defaults": {
             "fields": [],
             "object_name": "Global Defaults",
-            "object_type": "template"
+            "object_type": "template",
+            "check_interval": 30
         },
         "srvt ping": {
             "fields": [],
@@ -110,8 +123,7 @@
         },
         "srvt nokia ping": {
             "check_command": "cmd_check_nokia_ping",
-            "fields": [
-                {
+            "fields": [{
                     "datafield_id": 127,
                     "is_required": "n",
                     "var_filter": null
@@ -134,10 +146,114 @@
                 "nokia_ping_host": "$host.address$"
             }
         },
+        "srvt snmp": {
+            "check_command": "snmp",
+            "fields": [],
+            "groups": [
+                "srvg_check_snmp"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt snmp",
+            "object_type": "template"
+        },
+        "srvt snmpv3": {
+            "check_command": "snmpv3",
+            "fields": [{
+                    "datafield_id": 142,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 146,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 141,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 143,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 144,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 148,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 147,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 139,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 145,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 140,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "groups": [
+                "srvg_check_snmp"
+            ],
+            "imports": [
+                "srvt snmp"
+            ],
+            "object_name": "srvt snmpv3",
+            "object_type": "template"
+        },
+        "srvt ssh": {
+            "check_command": "ssh",
+            "fields": [{
+                "datafield_id": 630,
+                "is_required": "n",
+                "var_filter": null
+            }, {
+                "datafield_id": 631,
+                "is_required": "n",
+                "var_filter": null
+            }, {
+                "datafield_id": 632,
+                "is_required": "n",
+                "var_filter": null
+            }],
+            "groups": [
+                "srvg_check_ssh"
+            ],
+            "imports": [
+                "Global Defaults"
+            ],
+            "object_name": "srvt ssh",
+            "object_type": "template",
+            "vars": {
+                "ssh_timeout": "10",
+                "ssh_port": "22",
+                "ssh_address": "$host.address$"
+
+            }
+
+        },
         "srvt ssl certificate": {
             "check_command": "cmd_check_ssl_certificate",
-            "fields": [
-                {
+            "fields": [{
                     "datafield_id": 529,
                     "is_required": "n",
                     "var_filter": null
@@ -174,8 +290,7 @@
         },
         "srvt tcp": {
             "check_command": "tcp",
-            "fields": [
-                {
+            "fields": [{
                     "datafield_id": 196,
                     "is_required": "n",
                     "var_filter": null
@@ -777,6 +892,96 @@
             "settings": {},
             "category": null
         },
+        "142": {
+            "varname": "snmpv3_address",
+            "caption": "snmpv3_address",
+            "description": "Host name, IP Address, or unix socket (must be an absolute path)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "146": {
+            "varname": "snmpv3_auth_alg",
+            "caption": "snmpv3_auth_alg",
+            "description": "SNMPv3 auth proto",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "141": {
+            "varname": "snmpv3_auth_key",
+            "caption": "snmpv3_auth_key",
+            "description": "SNMPv3 authentication password",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "143": {
+            "varname": "snmpv3_label",
+            "caption": "snmpv3_label",
+            "description": "Prefix label for output from plugin",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "144": {
+            "varname": "snmpv3_oid",
+            "caption": "snmpv3_oid",
+            "description": "Object identifier(s) or SNMP variables whose value you wish to query",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "148": {
+            "varname": "snmpv3_priv_alg",
+            "caption": "snmpv3_priv_alg",
+            "description": "SNMPv3 priv proto (default DES)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "147": {
+            "varname": "snmpv3_priv_key",
+            "caption": "snmpv3_priv_key",
+            "description": "SNMPv3 privacy password",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "139": {
+            "varname": "snmpv3_seclevel",
+            "caption": "snmpv3_seclevel",
+            "description": "SNMPv3 securityLevel",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "145": {
+            "varname": "snmpv3_timeout",
+            "caption": "snmpv3_timeout",
+            "description": "Seconds before connection times out (default: 10)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "140": {
+            "varname": "snmpv3_user",
+            "caption": "snmpv3_user",
+            "description": "SNMPv3 username",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
         "196": {
             "varname": "tcp_address",
             "caption": "tcp_address",
@@ -836,6 +1041,33 @@
             "caption": "ssl",
             "description": null,
             "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeArray",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "630": {
+            "varname": "ssh_address",
+            "caption": "ssh_address",
+            "description": "Address of the server to check",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "631": {
+            "varname": "ssh_port",
+            "caption": "ssh_port",
+            "description": "Port to send the request to",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "settings": {},
+            "category": null
+        },
+        "632": {
+            "varname": "ssh_timeout",
+            "caption": "ssh_timeout",
+            "description": "Timeout",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
             "format": null,
             "settings": {},
             "category": null
