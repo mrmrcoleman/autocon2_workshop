@@ -101,6 +101,13 @@ def main():
             }
         },
         {
+            "object_name": "SSH",
+            "object_type": "apply",
+            "imports": ["srvt ssh"],
+            "assign_filter": "host.address=true",
+            "vars": {}
+        },
+        {
             "object_name": "Icinga2",
             "object_type": "apply",
             "imports": ["srvt icinga service"],
