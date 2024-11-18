@@ -4,8 +4,8 @@
 
 ## DK notes
 
-The integration between Icinga and NetBox lets us configure monitoring from our SoT and hence creates a feedback loop that lets us know that the data is valid.
-A user can add a device to Netbox, have it be monitored automatically, and effectively check the data matches up. As the ingration is very mature, it can handle many data types and edge cases. In addition all manner of grouping can be provided, so for example, SNMP settings per device type or latency per site, or NTP servers per region can all be imported and configuration created in Icinga. This allows for massive scale, sustainable monitoring, with a garunteed lower signal to noise ratio, and happier engineers. 
+The integration between Icinga and NetBox lets us configure monitoring from our SoT which creates a feedback loop where montioring lets us know that the data in Netbox is valid.
+A user can add a device to Netbox, have it be monitored automatically, and effectively check the Netbox data matches real life now and in the future. As the integration is very mature, it can handle many data types and edge cases. In addition all manner of grouping can be provided, so for example, SNMP settings per device type or latency per site, or NTP servers per region can all be imported and configuration created in Icinga. This allows for massive scale, sustainable monitoring, with a garunteed lower signal to noise ratio, and happier engineers. 
 
 
 To demonstrate and progress the lab, the first step is to set the devices in Netbox to be imported by Icinga.
