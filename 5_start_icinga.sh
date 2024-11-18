@@ -47,9 +47,37 @@ docker cp ../workshop_setup/icinga/. icinga2-docker-stack-icinga2-1:/opt/setup/o
 
 for json in ../workshop_setup/icinga/*.json; do echo $json;docker cp $json icinga2-docker-stack-icinga2-1:/opt/baskets/; done
 
-docker cp  workshop_setup/icinga/menu.ini icinga2-docker-stack-icinga2-1:/etc/icingaweb2/navigation/
-docker cp  workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
-docker cp  workshop_setup/icinga/check_nokia_ping.sh icinga2-docker-stack-icinga2-1:/usr/lib/nagios/plugins/
+echo
+echo "--- Waiting for Icinga2 directories to be ready ---"
+echo
+
+# Variables
+COMMAND=("exec" "icinga2-docker-stack-icinga2-1" "ls" "/etc/icingaweb2/navigation/")
+TIMEOUT=30  # Timeout in seconds
+
+# Counter for time elapsed
+elapsed=0
+
+# Loop to check if the directory is available
+while ! docker "${COMMAND[@]}"; do
+  # Sleep for 1 second
+  sleep 1
+  elapsed=$((elapsed + 1))
+  echo "${elapsed}"
+
+  # Check if the timeout has been reached
+  if [ "$elapsed" -ge "$TIMEOUT" ]; then
+    echo "Timeout after waiting $TIMEOUT seconds for docker $COMMAND"
+    exit 1
+  fi
+done
+
+#echo "Checking if the target directory actually exists"
+#docker exec -it icinga2-docker-stack-icinga2-1 ls /etc/icingaweb2/navigation/
+
+docker cp ../workshop_setup/icinga/menu.ini icinga2-docker-stack-icinga2-1:/etc/icingaweb2/navigation/
+docker cp ../workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
+docker cp ../workshop_setup/icinga/check_nokia_ping.sh icinga2-docker-stack-icinga2-1:/usr/lib/nagios/plugins/
 
 echo
 echo "--- Waiting for Icinga2 to start ---"
@@ -76,9 +104,9 @@ while ! curl --output /dev/null --silent --head --fail "$URL"; do
   fi
 done
 
-popd
+sed -i "s/meerkat/${MY_EXTERNAL_IP}/" ../workshop_setup/icinga/menu.ini
 
-sed -i "s/meerkat/${MY_EXTERNAL_IP}/" workshop_setup/icinga/menu.ini
+popd
 
 
 echo "Icinga is available at http://${MY_EXTERNAL_IP}:${ICINGA_PORT}"
