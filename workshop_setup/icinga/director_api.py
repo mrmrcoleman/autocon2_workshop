@@ -104,7 +104,7 @@ def main():
             "object_name": "SSH",
             "object_type": "apply",
             "imports": ["srvt ssh"],
-            "assign_filter": "host.address=true",
+            "assign_filter": "host.vars.model=%227220 IXR-D2L%22",
             "vars": {}
         },
         {
