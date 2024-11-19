@@ -1,27 +1,44 @@
-**Section 5 - Monitoring - Icinga**
+# Verifying Intent - Monitoring driven from your SoT
 
-- Network - 5.1_monitoring
+Monitoring can be defined as the process to check to see if the stuff we care about is working. 
+When the monitoring tool can be configured from your Source of Truth, our intent can be verified.
 
-## DK notes
+<img src="images/icinga/netbox-icinga.png" alt="Netbox and Icinga logos" title="Netbox and Icinga" width="1000" />
 
-The integration between Icinga and NetBox lets us configure monitoring from our SoT which creates a feedback loop where montioring lets us know that the data in Netbox is valid.
-A user can add a device to Netbox, have it be monitored automatically, and effectively check the Netbox data matches real life now and in the future. 
+[Icinga](https://icinga.com/) is a full featured, fully open source monitoring system. 
 
-As the integration is very mature, it can handle many data types and edge cases. In addition all manner of grouping can be provided, so for example, SNMP settings per device type or latency per site, or NTP servers per region can all be imported and configuration created in Icinga. This allows for massive scale, sustainable monitoring, with a garunteed lower signal to noise ratio, and happier engineers. 
+The [integration](https://github.com/sol1/icingaweb2-module-netbox) between Icinga and NetBox lets us configure monitoring from our SoT which creates a feedback loop. The  monitoring lets us know that the data in Netbox is valid.
 
+As the integration is very mature, it can handle many data types and edge cases. In addition all manner of grouping can be provided, so for example, SNMP settings per device type or latency per site, or NTP servers per region can all be imported and configuration created in Icinga. 
 
-To demonstrate and progress the lab, the first step is to set the devices in Netbox to be imported by Icinga.
-Slurpit creates devices as status=Inventory by default, and Icinga needs them Active. 
+Lets get started!
 
-Go ahead and set the devices active in Netbox.
+> [!TIP]
+> **Icinga URL**: `./0_set_envvars.sh | grep -i icinga`  
+> **username** icingaadmin
+> **password** icinga
 
-In addition, the devices need the custom field  Icinga Import Source set to Default. This is a flexible way of allowing for different entires profiles of integration between Netbox and Icinga, and for example, you could have different teams or even vendors have very different monitoring scopes.
+The first step is to set the devices in Netbox to be imported by Icinga. Slurpit creates devices as status=Inventory by default, and Icinga needs them Active. 
 
-Go ahead and update the Custom Field Icinga Import Source to Default for the workshop Devices.
+Login to Netbox:
+> [!TIP]
+> **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
+> **username** admin
+> **password** admin
 
-For this workshop, we have a special check that pings the OTHER Nokia device from each device. This is controlled by the custom field ping_target, and if you se this to the valid taget, the ping will come from the nokia device itlsef. 
+Go to: Devices -> Devices, and Select both Devices and then click Edit Selected. Set the Status to Active, and the Icinga import source Custom Field to Default. Click Apply.
+
+The Custom Field allows for different monitoring "profiles".
+
+Now login to Icinga and see if the devices turn and monitoring starts. It can take a minute or so to see them appear - go to Overview -> Tactical Overview.
+
+*Workshop Specific Plugin*
+
+For this workshop, we have a special check that pings the OTHER Nokia device from each device. This is controlled by the custom field ping_target, and if you set this to the valid tatget, the ping will come from the nokia device itself. 
 
 Once the device automatically imports into Icinga, you can see the checks being applied automatcaily. This incldues ping (of the primary IP), SSH, an SNMP uptime command. These Icinga Services are applied automatically when a device with the Netbox manufacturer Nokia is created as an Icinga Host. The concept of Icinga Apply Rules is very powerful, and means we can use any Netbox Data to create a dynamic and accurate set of Services.
+
+*Bonus Other Checks*
 
 We have also included other checks in the Icinga configuration, which can check SSL certifcates, as an example. 
 To try this out
@@ -33,22 +50,6 @@ As another bonus option, the Netbox Contacts can be imported, and assigned to de
 Go ahead and add yourself as a contact, and add your email. Assign a dveice to yourself and try it out.
 
 
-## dk notes
-
-
-
-
-
-
-
-
-- Introduce Icinga and explain the benefits of using NetBox to drive the monitoring, instead of updating it manually
-- Make devices active as this is when Icinga will “see” the devices
-- Introduce the checks: https://github.com/mrmrcoleman/autocon2_workshop/issues/50
-    - Then they will start getting pinged on the mgmt interfaces
-    - Then the ping check between ethernet-1/1 interfaces will start
-    - Enrich the checks with an SSH check and an snmp check
-- Update the ethernet-1/1 IP to something random in NetBox, Icinga will pick this up and it will break
 
 ### Icinga - Our monitoring tool
 
