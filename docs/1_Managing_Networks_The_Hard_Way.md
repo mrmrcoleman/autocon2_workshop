@@ -3,7 +3,11 @@
 > [!TIP]
 > 
 > All instructions throughout this workshop are relative to the project root directory  
-> **Project Root Directory** `/root/src`    
+> **Project Root Directory** `/root/src`
+
+> > [!TIP]
+> 
+> Be sure to run `source 0_set_envvars.sh` when you first open your terminal  
 
 Let's explore the initial state. It's much like many traditional network setups: some devices, some monitoring and not a lot of documentation.
 
@@ -28,7 +32,7 @@ You can see that we have two Nokia SRLinux devices running in the network. Let's
 
 > [!TIP]
 > 
-> **username** admin
+> **username** admin  
 > **password** NokiaSrl1!  
 
 ```

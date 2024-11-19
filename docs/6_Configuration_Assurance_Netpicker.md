@@ -80,7 +80,7 @@ After a few seconds you'll see the output of the debug run on the right. In this
 
 <img src="images/netpicker/simple_rule_fails.png" alt="Netpicker Simple Rule Fails" title="Netpicker Simple Rule Fails" width="800" />
 
-Try the same, but this time with `clab-autocon2-srl2`. When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
+When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
 
 ### Creating a Netpicker Python rule
 
@@ -112,7 +112,7 @@ After a few seconds you'll see the output of the debug run on the right. In this
 
 <img src="images/netpicker/python_rule_fails.png" alt="Netpicker Python Rule Fails" title="Netpicker Python Rule Fails" width="800" />
 
-Try the same, but this time with `clab-autocon2-srl2`. When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
+When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
 
 ## Making our network compliant
 
@@ -121,7 +121,7 @@ We now have two Netpicker rules set up to help us check when our device configur
 > [!TIP]
 > 
 > If you'd rather skip the manual steps, this command will make your lab devices compliant:  
-> `./3_start_network.sh network/4.2_discovery_reconciliation`
+> `./3_start_network.sh network/6.2_assurance`
 
 First let's fix `clab-autocon2-srl1`.
 
