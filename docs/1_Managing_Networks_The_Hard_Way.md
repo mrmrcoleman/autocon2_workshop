@@ -32,7 +32,7 @@ You can see that we have two Nokia SRLinux devices running in the network. Let's
 
 > [!TIP]
 > 
-> **username** admin
+> **username** admin  
 > **password** NokiaSrl1!  
 
 ```
