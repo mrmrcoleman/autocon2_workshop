@@ -51,7 +51,7 @@ There is much more power available to this integration, and once you realise tha
 
 ### Notifications
 
-As another bonus option, the Netbox Contacts can be imported, and assigned to devices or virtual machines. Using a Contact Assignment, of type 'engineer' we can effectivel subscribe to alerts from this device. This gives us a powerful way of documenting the relationships between man and machine, and making sure the right person gets the right alerts.
-Go ahead and add yourself as a contact, and add your email. Assign a dveice to yourself and try it out.
+As another bonus option, the Netbox Contacts can be imported, and assigned to devices or virtual machines. Using a Contact Assignment, of type 'engineer' we can effectively subscribe to alerts from this device. This gives us a powerful way of documenting the relationships between man and machine, and making sure the right person gets the right alerts.
+Go ahead and add yourself as a contact, and add your email. Assign a device to yourself and try it out.
 
 
