@@ -132,19 +132,3 @@ This is exactly why we spent most of the workshop focussing on other areas of th
 > **Exercise** Go back to Netpicker, create new backups for our devices, and then run the policy. The NTP check should pass!
 
 _____
-
-Still to do...
-
-- Think of a test that would affect Icinga and another that would affect Netpicker
-
-
-**This section needs to be moved into a summary section of its own**
-
-See the pattern here... we add the change to NetBox... then we update the network. Let's look back at the problems we discovered in the first slide.....
-
-- 8 commands to apply the changes and 1 command to confirm them.
-- When we were SSHing into that device, we didn’t really know what we were going to find because we have no documentation. What if other engineers have been making changes?
-- We also need to now go back and update our documentation (if it exists) so that future engineers will know what they are getting themselves into when they SSH into the devices. How do we ensure that the documentation is updated when many engineers are making changes to the network?
-- When making changes to the network, we also need to coordinate with the monitoring team, or risk creating a bunch of false positive alerts, wasting our colleagues time.
-- How can we confirm that our devices are correctly (and securely) configured?
-- If we're ever audited, we may be asked to show the reason why this change was made and by whom. How could we correlate our ITSM ticket to all those changes?
