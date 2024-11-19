@@ -5,14 +5,16 @@ mgmt:
 
 topology:
   nodes:
-    client:
-      kind: linux
-      image: mrmrcoleman/autocon-client:latest
-      ports:
-      - 8005:8080
-    server:
-      kind: linux
-      image: mrmrcoleman/autocon-server:latest
+    srl1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.7.2
+      mgmt-ipv4: 172.24.0.100
+      startup-config: srl1.cfg
+    srl2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.7.2
+      mgmt-ipv4: 172.24.0.101
+      startup-config: srl2.cfg
 
   links:
     - endpoints: ["srl1:e1-1", "srl2:e1-1"]
