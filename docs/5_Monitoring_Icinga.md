@@ -1,5 +1,7 @@
 # Verifying Intent - Monitoring driven from your SoT
 
+To make sure your network is in the right state for this section, you can use the following command: `./3_start_network.sh network/5.1_monitoring
+
 Monitoring can be defined as the process to check to see if the stuff we care about is working. 
 When the monitoring tool can be configured from your Source of Truth, our intent can be verified.
 
