@@ -15,7 +15,7 @@ Lets get started!
 
 > [!TIP]
 > **Icinga URL**: `./0_set_envvars.sh | grep -i icinga`  
-> **username** icingaadmin
+> **username** icingaadmin  
 > **password** icinga
 
 The first step is to set the devices in Netbox to be imported by Icinga. Slurpit creates devices as status=Inventory by default, and Icinga needs them Active. 
@@ -23,7 +23,7 @@ The first step is to set the devices in Netbox to be imported by Icinga. Slurpit
 Login to Netbox:
 > [!TIP]
 > **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
-> **username** admin
+> **username** admin  
 > **password** admin
 
 Go to: Devices -> Devices, and Select both Devices and then click Edit Selected. Set the Status to Active, and the Icinga import source Custom Field to Default. Click Apply.
