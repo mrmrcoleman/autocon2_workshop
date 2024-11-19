@@ -51,31 +51,8 @@ echo
 echo "--- Waiting for Icinga2 directories to be ready ---"
 echo
 
-# Variables
-COMMAND=("exec" "icinga2-docker-stack-icinga2-1" "ls" "/etc/icingaweb2/navigation/")
-TIMEOUT=30  # Timeout in seconds
+sleep 5
 
-# Counter for time elapsed
-elapsed=0
-
-# Loop to check if the directory is available
-while ! docker "${COMMAND[@]}"; do
-  # Sleep for 1 second
-  sleep 1
-  elapsed=$((elapsed + 1))
-  echo "${elapsed}"
-
-  # Check if the timeout has been reached
-  if [ "$elapsed" -ge "$TIMEOUT" ]; then
-    echo "Timeout after waiting $TIMEOUT seconds for docker $COMMAND"
-    exit 1
-  fi
-done
-
-#echo "Checking if the target directory actually exists"
-#docker exec -it icinga2-docker-stack-icinga2-1 ls /etc/icingaweb2/navigation/
-
-docker cp ../workshop_setup/icinga/menu.ini icinga2-docker-stack-icinga2-1:/etc/icingaweb2/navigation/
 docker cp ../workshop_setup/icinga/director_api.py icinga2-docker-stack-icinga2-1:/opt/setup/onetime/
 docker cp ../workshop_setup/icinga/check_nokia_ping.sh icinga2-docker-stack-icinga2-1:/usr/lib/nagios/plugins/
 
