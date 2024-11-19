@@ -1,4 +1,4 @@
-# Section 6 - Monitoring - Icinga
+# Section 5 - Monitoring - Icinga
 
 - Network - 5.1_monitoring
 
