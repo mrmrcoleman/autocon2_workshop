@@ -1,4 +1,4 @@
-### NetBox - Our Network Source of Truth
+# Section 3 - NetBox - Our Network Source of Truth
 
 A Network Source of Truth like [NetBox](https://netboxlabs.com/) is the bedrock of any network automation stategy. NetBox acts as your living documentation and captures the Low Level Design of your network, but initially our NetBox is empty (apart from a site called Slurpit, which you can ignore for now.)
 
@@ -24,3 +24,7 @@ So we can focus on intent-based networking, the NetBox instance is already pre-c
 > It's packed with useful information and instructional videos to give you a deeper understanding of NetBox's capabilities
 
 With our organizational specifics in NetBox, now we need to import our devices from the network.
+
+___
+
+Next Section - [**Discovery and Reconciliation - Slurpit**](./4_Discovery_Reconciliation_Slurpit.md)

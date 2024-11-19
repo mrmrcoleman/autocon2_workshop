@@ -1,4 +1,4 @@
-**Section 7 - Automated Network Changes - Ansible**
+# Section 7 - Automated Network Changes - Ansible
 
 You may be surprised that we're only getting to automating network changes in the last section of the workshop, afterall, isn't automation about making changes to the network?
 

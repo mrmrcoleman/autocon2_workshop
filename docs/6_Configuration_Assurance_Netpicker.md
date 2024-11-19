@@ -1,4 +1,4 @@
-# Netpicker - Our configuration assurance tool
+# Section 6 - Netpicker - Our configuration assurance tool
 
 > [!TIP]
 > Make sure your lab devices are in the correct state by running:
@@ -215,3 +215,7 @@ So far we have been using Netpicker's debug mode to run our rules, but running i
 Click `Policies` on the left hand menu bar and then hit `Run Policies`. After a short while, you should see that 4 rules have run successfully.
 
 <img src="images/netpicker/policy_success.png" alt="Netpicker Policy Success" title="Netpicker Policy Success" width="800" />
+
+___
+
+Next Section - [**Automated Network Changes - Ansible**](./7_Automated_Network_Changes_Ansible.md)
