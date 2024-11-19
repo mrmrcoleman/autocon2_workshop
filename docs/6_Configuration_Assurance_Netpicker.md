@@ -80,7 +80,7 @@ After a few seconds you'll see the output of the debug run on the right. In this
 
 <img src="images/netpicker/simple_rule_fails.png" alt="Netpicker Simple Rule Fails" title="Netpicker Simple Rule Fails" width="800" />
 
-Try the same, but this time with `clab-autocon2-srl2`. When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
+When you're done testing hit `Save & Close`. You'll now be taken back to the policy you created earlier.
 
 ### Creating a Netpicker Python rule
 
