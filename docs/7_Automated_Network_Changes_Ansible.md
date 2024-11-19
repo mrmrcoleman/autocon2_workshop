@@ -15,7 +15,7 @@ Each of these systems is reading data from NetBox, examining the operational sta
 > [!TIP]
 > 
 > To make sure your network is in the right state for this section, you can use the following command:  
-> `./3_start_network.sh network/7_automated_network_changes
+> `./3_start_network.sh network/7_automated_network_changes`
 
 ## Using our Source of Truth to drive changes to the network
 
