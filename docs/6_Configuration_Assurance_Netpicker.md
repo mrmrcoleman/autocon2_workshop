@@ -121,7 +121,7 @@ We now have two Netpicker rules set up to help us check when our device configur
 > [!TIP]
 > 
 > If you'd rather skip the manual steps, this command will make your lab devices compliant:  
-> `./3_start_network.sh network/4.2_discovery_reconciliation`
+> `./3_start_network.sh network/6.2_assurance`
 
 First let's fix `clab-autocon2-srl1`.
 
