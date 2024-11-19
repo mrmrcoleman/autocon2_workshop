@@ -53,7 +53,7 @@ services:
       SUPERUSER_PASSWORD: "admin"
     healthcheck:
       test: curl -f http://${MY_EXTERNAL_IP}:${NETBOX_PORT}/login/ || exit 1
-      start_period: 420s
+      start_period: 600s
       timeout: 3s
       interval: 15s
   netbox-worker:

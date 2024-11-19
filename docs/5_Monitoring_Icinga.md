@@ -1,4 +1,4 @@
-**Section 5 - Monitoring - Icinga**
+# Section 6 - Monitoring - Icinga
 
 - Network - 5.1_monitoring
 
@@ -110,3 +110,6 @@ ping -c 4 192.168.0.1 network-instance default
 Using network instance default
 ping: connect: Network is unreachable
 ```
+___
+
+Next Section - [**Netpicker - Our configuration assurance tool**](./6_Configuration_Assurance_Netpicker.md)

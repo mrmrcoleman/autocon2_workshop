@@ -1,4 +1,4 @@
-# Discovery and Reconciliation - Slurpit
+# Section 4 - Discovery and Reconciliation - Slurpit
 
 Tools that are used to import operational state from our network into Netbox are typically called **Discovery** tools. Network Discovery typically falls into two categories:
 
@@ -64,6 +64,9 @@ Now that the plugin is configured, navigate back to the NetBox left-hand menu an
 
 <img src="images/slurpit/plugin_menu.png" alt="Slurpit Plugin Menu" title="Slurpit Plugin Menu" width="300" />
 
+> [!TIP]
+> Slurpit syncs devices in the background, so your devices may already be populated  
+
 If you now click `Sync` the Slurp'it plugin will pull the devices it has discovered in our network over to NetBox.
 
 <img src="images/slurpit/device_onboarding.png" alt="Slurpit Device Onboarding" title="Slurpit Device Onboarding" width="1000" />
@@ -114,11 +117,11 @@ In the NetBox left-hand menu click on `SLURP'IT` -> `Reconcile`
 
 Select the `IPAM` tab, select all the IPs and then click `Accept`.
 
-<img src="images/slurpit/reconcile_ipam.png" alt="Slurpit Reconcile Devices" title="Slurpit Reconcile Devices" width="750" />
+<img src="images/slurpit/reconcile_ipam.png" alt="Slurpit Reconcile IPAM" title="Slurpit Reconcile IPAM" width="750" />
 
 Select the `Interfaces` tab, select all the interfaces and then click `Accept`
 
-<img src="images/slurpit/reconcile_interfaces.png" alt="Slurpit Reconcile Devices" title="Slurpit Reconcile Devices" width="750" />
+<img src="images/slurpit/reconcile_interfaces.png" alt="Slurpit Reconcile Interfaces" title="Slurpit Reconcile Interfaces" width="750" />
 
 Now the device interfaces have been added to the devices in NetBox. To confirm, navigate to `Devices` -> `Devices` -> `clab-autocon2-srl1` and select the `Interfaces` tab.
 
@@ -191,3 +194,7 @@ Select the `Interfaces` tab, now you can see that Slurpit has found the operatio
  In this case we decide that the source of truth is correct and the network is wrong. `ethernet-1/1` on `clab-autocon2-srl1` _should_ be enabled, so there's an issue in the network and it should be fixed there.
  
  In this case, select the item and hit `Decline`
+
+___
+
+Next Section - [**Monitoring - Icinga**](./5_Monitoring_Icinga.md)

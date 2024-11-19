@@ -1,4 +1,9 @@
-# Managing Networks the Hard Way
+# Section 1 - Managing Networks the Hard Way
+
+> [!TIP]
+> 
+> All instructions throughout this workshop are relative to the project root directory  
+> **Project Root Directory** `/root/src`    
 
 Let's explore the initial state. It's much like many traditional network setups: some devices, some monitoring and not a lot of documentation.
 
@@ -199,3 +204,7 @@ Phew! 8 commands to apply the changes and 1 command to confirm them. Unfortunate
 4. If we're ever audited, we may be asked to show the reason why this change was made and by whom. How?
 
 Even with this trivial network change that's a lot to worry about, with plenty of surface area for us to fat finger a command or forget an important step. If only there were a better way!
+
+___
+
+Next Section - [**Introducing Intent Based Network Automation**](./2_Introducing_Intent_Based_Network_Automation.md)
