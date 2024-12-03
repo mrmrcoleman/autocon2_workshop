@@ -14,10 +14,8 @@ done
 # Detect the package manager (apt or yum/dnf)
 if command -v apt &> /dev/null; then
     PM="apt"
-    INSTALL_CMD="sudo apt update && sudo apt install -y"
 elif command -v yum &> /dev/null || command -v dnf &> /dev/null; then
     PM=$(command -v dnf || echo yum)  # Use dnf if available, fallback to yum
-    INSTALL_CMD="sudo $PM install -y"
 else
     echo "Unsupported package manager. Only apt, yum, and dnf are supported."
     exit 1
@@ -25,11 +23,13 @@ fi
 
 echo "--- Running setup for Linux ---"
 
-# Install dependencies
+# Run package manager-specific commands
 if [[ $PM == "apt" ]]; then
     sudo apt update
+    sudo apt install -y python3-venv net-tools snmp curl ca-certificates
+else
+    sudo $PM install -y python3-venv net-tools snmp curl ca-certificates
 fi
-$INSTALL_CMD python3-venv net-tools snmp curl ca-certificates
 
 # Install Docker
 echo "--- Installing Docker ---"
@@ -37,7 +37,7 @@ if [[ $PM == "apt" ]]; then
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt update
-    $INSTALL_CMD docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 else
     sudo $PM install -y yum-utils
     sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -50,7 +50,7 @@ sudo systemctl start docker
 
 # Install ContainerLab
 echo "--- Installing ContainerLab ---"
-curl -sL https://containerlab.dev/install.sh | sudo bash
+curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
 
 # Add the current user to the Docker group
 current_user=$(whoami)
