@@ -3,7 +3,7 @@
 > [!TIP]
 > 
 > All instructions throughout this workshop are relative to the project root directory  
-> **Project Root Directory** `/root/src`
+> where you Git cloned the project  
 
 > > [!TIP]
 > 
@@ -20,12 +20,15 @@ pushd network/1_the_hard_way
 clab inspect
 
 INFO[0000] Parsing & checking topology file: autocon2.clab.yml 
-+---+--------------------+--------------+------------------------------+---------------+---------+-----------------+--------------+
-| # |        Name        | Container ID |            Image             |     Kind      |  State  |  IPv4 Address   | IPv6 Address |
-+---+--------------------+--------------+------------------------------+---------------+---------+-----------------+--------------+
-| 1 | clab-autocon2-srl1 | c95fb73219d1 | ghcr.io/nokia/srlinux:24.7.2 | nokia_srlinux | running | 172.24.0.100/24 | N/A          |
-| 2 | clab-autocon2-srl2 | a4e565d67b9f | ghcr.io/nokia/srlinux:24.7.2 | nokia_srlinux | running | 172.24.0.101/24 | N/A          |
-+---+--------------------+--------------+------------------------------+---------------+---------+-----------------+--------------+
+╭────────────────────┬──────────────────────────────┬─────────┬────────────────╮
+│        Name        │          Kind/Image          │  State  │ IPv4/6 Address │
+├────────────────────┼──────────────────────────────┼─────────┼────────────────┤
+│ clab-autocon2-srl1 │ nokia_srlinux                │ running │ 172.24.0.100   │
+│                    │ ghcr.io/nokia/srlinux:24.7.2 │         │ N/A            │
+├────────────────────┼──────────────────────────────┼─────────┼────────────────┤
+│ clab-autocon2-srl2 │ nokia_srlinux                │ running │ 172.24.0.101   │
+│                    │ ghcr.io/nokia/srlinux:24.7.2 │         │ N/A            │
+╰────────────────────┴──────────────────────────────┴─────────┴────────────────╯
 ```
 
 You can see that we have two Nokia SRLinux devices running in the network. Let's inspect one of them by ssh'ing into `clab-autocon2-srl1`.
@@ -96,11 +99,15 @@ We can see that this device has two active interfaces: `mgmt0` and `ethernet-1/1
 ```
 clab-autocon2-srl1# show system lldp neighbor
 
-    +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
-  |     Name     |     Neighbor      | Neighbor System Name | Neighbor Chassis ID | Neighbor First Message | Neighbor Last Update | Neighbor Port |
-  +==============+===================+======================+=====================+========================+======================+===============+
-  | ethernet-1/1 | 1A:A1:03:FF:00:00 | clab-autocon2-srl2   | 1A:A1:03:FF:00:00   | 42 seconds ago         | 12 seconds ago       | ethernet-1/1  |
-  +--------------+-------------------+----------------------+---------------------+------------------------+----------------------+---------------+
+  +------------+------------+------------+-----------+-----------+-----------+-----------+
+  |    Name    |  Neighbor  |  Neighbor  | Neighbor  | Neighbor  | Neighbor  | Neighbor  |
+  |            |            |   System   |  Chassis  |   First   |   Last    |   Port    |
+  |            |            |    Name    |    ID     |  Message  |  Update   |           |
+  +============+============+============+===========+===========+===========+===========+
+  | ethernet-  | 1A:B5:01:F | clab-autoc | 1A:B5:01: | 8 minutes | 12        | ethernet- |
+  | 1/1        | F:00:00    | on2-srl2   | FF:00:00  | ago       | seconds   | 1/1       |
+  |            |            |            |           |           | ago       |           |
+  +------------+------------+------------+-----------+-----------+-----------+-----------+
 ```
 
 Let's ping it across the `ethernet-1/1` interface to confirm connectivity.
@@ -148,6 +155,8 @@ First on `clab-autocon2-srl1`
 > **password** NokiaSrl1!  
 
 ```
+ssh admin@clab-autocon2-srl1
+
 --{ running }--[  ]--
 A:clab-autocon2-srl1# enter candidate
 
@@ -171,6 +180,8 @@ Use `Ctrl+D` to exit `clab-autocon2-srl1`. Now on `clab-autocon2-srl2`
 > **password** NokiaSrl1!  
 
 ```
+ssh admin@clab-autocon2-srl2
+
 --{ running }--[  ]--
 A:clab-autocon2-srl2# enter candidate
 

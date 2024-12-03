@@ -15,28 +15,46 @@ As the integration is very mature, it can handle many data types and edge cases.
 
 Lets get started!
 
-> [!TIP]
-> **Icinga URL**: `./0_set_envvars.sh | grep -i icinga`  
-> **username** icingaadmin  
-> **password** icinga
+___
 
-The first step is to set the devices in Netbox to be imported by Icinga. Slurpit creates devices as status=Inventory by default, and Icinga needs them Active. 
+The first step is to update the device states in Netbox so that they will be imported by Icinga. Slurpit creates devices with a default status of `Inventory`. To be monitored by Icinga, their status needs to be set to `Active`.
 
-Login to Netbox:
+First login to NetBox.
+
 > [!TIP]
 > **NetBox URL**: `./0_set_envvars.sh | grep -i netbox`  
 > **username** admin  
 > **password** admin
 
-Go to: ``Devices -> Devices``, and Select both Devices and then click ``Edit Selected``. Set the Status to Active, and the Icinga import source Custom Field to Default. Click Apply.
+Navigate to `Devices -> Devices`, select both Devices and then click `Edit Selected`. Set Status to `Active`, and `the `Icinga import source` to `Default`. The click `Apply`.
 
-The Custom Field allows for different monitoring "profiles" in the Icinga Director Import Sources.
+> [!TIP]
+> The `Icinga import source` field allows us to define diffrent "profiles" in the Icinga Director Import Sources.  
 
-Now login to Icinga and see if the devices turn and monitoring starts. It can take a minute or so to see them appear - go to ``Overview -> Tactical Overview``.
+Now login to Icinga.
+
+> [!TIP]
+> **Icinga URL**: `./0_set_envvars.sh | grep -i icinga`  
+> **username** icingaadmin  
+> **password** icinga
+
+Our devices are now being imported into Icinga. Once they are imported the predefined monitoring, known as `Checks`, will begin. Keep an eye on `Overview` -> `Tactical Overview`. (It can take a minute or so to see them appear.)
+
+- INSERT SCREENSHOT OF TACTICAL OVERVIEW and explain that one of them is the Icinga host itself.
+
+- Click on the number 3 under hosts to be taken to http://147.182.198.119:8002/icingaweb2/icingadb/hosts?host.state.soft_state=0
+
+- INSERT SCREENSHOT OF MONITORED HOSTS
+
+- Back on the tactical overview page, click on the GREEN 9 under services
+
+- INSERT SCREENSHOT OF GREEN 9
+
+- INSERT SCREENSHOT OF MONITORED SERVICES and explain what they are: http://147.182.198.119:8002/icingaweb2/icingadb/services?service.state.soft_state=0
 
 ### Workshop Specific Plugin
 
-For this workshop, we have a special check that pings the OTHER Nokia device from each device. This is controlled by the custom field ping_target, and if you set this to the valid tatget, the ping will come from the nokia device itself. 
+For this workshop, we have a special check that pings the OTHER Nokia device from each device. This is controlled by the custom field ping_target, and if you set this to the valid target, the ping will come from the nokia device itself. 
 
 Once the device automatically imports into Icinga, you can see the checks being applied automatcaily. This incldues ping (of the primary IP), SSH, an SNMP uptime command. These Icinga Services are applied automatically when a device with the Netbox manufacturer Nokia is created as an Icinga Host. The concept of Icinga Apply Rules is very powerful, and means we can use any Netbox Data to create a dynamic and accurate set of Services.
 
