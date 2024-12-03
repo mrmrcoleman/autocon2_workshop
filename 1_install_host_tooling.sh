@@ -7,57 +7,60 @@ REQUIRED_VARS=("WORKSHOP_SUBNET")
 for var in "${REQUIRED_VARS[@]}"; do
   if [ -z "${!var:-}" ]; then
     echo "Error: Required environment variable '$var' is not set."
-    exit 0
+    exit 1
   fi
 done
 
-sudo apt install needrestart -y
+# Detect the package manager (apt or yum/dnf)
+if command -v apt &> /dev/null; then
+    PM="apt"
+    INSTALL_CMD="sudo apt update && sudo apt install -y"
+elif command -v yum &> /dev/null || command -v dnf &> /dev/null; then
+    PM=$(command -v dnf || echo yum)  # Use dnf if available, fallback to yum
+    INSTALL_CMD="sudo $PM install -y"
+else
+    echo "Unsupported package manager. Only apt, yum, and dnf are supported."
+    exit 1
+fi
 
-echo "--- Setting noninteractive and updating repos ---"
-export DEBIAN_FRONTEND=noninteractive
-echo "\$nrconf{restart} = 'l';" | sudo tee /etc/needrestart/conf.d/90-autorestart.conf > /dev/null
-sudo apt-get update
+echo "--- Running setup for Linux ---"
 
-# Install venv
-sudo apt install -y python3-venv
-
-# Install net-tools
-sudo apt install -y net-tools
-
-# Install snmpwalk
-sudo apt install -y snmp
+# Install dependencies
+if [[ $PM == "apt" ]]; then
+    sudo apt update
+fi
+$INSTALL_CMD python3-venv net-tools snmp curl ca-certificates
 
 # Install Docker
 echo "--- Installing Docker ---"
+if [[ $PM == "apt" ]]; then
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+    $INSTALL_CMD docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+else
+    sudo $PM install -y yum-utils
+    sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    sudo $PM install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+fi
 
-sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo install -o root -g root /dev/stdin /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-# Start docker
+# Start Docker
+sudo systemctl enable docker
 sudo systemctl start docker
-
-echo
-echo "--- Creating Docker Network ---"
-echo
-
-docker network create --driver=bridge --subnet=${WORKSHOP_SUBNET} autocon-workshop
 
 # Install ContainerLab
 echo "--- Installing ContainerLab ---"
+curl -sL https://containerlab.dev/install.sh | sudo bash
 
-curl -sL https://containerlab.dev/setup | sudo -E bash -s "install-containerlab"
-
-# Get the current username using whoami
+# Add the current user to the Docker group
 current_user=$(whoami)
-
-# Check if the current user is in the docker group
-if groups $current_user | grep -q "\bdocker\b"; then
-    echo "User $current_user is in the docker group."
-else
-    echo "User $current_user is NOT in the docker group."
-	sudo adduser $current_user docker
+if ! groups "$current_user" | grep -q "\bdocker\b"; then
+    echo "Adding user $current_user to the docker group."
+    sudo usermod -aG docker "$current_user"
+    echo "Please log out and back in for the group change to take effect."
 fi
 
+echo "--- Creating Docker Network ---"
+docker network create --driver=bridge --subnet="${WORKSHOP_SUBNET}" autocon-workshop
+
+echo "--- Setup Complete ---"

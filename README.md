@@ -4,6 +4,11 @@ Welcome to NetBox Automation - Zero to Hero! In this workshop we will build a fu
 
 This workshop is intended to teach you the high-level concepts around intent-based networking, while also delivering you a fully functioning stack you can continue to experiment with. The workshop is split into sections covering different elements of the story. You should follow them sequentially.
 
+> [!TIP]
+>  
+> This guide relies heavily on ContainerLab which does not have native support for MacOS  
+> You are very welcome to figure out MacOS and submit a PR  
+
 
 ## Sections
 
