@@ -2,7 +2,7 @@
 
 > [!TIP]
 >  
-> 1. This workshop is resource intensive. We recommend using a machine with 16GB of RAM and 8 cores.  
+> 1. This workshop is resource intensive. We recommend using a machine with at least 8GB of RAM and 4 cores.  
 > 2. The workshop assumes it is running on an internet accessible machine and relies on the public IP  
 > for a lot of the functionality. This means that it _probably_ won't work on your local machine, but we aim  
 > to add that at a later stage.
