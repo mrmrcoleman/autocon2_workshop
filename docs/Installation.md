@@ -9,7 +9,7 @@
 
 > [!TIP]
 >  
-> Installation is easy to follow, but takes about 10 minutes  
+> The installation is easy to follow, but takes about 10 minutes  
 
 ## Set environment variables
 
